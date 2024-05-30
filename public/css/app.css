@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-image: url('../images/UNTAR Background Navbar.png');
+    background-size: cover;
+    color: #fff;
+    padding: 5px 75px 5px 75px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left img {
+    height: 40px;
+    margin-right: 15px;
+}
+
+.nav-left p {
+    font-weight: 100;
+    font-size: 30px;
+}
+
+.nav-right ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-right ul li {
+    display: inline-block;
+    margin-left: 50px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.nav-right ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-right ul li a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #A01627;
+    color: #fff;
+    padding: 15px 75px 15px 75px;
+    text-align: center;
+}
