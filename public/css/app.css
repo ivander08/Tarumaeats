@@ -1,0 +1,138 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
+
+/* Root Variables */
+:root {
+    --red: #A01627;
+    --white: #FEFEFA;
+    --slightly-darker-white: #F5F5F5;
+    --grey: #858585;
+}
+
+/* Global Styles */
+body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-image: url('../images/UNTAR Background Navbar.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 0.2rem 4rem;
+    text-align: center;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left img {
+    height: 2.5rem;
+    margin-right: 0.8rem;
+}
+
+.nav-left p {
+    font-weight: 100;
+    font-size: 2rem;
+}
+
+.nav-right ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-right ul li {
+    display: inline-block;
+    margin-left: 4rem;
+    font-size: 1.2rem;
+    
+}
+
+.nav-right ul li a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+.nav-right ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 1rem 4rem;
+    text-align: center;
+}
+
+/* Search Container */
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 15rem;
+    background-color: var(--slightly-darker-white);
+}
+
+.search-container p {
+    color: var(--grey);
+    font-size: 1.3rem;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    padding: 0.5rem 0.5rem;
+    width: 40rem;
+    height: 3.5rem;
+}
+
+.search-icon {
+    height: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.search-form input[type="text"] {
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 75%;
+}
+
+.search-submit {
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    width: 13rem;
+    height: 4.5rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
