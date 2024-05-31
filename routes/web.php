@@ -14,5 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts/app');
+    return view('welcome');
 });
+
+// Temporary routes
+Route::get('/eats', function () {
+    return view('eats');
+})->name('eats');
+
+Route::get('/layout', function () {
+    return view('layout');
+})->name('layout');
