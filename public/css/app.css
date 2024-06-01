@@ -79,8 +79,8 @@ footer {
     text-align: center;
 }
 
-/* Search Container */
-.search-container {
+/* Eats Search Container */
+.eats-search-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -88,19 +88,18 @@ footer {
     background-color: var(--slightly-darker-white);
 }
 
-.search-container p {
+.eats-search-container p {
     color: var(--grey);
     font-size: 1.3rem;
 }
 
-/* Search Bar */
-.search-bar {
+.eats-search-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.search-form {
+.eats-search-form {
     display: flex;
     align-items: center;
     background-color: var(--white);
@@ -109,21 +108,22 @@ footer {
     height: 3.5rem;
 }
 
-.search-icon {
+.eats-search-icon {
     height: 1.2rem;
     margin-left: 1rem;
     margin-right: 1rem;
 }
 
-.search-form input[type="text"] {
+.eats-search-form input[type="text"] {
     border: none;
     outline: none;
     font-size: 1.1rem;
     font-weight: 300;
+    width: 35rem;
     opacity: 75%;
 }
 
-.search-submit {
+.eats-search-submit {
     background-color: var(--red);
     color: var(--white);
     border: none;
@@ -135,4 +135,136 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Eats Listing Container */
+.eats-container{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.eats-filter-container{
+    padding: 2.5rem 2.5rem;
+    background-color: var(--slightly-darker-white);
+    border-radius: 15px;
+    width: 16rem;
+}
+
+.eats-filter-container h3, hr,
+.eats-filter-pack-container h3{
+    color: var(--grey);
+}
+
+.eats-filter-container h3{
+    font-size: 1.3rem;
+}
+
+.eats-filter-pack-container h3{
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+}
+
+.eats-filter-pack{
+    display: flex;
+    align-items: center;
+}
+
+.eats-filter-pack button{
+    width: 1rem;
+    height: 1rem;
+}
+
+.eats-filter-pack h3{
+    margin-left: 0.7rem;
+    margin-top: 0.5rem;
+    font-weight: 300;
+    font-size: 0.8rem;
+}
+
+.eats-card-image{
+    background-image: url('../images/Solaria Main Image.png');
+    background-position: center;
+    background-size: cover;
+    height: 13rem;
+    width: 20rem;
+    padding: 0.5rem;
+    margin-bottom: 0;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.eats-card-heart-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.eats-card-heart-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    opacity: 75%;
+    filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg) brightness(100%) contrast(113%);
+}
+
+.eats-card-content{
+    padding: 0 1rem 1rem 1rem;
+    background-color: var(--slightly-darker-white);
+    border-radius: 0 0 15px 15px;
+}
+
+.eats-card-name-rating{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.eats-card-name-rating h1{
+    color: #AE737B;
+    font-size: 1.2rem;
+}
+
+.eats-card-rating{
+    display: flex;
+    align-items: center;
+}
+
+.eats-card-rating h3{
+    font-size: 0.9rem;
+    opacity: 75%;
+    color: var(--grey);
+}
+
+.eats-card-star-icon{
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.2rem;
+    filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg) brightness(103%) contrast(103%);
+}
+
+.eats-card-content p{
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 200;
+    font-size: 0.8rem;
+    color: var(--grey);
+    transform: translateY(-0.5rem);
+}
+
+.eats-card-content h2{
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--grey);
 }
