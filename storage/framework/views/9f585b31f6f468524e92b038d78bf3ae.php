@@ -16,6 +16,18 @@
         <h3>Filters</h3>
         <hr>
         <div class="eats-filter-pack-container">
+            <h3>Favourite</h3>
+            <div class="eats-filter-pack">
+                <button class="eats-filter-button"></button>
+                <h3>Show Only Favourites</h3>
+            </div>
+            <div class="eats-filter-pack">
+                <button class="eats-filter-button"></button>
+                <h3>Show All</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="eats-filter-pack-container">
             <h3>Type</h3>
             <div class="eats-filter-pack">
                 <button class="eats-filter-button"></button>
@@ -63,7 +75,7 @@
             </div>
             <div class="eats-filter-pack">
                 <button class="eats-filter-button"></button>
-                <h3>Middle Eastern</h3>
+                <h3>And so on...</h3>
             </div>
         </div>
     </div>
