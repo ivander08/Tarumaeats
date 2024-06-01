@@ -88,6 +88,60 @@
                 <h2>Mall Ciputra Jakarta, Lantai 5</h2>
             </div>
         </div>
+        <div class="eats-cards-container">
+            <div class="eats-card-image">
+                <button class="eats-card-heart-button" aria-label="Add to favorites">
+                    <img src="{{ asset('images/heart.svg') }}" alt="Heart Icon" class="eats-card-heart-icon">
+                </button>
+            </div>
+            <div class="eats-card-content">
+                <div class="eats-card-name-rating">
+                    <h1>Solaria - Mal Ciputra</h1>
+                    <div class="eats-card-rating">
+                        <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="eats-card-star-icon">
+                        <h3>2.5(176)
+                    </div>
+                </div>
+                <p>Rp16,000 - Rp44,999
+                <h2>Mall Ciputra Jakarta, Lantai 5</h2>
+            </div>
+        </div>
+        <div class="eats-cards-container">
+            <div class="eats-card-image">
+                <button class="eats-card-heart-button" aria-label="Add to favorites">
+                    <img src="{{ asset('images/heart.svg') }}" alt="Heart Icon" class="eats-card-heart-icon">
+                </button>
+            </div>
+            <div class="eats-card-content">
+                <div class="eats-card-name-rating">
+                    <h1>Solaria - Mal Ciputra</h1>
+                    <div class="eats-card-rating">
+                        <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="eats-card-star-icon">
+                        <h3>2.5(176)
+                    </div>
+                </div>
+                <p>Rp16,000 - Rp44,999
+                <h2>Mall Ciputra Jakarta, Lantai 5</h2>
+            </div>
+        </div>
+        <div class="eats-cards-container">
+            <div class="eats-card-image">
+                <button class="eats-card-heart-button" aria-label="Add to favorites">
+                    <img src="{{ asset('images/heart.svg') }}" alt="Heart Icon" class="eats-card-heart-icon">
+                </button>
+            </div>
+            <div class="eats-card-content">
+                <div class="eats-card-name-rating">
+                    <h1>Solaria - Mal Ciputra</h1>
+                    <div class="eats-card-rating">
+                        <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="eats-card-star-icon">
+                        <h3>2.5(176)
+                    </div>
+                </div>
+                <p>Rp16,000 - Rp44,999
+                <h2>Mall Ciputra Jakarta, Lantai 5</h2>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

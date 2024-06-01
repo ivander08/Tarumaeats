@@ -141,9 +141,8 @@ footer {
 .eats-container{
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 2rem;
+    gap: 5rem;
 }
 
 .eats-filter-container{
@@ -183,6 +182,14 @@ footer {
     margin-top: 0.5rem;
     font-weight: 300;
     font-size: 0.8rem;
+}
+
+.eats-results-container{
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 2rem;
+    column-gap: 5rem;
 }
 
 .eats-card-image{
