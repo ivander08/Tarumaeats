@@ -215,8 +215,9 @@ footer {
     margin-top: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    row-gap: 2rem;
+    row-gap: 5rem;
     column-gap: 5rem;
+    height: fit-content;
 }
 
 .eats-card-image{

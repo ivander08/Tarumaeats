@@ -18,64 +18,136 @@
         <div class="eats-filter-pack-container">
             <h3>Favourite</h3>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="favourite" class="eats-filter-checkbox">
-                <label for="favourite">Show Only Favourites</label>
+                <input type="checkbox" id="filter-fav" class="eats-filter-checkbox">
+                <label for="filter-fav">Favourites Only</label>
             </div>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="all" class="eats-filter-checkbox">
-                <label for="all">Show All</label>
+                <input type="checkbox" id="filter-nonfav" class="eats-filter-checkbox">
+                <label for="filter-nonfav">Non-Favourites Only</label>
             </div>
         </div>
         <hr>
         <div class="eats-filter-pack-container">
             <h3>Type</h3>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="restaurant" class="eats-filter-checkbox">
-                <label for="restaurant">Restaurant</label>
+                <input type="checkbox" id="filter-food-type" class="eats-filter-checkbox">
+                <label for="filter-food-type">Food Only</label>
             </div>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="cafe" class="eats-filter-checkbox">
-                <label for="cafe">Café</label>
-            </div>
-            <div class="eats-filter-pack">
-                <input type="checkbox" id="stall" class="eats-filter-checkbox">
-                <label for="stall">Stall/Kiosk</label>
-            </div>
-            <div class="eats-filter-pack">
-                <input type="checkbox" id="beverage" class="eats-filter-checkbox">
-                <label for="beverage">Beverage</label>
-            </div>
-            <div class="eats-filter-pack">
-                <input type="checkbox" id="buffet" class="eats-filter-checkbox">
-                <label for="buffet">Buffet</label>
+                <input type="checkbox" id="filter-drink-type" class="eats-filter-checkbox">
+                <label for="filter-drink-type">Drinks Only</label>
             </div>
         </div>
         <hr>
         <div class="eats-filter-pack-container">
             <h3>Cuisine</h3>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="indonesian" class="eats-filter-checkbox">
-                <label for="indonesian">Indonesian</label>
+                <input type="checkbox" id="filter-indonesian-cuisine" class="eats-filter-checkbox">
+                <label for="filter-indonesian-cuisine">Indonesian</label>
             </div>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="western" class="eats-filter-checkbox">
-                <label for="western">Western</label>
+                <input type="checkbox" id="filter-western-cuisine" class="eats-filter-checkbox">
+                <label for="filter-western-cuisine">Western</label>
             </div>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="japanese" class="eats-filter-checkbox">
-                <label for="japanese">Japanese</label>
+                <input type="checkbox" id="filter-japanese-cuisine" class="eats-filter-checkbox">
+                <label for="filter-japanese-cuisine">Japanese</label>
             </div>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="chinese" class="eats-filter-checkbox">
-                <label for="chinese">Chinese</label>
+                <input type="checkbox" id="filter-chinese-cuisine" class="eats-filter-checkbox">
+                <label for="filter-chinese-cuisine">Chinese</label>
             </div>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="italian" class="eats-filter-checkbox">
-                <label for="italian">Italian</label>
+                <input type="checkbox" id="filter-other-cuisine" class="eats-filter-checkbox">
+                <label for="filter-other-cuisine">Other</label>
+            </div>
+        </div>
+        <hr>
+        <div class="eats-filter-pack-container">
+            <h3>Price Range</h3>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-under-price" class="eats-filter-checkbox">
+                <label for="filter-under-price">&lt;Rp10,000</label>
             </div>
             <div class="eats-filter-pack">
-                <input type="checkbox" id="and-so-on" class="eats-filter-checkbox">
-                <label for="and-so-on">And so on...</label>
+                <input type="checkbox" id="filter-thirty-price" class="eats-filter-checkbox">
+                <label for="filter-thirty-price">Rp10,000 - Rp30,0000</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-sixty-price" class="eats-filter-checkbox">
+                <label for="filter-sixty-price">Rp30,000 - Rp60,0000</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-over-price" class="eats-filter-checkbox">
+                <label for="filter-over-price">&gt;Rp60,000</label>
+            </div>
+        </div>
+        <hr>
+        <div class="eats-filter-pack-container">
+            <h3>Rating</h3>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-five-rating" class="eats-filter-checkbox">
+                <label for="filter-five-rating">5</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-four-rating" class="eats-filter-checkbox">
+                <label for="filter-four-rating">4.0 - 4.9</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-three-rating" class="eats-filter-checkbox">
+                <label for="filter-three-rating">3.0 - 3.9</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-two-rating" class="eats-filter-checkbox">
+                <label for="filter-two-rating">2.0 - 2.9</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-under-rating" class="eats-filter-checkbox">
+                <label for="filter-under-rating">&lt;2.0</label>
+            </div>
+        </div>
+        <hr>
+        <div class="eats-filter-pack-container">
+            <h3>Payment Options</h3>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-cash-option" class="eats-filter-checkbox">
+                <label for="filter-cash-option">Cash</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-credit-option" class="eats-filter-checkbox">
+                <label for="filter-credit-option">Credit Card</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-debit-option" class="eats-filter-checkbox">
+                <label for="filter-debit-option">Debit Card</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-mobile-option" class="eats-filter-checkbox">
+                <label for="filter-mobile-option">Mobile Payment</label>
+            </div>
+        </div>
+        <hr>
+        <div class="eats-filter-pack-container">
+            <h3>Special Features</h3>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-halal-special" class="eats-filter-checkbox">
+                <label for="filter-halal-special">Halal</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-nonhalal-special" class="eats-filter-checkbox">
+                <label for="filter-nonhalal-special">Non-Halal</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-takeaway-special" class="eats-filter-checkbox">
+                <label for="filter-takeaway-special">Takeaway Available</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-indoor-special" class="eats-filter-checkbox">
+                <label for="filter-indoor-special">Indoor Seating</label>
+            </div>
+            <div class="eats-filter-pack">
+                <input type="checkbox" id="filter-outdoor-special" class="eats-filter-checkbox">
+                <label for="filter-outdoor-special">Outdoor Seating</label>
             </div>
         </div>
     </div>
