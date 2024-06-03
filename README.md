@@ -2,6 +2,11 @@
 
 ![Tarumaeats Logo](https://repobeats.axiom.co/api/embed/ab2c52d0a0f2dff05a8852fbe84cff4edf25bf71.svg)
 
+## Team 2-TI-A
+- **Ivander** (535220010)
+- **Justin Salim** (535220020)
+- **Willsen Yogi Prasetia** (535220010)
+
 ## Introduction
 
 Tarumaeats is a web application designed to help students and visitors at UNTAR (Universitas Tarumanagara) find places to eat within the campus. Often, hidden gems like canteens or food establishments within academic institutions can be challenging to discover, leading to students missing out on convenient dining options. Additionally, the platform serves as a hub for food and beverage business owners in the university to showcase their offerings.
