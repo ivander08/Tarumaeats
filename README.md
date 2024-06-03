@@ -1,66 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tarumaeats
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Tarumaeats Logo](https://repobeats.axiom.co/api/embed/ab2c52d0a0f2dff05a8852fbe84cff4edf25bf71.svg)
 
-## About Laravel
+## Introduction
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Tarumaeats is a web application designed to help students and visitors at UNTAR (Universitas Tarumanagara) find places to eat within the campus. Often, hidden gems like canteens or food establishments within academic institutions can be challenging to discover, leading to students missing out on convenient dining options. Additionally, the platform serves as a hub for food and beverage business owners in the university to showcase their offerings.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **User Registration and Authentication**: Users are required to register and verify their email addresses before accessing the platform. Authentication ensures secure access and allows users to manage their profiles.
+  
+- **Listing Search**: A search feature enables users to find food establishments based on various criteria such as price range, food type, special features, and opening hours.
+  
+- **Detailed Listings**: Detailed listings provide users with comprehensive information about each food establishment, including images, name, location, price range, tags, contact details, and a map showing the location.
+  
+- **Image Management**: Users can upload images for their listings, including a main image, banner image, and carousel images. Image management allows for a visually appealing representation of the food establishments.
+  
+- **User Profile Management**: Users can update their profile information, including email, password, and username.
+  
+- **Listing Management**: Business owners can manage their listings by adding, editing, creating, or deleting them. Each listing requires approval by an admin before being visible to other users, ensuring quality and relevance.
 
-## Learning Laravel
+## Getting Started
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+To set up Tarumaeats locally, follow these steps:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Clone the Repository**: 
+   ```
+   git clone https://github.com/your-username/tarumaeats.git
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. **Install Dependencies**: Navigate to the project directory and install the required dependencies using Composer.
+   ```
+   cd tarumaeats
+   composer install
+   ```
 
-## Laravel Sponsors
+3. **Set Up Environment Variables**: Create a copy of the `.env.example` file and name it `.env`. Update the database and email configuration details in the `.env` file.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+4. **Generate Application Key**: Generate an application key using the `php artisan key:generate` command.
 
-### Premium Partners
+5. **Migrate Database**: Run migrations to create the necessary tables in the database.
+   ```
+   php artisan migrate
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+6. **Start the Development Server**: Use the `php artisan serve` command to start the development server.
+   ```
+   php artisan serve
+   ```
+
+7. **Access the Application**: Open your web browser and navigate to `http://localhost:8000` to access Tarumaeats.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contributions to Tarumaeats are welcome! To contribute:
 
-## Code of Conduct
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with descriptive commit messages.
+4. Push your changes to your fork.
+5. Submit a pull request to the `main` branch of the original repository.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
