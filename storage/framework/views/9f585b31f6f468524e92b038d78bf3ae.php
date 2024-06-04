@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Your Page Title'); ?>
+<?php $__env->startSection('title', 'Eats'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="eats-search-container">

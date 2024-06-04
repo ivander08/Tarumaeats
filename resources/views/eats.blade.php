@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Your Page Title')
+@section('title', 'Eats')
 
 @section('content')
 <div class="eats-search-container">
