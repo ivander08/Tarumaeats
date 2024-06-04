@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form action="{{ route('listings.store') }}" method="POST">
+<form action="{{ route('listings.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <div class="form-group">
@@ -51,7 +51,7 @@
 
     <div class="form-group">
         <label for="images">Images</label>
-        <input type="text" class="form-control" id="images" name="images">
+        <input type="file" class="form-control" id="images" name="images" multiple>
     </div>
 
     <div class="form-group">

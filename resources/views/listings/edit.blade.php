@@ -59,7 +59,7 @@
 
             <div class="form-group">
                 <label for="images">Images</label>
-                <input type="text" class="form-control" id="images" name="images" value="{{$listing->images}}">
+                <input type="file" class="form-control" id="images" name="images" value="{{$listing->images}}">
             </div>
 
             <div class="form-group">
