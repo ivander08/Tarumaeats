@@ -42,7 +42,17 @@
       <td>{{ $listing->email }}</td>
       <td>{{ $listing->latitude }}</td>
       <td>{{ $listing->longitude }}</td>
-      <td>{{ $listing->images }}</td>
+      <td>
+      @if($listing->images)
+        @if(is_array($listing->images))
+            @foreach ($listing->images as $image)
+                <img src="data:/image/jpeg;base64,{{ $image }}" width="100" height="100">
+            @endforeach
+        @else
+            <img src="data:/image/jpeg;base64,{{ $listing->images }}" width="100" height="100">
+        @endif
+      @endif
+      </td>
       <td>
     @if(is_array($listing->tags))
         @foreach($listing->tags as $tag)
