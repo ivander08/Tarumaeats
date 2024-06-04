@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('open_hours')->nullable();
             $table->string('closed_hours')->nullable();
             $table->enum('approval_status', ['pending', 'approved', 'declined'])->default('pending');
+            $table->enum('status', ['online', 'offline'])->default('online');
             $table->timestamps();
         });
     }
