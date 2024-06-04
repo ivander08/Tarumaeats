@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\listings;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ListingsController extends Controller
 {
@@ -23,7 +24,8 @@ class ListingsController extends Controller
 
         // dd($request->all());
 
-        $request->validate([
+         // Validate the form data
+         $request->validate([
             'location_name' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
             'price_range' => 'required|string|max:255',
@@ -32,7 +34,7 @@ class ListingsController extends Controller
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|string|max:255',
+            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tags' => 'nullable|array',
             'special_features' => 'nullable|array',
             'price_per_person' => 'nullable|string',
@@ -41,6 +43,16 @@ class ListingsController extends Controller
             'closed_hours' => 'nullable|string',
         ]);
 
+        // Handle the image file upload
+        $imageData = null;
+        $image = $request->file('images');
+
+        if ($image !== null) {
+            // Read the image file and encode it as base64
+            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+        }
+
+        // Create the listing
         listings::create([
             'location_name' => $request->location_name,
             'location_address' => $request->location_address,
@@ -50,7 +62,7 @@ class ListingsController extends Controller
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'images' => $request->images,
+            'images' => $imageData,
             'tags' => json_encode($request->tags),
             'special_features' => json_encode($request->special_features),
             'price_per_person' => $request->price_per_person,
@@ -80,14 +92,22 @@ class ListingsController extends Controller
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|string|max:255',
+            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tags' => 'nullable|array',
             'special_features' => 'nullable|array',
-            'price_per_person' => 'nullable|string|max:255',
+            'price_per_person' => 'nullable|string',
             'payment_options' => 'nullable|array',
-            'open_hrs' => 'nullable|string',
-            'closed_hrs' => 'nullable|string',
+            'open_hours' => 'nullable|string',
+            'closed_hours' => 'nullable|string',
         ]);
+
+        $imageData = null;
+        $image = $request->file('images');
+
+        if ($image !== null) {
+            // Read the image file and encode it as base64
+            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+        }
 
         listings::find($id)->update([
             'location_name' => $request->location_name,
@@ -98,7 +118,7 @@ class ListingsController extends Controller
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'images' => $request->images,
+            'images' => $imageData,
             'tags' => json_encode($request->tags),
             'special_features' => json_encode($request->special_features),
             'price_per_person' => $request->price_per_person,

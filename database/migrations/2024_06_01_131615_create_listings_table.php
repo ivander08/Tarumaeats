@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->string('images')->nullable();
+            $table->text('images')->nullable();
             $table->json('tags')->nullable();
             $table->json('special_features')->nullable();
             $table->string('price_per_person')->nullable();

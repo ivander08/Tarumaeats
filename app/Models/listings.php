@@ -31,6 +31,7 @@ class listings extends Model
     protected $casts = [
         'latitude' => 'string',
         'longitude' => 'string',
+        'images' => 'array',
         'tags' => 'array',
         'special_features' => 'array',
         'payment_options' => 'array',
