@@ -400,25 +400,24 @@ footer {
 
 .user-listings-table-interact {
     display: flex;
-    align-items: end;
+    justify-content: end;
+    align-items: center;
     gap: 0.5rem;
 }
 
-.user-listings-table-interact-btn {
-    background-color: var(--red);
-    color: var(--white);
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    border-radius: 5px;
+.delete-button{
+    height: 2rem;
 }
 
+.edit-button{
+    height: 2rem;
+}
+
+
 .user-listings-table thead th input[type="text"] {
-    width: 10rem;
     padding: 0.5rem;
     font-size: 1rem;
+    width: 10rem;
     border: 1px solid var(--grey);
     border-radius: 5px;
     outline: none;

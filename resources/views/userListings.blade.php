@@ -17,12 +17,12 @@
     <div class="user-listings-table">
         <table>
             <thead>
-                <th>Name</th>
-                <th>Rating</th>
-                <th>Status</th>
-                <th>Approval</th>
-                <th>Last Modified</th>
-                <th>
+                <th style="width: 20rem;">Name</th>
+                <th style="width: 5rem;">Rating</th>
+                <th style="width: 5rem;">Status</th>
+                <th style="width: 8rem;">Approval</th>
+                <th style="width: 8rem;">Last Modified</th>
+                <th style="width: 10rem; text-align: end;">
                     <input type="text" placeholder="Search Name...">
                 </th>
             </thead>
@@ -43,8 +43,8 @@
                     <td>3 minutes ago</td>
                     <td>
                         <div class="user-listings-table-interact">
-                            <button class="user-listings-table-interact-btn">Edit</button>
-                            <button class="user-listings-table-interact-btn">Delete</button>
+                            <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
+                            <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
                         </div>
                     </td>
                 </tr>
