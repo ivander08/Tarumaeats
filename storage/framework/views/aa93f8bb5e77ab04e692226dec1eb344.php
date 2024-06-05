@@ -19,7 +19,7 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/eats">Eats</a></li>
-                    <li><a href="/user">User</a></li>
+                    <li><a href="/user/listings">User</a></li>
                 </ul>
             </div>
         </nav>

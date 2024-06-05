@@ -22,6 +22,10 @@ Route::get('/eats', function () {
     return view('eats');
 })->name('eats');
 
+Route::get('/user/listings', function () {
+    return view('userListings');
+})->name('userListings');
+
 Route::get('/layout', function () {
     return view('layout');
 })->name('layout');

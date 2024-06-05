@@ -1,7 +1,9 @@
-@include('partials.header')
+<div class="page-container">
+    @include('partials.header')
 
-<main>
-    @yield('content')
-</main>
+    <main>
+        @yield('content')
+    </main>
 
-@include('partials.footer')
+    @include('partials.footer')
+</div>
