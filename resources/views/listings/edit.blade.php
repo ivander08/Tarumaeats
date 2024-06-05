@@ -13,7 +13,7 @@
     $price_range = explode('-', $listing->price_range);
     $payment_options = json_decode($listing->payment_options);
     @endphp
-  <form action="{{ route('listings.update', $listing->id)}}" method="POST">
+  <form action="{{ route('listings.update', $listing->id)}}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
 
@@ -59,8 +59,25 @@
 
             <div class="form-group">
                 <label for="images">Images</label>
-                <input type="file" class="form-control" id="images" name="images" value="{{$listing->images}}">
+                <input type="file" class="form-control" id="images" name="images[]" accept="image/*" multiple>
             </div>
+
+            <div class="form-group">
+                <label for="remove_images">Remove Images</label><br>
+                @php
+                    $images = json_decode($listing->images, true); // Decode JSON string into an array
+                @endphp
+                @if(is_array($images))
+                    @foreach ($images as $index => $image)
+                        <label>
+                            <img src="data:image/jpeg;base64,{{ $image }}" alt="Image {{ $index + 1 }}" width="100" height="100">
+                            <input type="checkbox" name="remove_images[]" value="{{ $index }}"> Remove Image {{ $index + 1 }}
+                        </label><br>
+                    @endforeach
+                @endif
+            </div>
+
+
 
             <div class="form-group">
                 <label>Tags</label><br>
@@ -132,5 +149,14 @@
 
 <a href ="{{ route('listings') }}"><button>Back</button></a>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   </body>
   </html>
