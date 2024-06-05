@@ -17,6 +17,16 @@ body {
     padding: 0;
 }
 
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
 /* Header Styles */
 header {
     background-image: url('../images/UNTAR Background Navbar.png');
@@ -312,7 +322,7 @@ footer {
 .user-listings-head {
     display: flex;
     justify-content: space-between;
-    padding: 2.5rem 15rem 1rem 15rem;
+    padding: 2.5rem 15rem 0rem 15rem;
     align-items: flex-end;
 }
 
@@ -349,22 +359,26 @@ footer {
     align-items: center;
 }
 
-.user-listings-table{
-    padding: 0rem 15rem 2.5rem 15rem;
+.user-listings-table-wrapper {
+    padding: 1.5rem 15rem 2.5rem 15rem;
+}
+
+.user-listings-table {
+    border: 1px solid rgba(133, 133, 133, 50%);
+    border-radius: 15px;
+    overflow: hidden;
     text-align: left;
 }
 
 .user-listings-table table {
     width: 100%;
-    margin-top: 2rem;
-    border-radius: 15px;
     font-size: 1rem;
-    border: 1px solid var(--grey);
+    border-collapse: collapse;
 }
 
 .user-listings-table thead {
     text-align: left;
-    border-bottom: 1px solid var(--grey);
+    border-bottom: 1px solid rgba(133, 133, 133, 50%);
     opacity: 75%;
 }
 
@@ -380,19 +394,40 @@ footer {
     font-weight: 400;
 }
 
-.listing-status-active{
+.user-listings-table tbody tr:nth-child(even) {
+    background-color: var(--slightly-darker-white);
+}
+
+.listing-status-active {
     background-color: #D7F6E9;
     color: #188659;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
 }
 
-.listing-status-approved{
+.listing-status-approved {
     background-color: #D7F6E9;
     color: #188659;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+.listing-status-inactive {
+    background-color: rgba(133, 133, 133, 25%);
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+.listing-status-unapproved {
+    background-color: rgba(218, 152, 152, 25%);
+    color: #B36060;
+    padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
@@ -405,14 +440,13 @@ footer {
     gap: 0.5rem;
 }
 
-.delete-button{
+.delete-button {
     height: 2rem;
 }
 
-.edit-button{
+.edit-button {
     height: 2rem;
 }
-
 
 .user-listings-table thead th input[type="text"] {
     padding: 0.5rem;
