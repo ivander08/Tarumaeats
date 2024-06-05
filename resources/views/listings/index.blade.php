@@ -44,51 +44,53 @@
       <td>{{ $listing->longitude }}</td>
       <td>
       @if($listing->images)
-        @if(is_array($listing->images))
-            @foreach ($listing->images as $image)
-                <img src="data:/image/jpeg;base64,{{ $image }}" width="100" height="100">
+        @php
+            $images = json_decode($listing->images, true);
+        @endphp
+            @foreach ($images as $image)
+                <img src="data:image/jpeg;base64,{{ $image }}" width="100" height="100">
             @endforeach
-        @else
-            <img src="data:/image/jpeg;base64,{{ $listing->images }}" width="100" height="100">
         @endif
-      @endif
       </td>
       <td>
-    @if(is_array($listing->tags))
-        @foreach($listing->tags as $tag)
-            {{ $tag }}<br>
-        @endforeach
-    @else
-        {{ $listing->tags }}
-    @endif
-</td>
-<td>
-    @if(is_array($listing->special_features))
-        @foreach($listing->special_features as $sf)
+        @if ($listing->tags)
+            @foreach(json_decode($listing->tags) as $tag)
+                {{ $tag }}<br>
+            @endforeach
+        @else
+            No tags
+        @endif
+    </td>
+
+
+    <td>
+    @if ($listing->special_features)
+        @foreach(json_decode($listing->special_features) as $sf)
             {{ $sf }}<br>
         @endforeach
     @else
         {{ $listing->special_features }}
     @endif
 </td>
+
 <td>
-    @if(is_array($listing->price_per_person))
-        @foreach($listing->price_per_person as $ppp)
-            {{ $ppp }}<br>
-        @endforeach
-    @else
+    @if ($listing->price_per_person)
         {{ $listing->price_per_person }}
+    @else
+        No price per person
     @endif
 </td>
+
 <td>
-    @if(is_array($listing->payment_options))
-        @foreach($listing->payment_options as $po)
+    @if ($listing->payment_options)
+        @foreach(json_decode($listing->payment_options) as $po)
             {{ $po }}<br>
         @endforeach
     @else
-        {{ $listing->payment_options }}
+        No payment options
     @endif
 </td>
+
 <td>{{ $listing->open_hours }}</td>
 <td>{{ $listing->closed_hours }}</td>
 <td>{{ $listing->approval_status }}</td>                          
