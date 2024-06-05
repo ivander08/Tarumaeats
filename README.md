@@ -3,8 +3,8 @@
 ![Tarumaeats Logo](https://repobeats.axiom.co/api/embed/ab2c52d0a0f2dff05a8852fbe84cff4edf25bf71.svg)
 
 ## Team 2-TI-A
-- **Ivander** (535220010)
-- **Justin Salim** (535220020)
+- **Ivander** (535220020)
+- **Justin Salim** (535220017)
 - **Willsen Yogi Prasetia** (535220010)
 
 ## Introduction
