@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\listings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
 {
@@ -34,7 +35,8 @@ class ListingsController extends Controller
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
             'tags' => 'nullable|array',
             'special_features' => 'nullable|array',
             'price_per_person' => 'nullable|string',
@@ -43,13 +45,15 @@ class ListingsController extends Controller
             'closed_hours' => 'nullable|string',
         ]);
 
-        // Handle the image file upload
-        $imageData = null;
-        $image = $request->file('images');
+        // dd($request->all());
 
-        if ($image !== null) {
-            // Read the image file and encode it as base64
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+        // Handle the image file upload
+        $imageData = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                // Read the image file and encode it as base64
+                $imageData[] = base64_encode(file_get_contents($image->getRealPath()));
+            }
         }
 
         // Create the listing
@@ -62,7 +66,7 @@ class ListingsController extends Controller
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'images' => $imageData,
+            'images' => json_encode($imageData),
             'tags' => json_encode($request->tags),
             'special_features' => json_encode($request->special_features),
             'price_per_person' => $request->price_per_person,
@@ -83,6 +87,10 @@ class ListingsController extends Controller
     public function update(Request $request, $id){
         $listing = listings::find($id);
 
+        if (!$listing) {
+            return redirect()->route('listings')->with('error', 'Listing not found.');
+        }
+    
         $request->validate([
             'location_name' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
@@ -92,7 +100,8 @@ class ListingsController extends Controller
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
             'tags' => 'nullable|array',
             'special_features' => 'nullable|array',
             'price_per_person' => 'nullable|string',
@@ -100,16 +109,31 @@ class ListingsController extends Controller
             'open_hours' => 'nullable|string',
             'closed_hours' => 'nullable|string',
         ]);
-
-        $imageData = null;
-        $image = $request->file('images');
-
-        if ($image !== null) {
-            // Read the image file and encode it as base64
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+    
+        if ($request->has('remove_images')) {
+            foreach ($request->remove_images as $index) {
+                $images = json_decode($listing->images, true);
+                $imageUrl = $images[$index];
+                Storage::delete($imageUrl);
+                unset($images[$index]);
+            }
+            $listing->images = json_encode(array_values($images));
+            $listing->save();
         }
-
-        listings::find($id)->update([
+    
+        $imageData = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageData[] = base64_encode(file_get_contents($image->getRealPath()));
+            }
+            $existingImages = json_decode($listing->images, true);
+            $mergedImages = array_merge($existingImages ?? [], $imageData);
+            $listing->images = json_encode($mergedImages);
+            $listing->save();
+        }
+    
+        // Update the listing attributes
+        $listing->update([
             'location_name' => $request->location_name,
             'location_address' => $request->location_address,
             'price_range' => $request->price_range,
@@ -118,17 +142,17 @@ class ListingsController extends Controller
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'images' => $imageData,
             'tags' => json_encode($request->tags),
             'special_features' => json_encode($request->special_features),
             'price_per_person' => $request->price_per_person,
             'payment_options' => json_encode($request->payment_options),
             'open_hours' => $request->open_hours,
             'closed_hours' => $request->closed_hours,
-            ]);
+        ]);
+    
+        return redirect()->route('listings');
+}
 
-        return redirect()-> route('listings');
-    }
 
     public function destroy($id){
         $listing = listings::find($id);

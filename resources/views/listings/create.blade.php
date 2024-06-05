@@ -51,7 +51,7 @@
 
     <div class="form-group">
         <label for="images">Images</label>
-        <input type="file" class="form-control" id="images" name="images" multiple>
+        <input type="file" class="form-control" id="images" name="images[]" accept="image/*" multiple>
     </div>
 
     <div class="form-group">
@@ -120,5 +120,14 @@
 
 <a href="{{ route('listings') }}"><button>Back</button></a>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 </body>
 </html>
