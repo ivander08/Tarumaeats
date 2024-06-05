@@ -59,7 +59,6 @@ nav {
     display: inline-block;
     margin-left: 4rem;
     font-size: 1.2rem;
-    
 }
 
 .nav-right ul li a {
@@ -138,14 +137,14 @@ footer {
 }
 
 /* Eats Listing Container */
-.eats-container{
+.eats-container {
     margin-top: 2rem;
     display: flex;
     margin-bottom: 2rem;
     gap: 5rem;
 }
 
-.eats-filter-container{
+.eats-filter-container {
     padding: 2.5rem 2.5rem;
     background-color: var(--slightly-darker-white);
     border-radius: 15px;
@@ -153,31 +152,31 @@ footer {
 }
 
 .eats-filter-container h3, hr,
-.eats-filter-pack-container h3{
-    color: var(--grey);
+.eats-filter-pack-container h3 {
+    color: var (--grey);
 }
 
-.eats-filter-container h3{
+.eats-filter-container h3 {
     font-size: 1.3rem;
 }
 
-.eats-filter-pack-container{
+.eats-filter-pack-container {
     margin-bottom: 1rem;
 }
 
-.eats-filter-pack-container h3{
+.eats-filter-pack-container h3 {
     font-size: 1.1rem;
     font-weight: 300;
     margin-bottom: 0.5rem;
 }
 
-.eats-filter-pack{
+.eats-filter-pack {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
 }
 
-.eats-filter-pack button{
+.eats-filter-pack button {
     width: 1rem;
     height: 1rem;
 }
@@ -196,22 +195,21 @@ footer {
     background-color: var(--red)
 }
 
-.eats-filter-pack label{
+.eats-filter-pack label {
     margin-left: 0.5rem;
     font-weight: 300;
     font-size: 0.8rem;
-    color: var(--grey);
+    color: var (--grey);
 }
 
-
-.eats-filter-pack h3{
+.eats-filter-pack h3 {
     margin-left: 0.7rem;
     margin-top: 0.5rem;
     font-weight: 300;
     font-size: 0.8rem;
 }
 
-.eats-results-container{
+.eats-results-container {
     margin-top: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -220,7 +218,7 @@ footer {
     height: fit-content;
 }
 
-.eats-card-image{
+.eats-card-image {
     background-image: url('../images/Solaria Main Image.png');
     background-position: center;
     background-size: cover;
@@ -247,49 +245,49 @@ footer {
     margin-right: 0.5rem;
 }
 
-.eats-card-heart-icon{
+.eats-card-heart-icon {
     width: 1.5rem;
     height: 1.5rem;
     opacity: 75%;
     filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg) brightness(100%) contrast(113%);
 }
 
-.eats-card-content{
+.eats-card-content {
     padding: 0 1rem 1rem 1rem;
     background-color: var(--slightly-darker-white);
     border-radius: 0 0 15px 15px;
 }
 
-.eats-card-name-rating{
+.eats-card-name-rating {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.eats-card-name-rating h1{
+.eats-card-name-rating h1 {
     color: #AE737B;
     font-size: 1.2rem;
 }
 
-.eats-card-rating{
+.eats-card-rating {
     display: flex;
     align-items: center;
 }
 
-.eats-card-rating h3{
+.eats-card-rating h3 {
     font-size: 0.9rem;
     opacity: 75%;
     color: var(--grey);
 }
 
-.eats-card-star-icon{
+.eats-card-star-icon {
     width: 1rem;
     height: 1rem;
     margin-right: 0.2rem;
     filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg) brightness(103%) contrast(103%);
 }
 
-.eats-card-content p{
+.eats-card-content p {
     margin-top: 0;
     margin-bottom: 1rem;
     font-weight: 200;
@@ -298,39 +296,39 @@ footer {
     transform: translateY(-0.5rem);
 }
 
-.eats-card-content h2{
+.eats-card-content h2 {
     font-weight: 500;
     font-size: 0.9rem;
     color: var(--grey);
 }
 
 /* User Management Page */
-.vl-red{
+.vl-red {
     border-left: 2px solid var(--red);
     position: absolute;
     height: 3rem;
 }
 
-.user-listings-head{
+.user-listings-head {
     display: flex;
     justify-content: space-between;
-    padding: 2.5rem 15rem;
+    padding: 2.5rem 15rem 1rem 15rem;
     align-items: flex-end;
 }
 
-.user-listings-head-text-settings{
+.user-listings-head-text-settings {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.user-listings-head-text-settings h1{
+.user-listings-head-text-settings h1 {
     font-size: 2rem;
     font-weight: 400;
     margin-left: 1rem;
 }
 
-.user-listings-head-text a{
+.user-listings-head-text a {
     color: var(--grey);
     text-decoration: none;
     margin-right: 1rem;
@@ -349,4 +347,80 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.user-listings-table{
+    padding: 0rem 15rem 2.5rem 15rem;
+    text-align: left;
+}
+
+.user-listings-table table {
+    width: 100%;
+    margin-top: 2rem;
+    border-radius: 15px;
+    font-size: 1rem;
+    border: 1px solid var(--grey);
+}
+
+.user-listings-table thead {
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+    opacity: 75%;
+}
+
+.user-listings-table thead th {
+    padding: 1rem 1.5rem;
+    color: var(--grey);
+    font-weight: 400;
+}
+
+.user-listings-table tbody td {
+    padding: 1rem 1.5rem;
+    color: var(--grey);
+    font-weight: 400;
+}
+
+.listing-status-active{
+    background-color: #D7F6E9;
+    color: #188659;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+.listing-status-approved{
+    background-color: #D7F6E9;
+    color: #188659;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+.user-listings-table-interact {
+    display: flex;
+    align-items: end;
+    gap: 0.5rem;
+}
+
+.user-listings-table-interact-btn {
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.user-listings-table thead th input[type="text"] {
+    width: 10rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
 }
