@@ -14,6 +14,7 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Location Name</th>
+                <th scope="col">Campus</th>
                 <th scope="col">Location Address</th>
                 <th scope="col">Price Range</th>
                 <th scope="col">Website</th>
@@ -28,6 +29,7 @@
                 <th scope="col">Cuisine</th>
                 <th scope="col">Payment Options</th>
                 <th scope="col">Special Features</th>
+                <th scope="col">Status</th>
                 <th scope="col">Approval Status</th>
                 <th scope="col">Action</th>
             </tr>
@@ -37,6 +39,7 @@
                 <tr>
                     <td>{{ $listing->name }}</td>
                     <td>{{ $listing->location_name }}</td>
+                    <td>{{ $listing->campus }}</td>
                     <td>{{ $listing->location_address }}</td>
                     <td>{{ $listing->price_range }}</td>
                     <td>{{ $listing->website }}</td>
@@ -97,6 +100,7 @@
                             No special features
                         @endif
                     </td>
+                    <td>{{ $listing->status }}</td>
                     <td>{{ $listing->approval_status }}</td>
                     <td>
                         <a href="{{ route('listings.edit', $listing->id) }}">Edit</a>

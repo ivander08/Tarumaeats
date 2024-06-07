@@ -27,6 +27,14 @@
             </div>
 
             <div class="form-group">
+                <label>Campus</label><br>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="campus" value="untar_satu">UNTAR 1</label><br>
+                    <label><input type="radio" name="campus" value="untar_dua">UNTAR 2</label><br>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="location_address">Location Address</label>
                 <input type="text" class="form-control" id="location_address" name="location_address" required>
             </div>
@@ -75,6 +83,7 @@
             <div class="form-group">
                 <label>Type</label><br>
                 <div class="checkbox-group">
+                    <label><input type="radio" name="campus" value="">None</label><br>
                     <label><input type="radio" name="type" value="food_only">Food Only</label><br>
                     <label><input type="radio" name="type" value="drinks_only">Drinks Only</label><br>
                 </div>
@@ -141,4 +150,5 @@
             </div>
         @endif
     </div>
+
 @endsection

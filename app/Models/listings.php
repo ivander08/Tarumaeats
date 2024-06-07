@@ -12,6 +12,7 @@ class listings extends Model
     protected $fillable = [
         'name',
         'location_name',
+        'campus',
         'location_address',
         'price_range',
         'website',

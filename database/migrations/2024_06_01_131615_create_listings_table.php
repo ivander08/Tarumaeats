@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('location_name');
+            $table->string('campus');
             $table->string('location_address');
             $table->string('website')->nullable();
             $table->string('phone_number')->nullable();

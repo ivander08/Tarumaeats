@@ -24,6 +24,7 @@ class ListingsController extends Controller
         // Validate the form data
         $request->validate([
             'location_name' => 'required|string|max:255',
+            'campus' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
             'website' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:255',
@@ -54,6 +55,7 @@ class ListingsController extends Controller
         Listings::create([
             'name' => auth()->user()->name,
             'location_name' => $request->location_name,
+            'campus' => $request->campus,
             'location_address' => $request->location_address,
             'website' => $request->website,
             'phone_number' => $request->phone_number,
@@ -91,6 +93,7 @@ class ListingsController extends Controller
         // Validate the form data
         $request->validate([
             'location_name' => 'required|string|max:255',
+            'campus' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
             'website' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:255',
@@ -112,6 +115,7 @@ class ListingsController extends Controller
         $listing->update([
             'name' => auth()->user()->name,
             'location_name' => $request->location_name,
+            'campus' => $request->campus,
             'location_address' => $request->location_address,
             'website' => $request->website,
             'phone_number' => $request->phone_number,
