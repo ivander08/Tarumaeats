@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->default("testUser");
+            $table->string('username')->default("testUser");
             $table->string('location_name');
             $table->string('location_address');
             $table->string('price_range');

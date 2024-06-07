@@ -15,14 +15,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/eats', function () {
+        return view('eats');
+    })->name('eats');
+    
+    Route::get('/user/listings', function () {
+        return view('listings/userListings');
+    })->name('userListings');
+    
+    Route::get('/user/listings/createListings', function () {
+        return view('listings/createListings');
+    })->name('createListings');
+
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
