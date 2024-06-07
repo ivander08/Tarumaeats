@@ -10,7 +10,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Name</th>
       <th scope="col">Location Name</th>
       <th scope="col">Location Address</th>
       <th scope="col">Price Range</th>
@@ -33,7 +33,7 @@
   <tbody>
     @foreach ($listings as $listing)
     <tr>
-      <td>{{ $listing->id }}</td>
+      <td>{{ $listing->name }}</td>
       <td>{{ $listing->location_name }}</td>
       <td>{{ $listing->location_address }}</td>
       <td>{{ $listing->price_range }}</td>

@@ -29,20 +29,18 @@ class ListingsController extends Controller
          $request->validate([
             'location_name' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
-            'price_range' => 'required|string|max:255',
             'website' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
-            'tags' => 'nullable|array',
+            'images' => 'required|array',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'type' => 'nullable|string|max:255',
+            'cuisine' => 'nullable|array',
+            'price_range' => 'required|string',
+            'payment_options' => 'required|array',
             'special_features' => 'nullable|array',
-            'price_per_person' => 'nullable|string',
-            'payment_options' => 'nullable|array',
-            'open_hours' => 'nullable|string',
-            'closed_hours' => 'nullable|string',
         ]);
 
         // dd($request->all());
@@ -58,21 +56,20 @@ class ListingsController extends Controller
 
         // Create the listing
         listings::create([
+            'name' => $request->name,
             'location_name' => $request->location_name,
             'location_address' => $request->location_address,
-            'price_range' => $request->price_range,
             'website' => $request->website,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'images' => json_encode($imageData),
-            'tags' => json_encode($request->tags),
-            'special_features' => json_encode($request->special_features),
-            'price_per_person' => $request->price_per_person,
+            'type' => $request->type,
+            'cuisine' => json_encode($request->cuisine),
+            'price_range' => $request->price_range,
             'payment_options' => json_encode($request->payment_options),
-            'open_hours' => $request->open_hours,
-            'closed_hours' => $request->closed_hours,
+            'special_features' => json_encode($request->special_features),
         ]);
 
         return redirect()-> route('listings');
@@ -94,20 +91,18 @@ class ListingsController extends Controller
         $request->validate([
             'location_name' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
-            'price_range' => 'required|string|max:255',
             'website' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
-            'tags' => 'nullable|array',
+            'images' => 'required|array',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'type' => 'nullable|string|max:255',
+            'cuisine' => 'nullable|array',
+            'price_range' => 'required|string',
+            'payment_options' => 'required|array',
             'special_features' => 'nullable|array',
-            'price_per_person' => 'nullable|string',
-            'payment_options' => 'nullable|array',
-            'open_hours' => 'nullable|string',
-            'closed_hours' => 'nullable|string',
         ]);
     
         if ($request->has('remove_images')) {
@@ -134,20 +129,20 @@ class ListingsController extends Controller
     
         // Update the listing attributes
         $listing->update([
+            'name' => $request->name,
             'location_name' => $request->location_name,
             'location_address' => $request->location_address,
-            'price_range' => $request->price_range,
             'website' => $request->website,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'tags' => json_encode($request->tags),
-            'special_features' => json_encode($request->special_features),
-            'price_per_person' => $request->price_per_person,
+            'images' => json_encode($imageData),
+            'type' => $request->type,
+            'cuisine' => json_encode($request->cuisine),
+            'price_range' => $request->price_range,
             'payment_options' => json_encode($request->payment_options),
-            'open_hours' => $request->open_hours,
-            'closed_hours' => $request->closed_hours,
+            'special_features' => json_encode($request->special_features),
         ]);
     
         return redirect()->route('listings');

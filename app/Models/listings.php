@@ -10,6 +10,7 @@ class listings extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'location_name',
         'location_address',
         'price_range',
@@ -19,12 +20,11 @@ class listings extends Model
         'latitude',
         'longitude',
         'images',
-        'tags',
-        'special_features',
-        'price_per_person',
+        'type',
+        'cuisine',
+        'price_range',
         'payment_options',
-        'open_hours',
-        'closed_hours',
+        'special_features',
     ];
 
 
@@ -32,7 +32,7 @@ class listings extends Model
         'latitude' => 'string',
         'longitude' => 'string',
         'images' => 'array',
-        'tags' => 'array',
+        'cuisine' => 'array',
         'special_features' => 'array',
         'payment_options' => 'array',
     ];
