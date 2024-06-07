@@ -457,3 +457,17 @@ footer {
     outline: none;
     box-sizing: border-box;
 }
+
+.user-listings-create-save {
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    width: 7rem;
+    height: 4.5rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
