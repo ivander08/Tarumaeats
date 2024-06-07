@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->text('images');
+            $table->text('main_image')->nullable();
+            $table->text('banner_image')->nullable();
+            $table->json('carousel_images')->nullable();
             $table->string('type')->nullable();
             $table->json('cuisine');
             $table->string('price_range');

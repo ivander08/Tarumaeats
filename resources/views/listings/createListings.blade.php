@@ -12,7 +12,8 @@
             <a href="#">My Details</a>
             <a href="#">My Listings</a>
         </div>
-        <button type="button" id="save-create-listing-btn" class="user-listings-create-save" onclick="document.getElementById('create-listing-form').submit();">Save</button>
+        <button type="button" id="save-create-listing-btn" class="user-listings-create-save"
+            onclick="document.getElementById('create-listing-form').submit();">Save</button>
     </div>
     <div class="user-listings-create-forms">
         <form id="create-listing-form" action="{{ route('listings.store') }}" method="POST" enctype="multipart/form-data">
@@ -56,8 +57,19 @@
             </div>
 
             <div class="form-group">
-                <label for="images">Images</label>
-                <input type="file" class="form-control" id="images" name="images[]" accept="image/*" multiple>
+                <label for="main_image">Main Image</label>
+                <input type="file" class="form-control" id="main_image" name="main_image" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label for="banner_image">Banner Image</label>
+                <input type="file" class="form-control" id="banner_image" name="banner_image" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label for="carousel_images">Carousel Images</label>
+                <input type="file" class="form-control" id="carousel_images" name="carousel_images[]" accept="image/*"
+                    multiple>
             </div>
 
             <div class="form-group">
@@ -76,40 +88,45 @@
                     <label><input type="checkbox" name="cuisine[]" value="japanese">Japanese</label><br>
                     <label><input type="checkbox" name="cuisine[]" value="chinese">Chinese</label><br>
                     <label><input type="checkbox" name="cuisine[]" value="other">Other</label><br>
-            </div>
-
-            <div class="form-group">
-                <label>Price Range</label><br>
-                <div class="checkbox-group">
-                    <label><input type="radio" name="price_range" value="under_price">&lt;Rp10,000</label><br>
-                    <label><input type="radio" name="price_range" value="thirty_price">Rp10,000 - Rp30,0000</label><br>
-                    <label><input type="radio" name="price_range" value="sixty_price">Rp30,000 - Rp60,0000</label><br>
-                    <label><input type="radio" name="price_range" value="over_price">&gt;Rp60,000</label><br>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label>Payment Options</label><br>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="payment_options[]" value="cash"> Cash</label><br>
-                    <label><input type="checkbox" name="payment_options[]" value="credit"> Credit Card</label><br>
-                    <label><input type="checkbox" name="payment_options[]" value="debit"> Debit Card</label><br>
-                    <label><input type="checkbox" name="payment_options[]" value="mobile"> Mobile Payment</label><br>
+                <div class="form-group">
+                    <label>Price Range</label><br>
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="price_range" value="under_price">&lt;Rp10,000</label><br>
+                        <label><input type="radio" name="price_range" value="thirty_price">Rp10,000 -
+                            Rp30,0000</label><br>
+                        <label><input type="radio" name="price_range" value="sixty_price">Rp30,000 -
+                            Rp60,0000</label><br>
+                        <label><input type="radio" name="price_range" value="over_price">&gt;Rp60,000</label><br>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label>Special Features</label><br>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="special_features[]" value="halal">Halal</label><br>
-                    <label><input type="checkbox" name="special_features[]" value="nonhalal">Non-Halal</label><br>
-                    <label><input type="checkbox" name="special_features[]" value="takeaway">Takeaway Available</label><br>
-                    <label><input type="checkbox" name="special_features[]" value="indoor">Indoor Sesating</label><br>
-                    <label><input type="checkbox" name="special_features[]" value="outdoor">Outdoor Seating</label><br>
+                <div class="form-group">
+                    <label>Payment Options</label><br>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="payment_options[]" value="cash"> Cash</label><br>
+                        <label><input type="checkbox" name="payment_options[]" value="credit"> Credit Card</label><br>
+                        <label><input type="checkbox" name="payment_options[]" value="debit"> Debit Card</label><br>
+                        <label><input type="checkbox" name="payment_options[]" value="mobile"> Mobile Payment</label><br>
+                    </div>
                 </div>
-            </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+                <div class="form-group">
+                    <label>Special Features</label><br>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="special_features[]" value="halal">Halal</label><br>
+                        <label><input type="checkbox" name="special_features[]" value="nonhalal">Non-Halal</label><br>
+                        <label><input type="checkbox" name="special_features[]" value="takeaway">Takeaway
+                            Available</label><br>
+                        <label><input type="checkbox" name="special_features[]" value="indoor">Indoor
+                            Sesating</label><br>
+                        <label><input type="checkbox" name="special_features[]" value="outdoor">Outdoor
+                            Seating</label><br>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
         </form>
 
         <a href="{{ route('listings') }}"><button class="btn btn-secondary">Back</button></a>
