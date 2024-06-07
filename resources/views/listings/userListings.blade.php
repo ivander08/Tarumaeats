@@ -12,7 +12,9 @@
             <a href="#">My Details</a>
             <a href="#">My Listings</a>
         </div>
-        <button type="create" class="user-listings-create">Create Listing</button>
+        <a href="{{ url('user/listings/createListings') }}" style="text-decoration: none;">
+            <button type="button" id="create-listing-btn" class="user-listings-create">Create Listing</button>
+        </a>
     </div>
     <div class="user-listings-table-wrapper">
         <div class="user-listings-table">
