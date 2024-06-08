@@ -69,12 +69,16 @@
                         <label for="main_image">Main Image*</label>
                         <input type="file" class="create-form-control" id="main_image" name="main_image" accept="image/*"
                             required>
+                        <img id="main_image_preview" src="#" alt="Main Image Preview"
+                            style="display: none; max-height: 200px; object-fit: cover;">
                     </div>
 
                     <div class="create-form-image-group">
                         <label for="banner_image">Banner Image*</label>
                         <input type="file" class="create-form-control" id="banner_image" name="banner_image"
                             accept="image/*" required>
+                        <img id="banner_image_preview" src="#" alt="Banner Image Preview"
+                            style="display: none; max-height: 200px; object-fit: cover;">
                     </div>
 
                     <div class="create-form-image-group">
@@ -126,28 +130,28 @@
                         <label>Cuisine*</label>
                         <div class="create-checkbox-group">
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="indonesian"
-                                    name="cuisine[]" value="indonesian">
+                                <input type="checkbox" class="create-form-checkbox" id="indonesian" name="cuisine[]"
+                                    value="indonesian">
                                 <label for="indonesian">Indonesian</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="western"
-                                    name="cuisine[]" value="western">
+                                <input type="checkbox" class="create-form-checkbox" id="western" name="cuisine[]"
+                                    value="western">
                                 <label for="western">Western</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="japanese"
-                                    name="cuisine[]" value="japanese">
+                                <input type="checkbox" class="create-form-checkbox" id="japanese" name="cuisine[]"
+                                    value="japanese">
                                 <label for="japanese">Japanese</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="chinese"
-                                    name="cuisine[]" value="chinese">
+                                <input type="checkbox" class="create-form-checkbox" id="chinese" name="cuisine[]"
+                                    value="chinese">
                                 <label for="chinese">Chinese</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="other"
-                                    name="cuisine[]" value="other">
+                                <input type="checkbox" class="create-form-checkbox" id="other" name="cuisine[]"
+                                    value="other">
                                 <label for="other">Other</label>
                             </div>
                         </div>
@@ -184,23 +188,23 @@
                         <label>Payment Options*</label>
                         <div class="create-checkbox-group">
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox"
-                                    id="cash" name="payment_options[]" value="cash">
+                                <input type="checkbox" class="create-form-checkbox" id="cash"
+                                    name="payment_options[]" value="cash">
                                 <label for="cash">Cash</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox"
-                                    id="credit" name="payment_options[]" value="credit">
+                                <input type="checkbox" class="create-form-checkbox" id="credit"
+                                    name="payment_options[]" value="credit">
                                 <label for="credit">Credit Card</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox"
-                                    id="debit" name="payment_options[]" value="debit">
+                                <input type="checkbox" class="create-form-checkbox" id="debit"
+                                    name="payment_options[]" value="debit">
                                 <label for="debit">Debit Card</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox"
-                                    id="mobile" name="payment_options[]" value="mobile">
+                                <input type="checkbox" class="create-form-checkbox" id="mobile"
+                                    name="payment_options[]" value="mobile">
                                 <label for="mobile">Mobile Payment</label>
                             </div>
                         </div>
@@ -253,4 +257,30 @@
             </div>
         </form>
     </div>
+
+    <script>
+        // Main Image Preview
+        document.getElementById('main_image').onchange = function(e) {
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                document.getElementById('main_image_preview').src = event.target.result;
+                document.getElementById('main_image_preview').style.display = 'block';
+            };
+
+            reader.readAsDataURL(e.target.files[0]);
+        };
+
+        // Banner Image Preview
+        document.getElementById('banner_image').onchange = function(e) {
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                document.getElementById('banner_image_preview').src = event.target.result;
+                document.getElementById('banner_image_preview').style.display = 'block';
+            };
+
+            reader.readAsDataURL(e.target.files[0]);
+        };
+    </script>
 @endsection
