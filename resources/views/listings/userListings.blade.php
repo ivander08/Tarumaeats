@@ -21,23 +21,25 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 15rem;">Name</th>
-                        <th style="width: 5rem;">Rating</th>
-                        <th style="width: 5rem;">Status</th>
-                        <th style="width: 8rem;">Approval</th>
-                        <th style="width: 8rem;">Last Modified</th>
-                        <th style="width: 10rem; text-align: end;">
+                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Name</th>
+                        <th style="cursor:pointer; width: 5rem;">Rating</th>
+                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status</th>
+                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status" data-order="asc">Approval</th>
+                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="desc">Last Modified
+                        </th>
+                        <th style="cursor:pointer; width: 10rem; text-align: end;">
                             <input type="text" id="search-input" placeholder="Search Name...">
                         </th>
                     </tr>
                 </thead>
                 <tbody id="listings-tbody">
-                    @foreach($listings as $listing)
+                    @foreach ($listings as $listing)
                         <tr>
                             <td>{{ $listing->location_name }}</td>
                             <td>--</td> <!-- Assuming you have a rating system to be added here -->
                             <td>
-                                <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}" data-status="{{ $listing->status }}">
+                                <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}"
+                                    data-status="{{ $listing->status }}">
                                     &#x2022; {{ ucfirst($listing->status) }}
                                 </div>
                             </td>
@@ -49,11 +51,14 @@
                             <td>{{ $listing->updated_at->diffForHumans() }}</td>
                             <td>
                                 <div class="user-listings-table-interact">
-                                    <form id="delete-form-{{ $listing->id }}" action="{{ route('listings.destroy', $listing->id) }}" method="POST" style="display:none;">
+                                    <form id="delete-form-{{ $listing->id }}"
+                                        action="{{ route('listings.destroy', $listing->id) }}" method="POST"
+                                        style="display:none;">
                                         @csrf
                                         @method('DELETE')
                                     </form>
-                                    <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $listing->id }}').submit();">
+                                    <a href="javascript:void(0);"
+                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $listing->id }}').submit();">
                                         <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
                                     </a>
                                     <a href="{{ route('listings.edit', $listing->id) }}">
@@ -76,7 +81,9 @@
                 $.ajax({
                     url: "{{ route('listings.search') }}",
                     type: "GET",
-                    data: {'search': query},
+                    data: {
+                        'search': query
+                    },
                     success: function(data) {
                         $('#listings-tbody').html(data);
                     }
@@ -100,6 +107,52 @@
                         location.reload();
                     }
                 });
+            });
+
+            // Function to sort table data
+            function sortTable(column, order) {
+                var tbody = $('#listings-tbody');
+                var rows = tbody.find('tr').toArray();
+
+                rows.sort(function(a, b) {
+                    var aValue = $(a).find('td').eq(column).text();
+                    var bValue = $(b).find('td').eq(column).text();
+
+                    if (column === 4) { // If sorting by date, parse date strings
+                        aValue = new Date(aValue);
+                        bValue = new Date(bValue);
+                    }
+
+                    if (order === 'asc') {
+                        return aValue.localeCompare(bValue);
+                    } else {
+                        return bValue.localeCompare(aValue);
+                    }
+                });
+
+                tbody.empty().append(rows);
+            }
+
+            // Click event for sorting table
+            $('.sort').on('click', function() {
+                var column = $(this).index();
+                var order = $(this).data('order');
+
+                // Toggle sort order
+                if (order === 'asc') {
+                    $(this).data('order', 'desc');
+                } else {
+                    $(this).data('order', 'asc');
+                }
+
+                // Remove sort indicator from other columns
+                $(this).siblings().removeAttr('data-order');
+
+                // Add sort indicator to current column
+                $(this).attr('data-order', order === 'asc' ? 'desc' : 'asc');
+
+                // Sort table
+                sortTable(column, order);
             });
         });
     </script>
