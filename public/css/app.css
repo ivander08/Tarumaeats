@@ -401,13 +401,14 @@ hr,
     background-color: var(--slightly-darker-white);
 }
 
-.listing-status-active {
+.listing-status-online {
     background-color: #d7f6e9;
     color: #188659;
     padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .listing-status-approved {
@@ -419,15 +420,25 @@ hr,
     font-weight: 500;
 }
 
-.listing-status-inactive {
+.listing-status-offline {
     background-color: rgba(133, 133, 133, 25%);
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.listing-status-pending {
+    background-color: rgba(218, 215, 152, 0.25);
+    color: #b3a560;
     padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
 }
 
-.listing-status-unapproved {
+.listing-status-declined {
     background-color: rgba(218, 152, 152, 25%);
     color: #b36060;
     padding: 0.5rem 1rem;
