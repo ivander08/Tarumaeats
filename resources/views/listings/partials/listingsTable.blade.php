@@ -1,11 +1,9 @@
-<!-- resources/views/listings/partials/listingsTable.blade.php -->
-
 @foreach($listings as $listing)
     <tr>
         <td>{{ $listing->location_name }}</td>
         <td>--</td> <!-- Assuming you have a rating system to be added here -->
         <td>
-            <div class="listing-status-{{ $listing->status }}">
+            <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}" data-status="{{ $listing->status }}">
                 &#x2022; {{ ucfirst($listing->status) }}
             </div>
         </td>
@@ -31,3 +29,26 @@
         </td>
     </tr>
 @endforeach
+
+<script>
+    $(document).ready(function() {
+        $('.listing-status-online, .listing-status-offline').on('click', function() {
+            var listingId = $(this).data('id');
+            var currentStatus = $(this).data('status');
+            var newStatus = currentStatus === 'online' ? 'offline' : 'online';
+
+            $.ajax({
+                url: "{{ route('listings.updateStatus') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: listingId,
+                    status: newStatus
+                },
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>

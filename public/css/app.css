@@ -408,6 +408,7 @@ hr,
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .listing-status-approved {
@@ -425,6 +426,7 @@ hr,
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .listing-status-pending {

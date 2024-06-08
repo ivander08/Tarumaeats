@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::put('user/listings/update/{id}', [ListingsController::class, 'update'])->name('listings.update');
     Route::delete('user/listings/destroy/{id}', [ListingsController::class, 'destroy'])->name('listings.destroy');
     Route::get('user/listings/search', [ListingsController::class, 'search'])->name('listings.search');
-
+    Route::post('user/listings/updateStatus', [ListingsController::class, 'updateStatus'])->name('listings.updateStatus');
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

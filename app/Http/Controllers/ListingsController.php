@@ -170,13 +170,28 @@ class ListingsController extends Controller
     public function search(Request $request)
     {
         $userName = auth()->user()->name;
-        $search = $request->input('search');
+        $search = strtolower($request->input('search')); // Convert search query to lowercase
 
         // Retrieve listings belonging to the authenticated user and matching the search query
         $listings = Listings::where('name', $userName)
-            ->where('location_name', 'LIKE', "%{$search}%")
+            ->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"]) // Convert database value to lowercase for comparison
             ->get();
 
         return view('listings.partials.listingsTable', compact('listings'))->render();
+    }
+
+
+    public function updateStatus(Request $request)
+    {
+        $listing = Listings::find($request->id);
+
+        if ($listing) {
+            $listing->status = $request->status;
+            $listing->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Listing not found'], 404);
     }
 }
