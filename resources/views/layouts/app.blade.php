@@ -1,5 +1,5 @@
 <div class="page-container">
-    @include('partials.header')
+    @include('partials.header', ['class' => $headerClass ?? ''])
 
     <main>
         @yield('content')

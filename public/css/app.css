@@ -1,11 +1,11 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap");
 
 /* Root Variables */
 :root {
-    --red: #A01627;
-    --white: #FEFEFA;
-    --slightly-darker-white: #F5F5F5;
+    --red: #a01627;
+    --white: #fefefa;
+    --slightly-darker-white: #f5f5f5;
     --grey: #858585;
 }
 
@@ -29,12 +29,98 @@ main {
 
 /* Header Styles */
 header {
-    background-image: url('../images/UNTAR Background Navbar.png');
+    background-image: url("../images/UNTAR Background Navbar.png");
     background-size: cover;
     background-position: center;
     color: var(--white);
     padding: 0.2rem 4rem;
     text-align: center;
+}
+
+.home-header {
+    background-image: url("../images/UNTAR Background.png");
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 0.2rem 4rem;
+    text-align: center;
+    height: 400px;
+}
+
+.home-content {
+    margin-top: 5rem;
+}
+
+.home-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.home-content p {
+    font-size: 1.5rem;
+    font-weight: 100;
+    margin-top: 0;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container .search-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    width: 34rem;
+    height: 3rem;
+    background-image: url('../images/search.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 2.5rem;
+}
+
+.search-container .type-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    width: 17rem;
+    height: 3rem;
+    background-image: url('../images/keyboarddown.svg');
+    background-position: right center;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.search-container .type-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    background: transparent;
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+}
+
+.search-container input[type="search"]:focus {
+    outline: none;
+    border-color: var(--red);
+}
+
+.search-container button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: var(--red);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
 }
 
 /* Navigation Styles */
@@ -161,7 +247,8 @@ footer {
     width: 16rem;
 }
 
-.eats-filter-container h3, hr,
+.eats-filter-container h3,
+hr,
 .eats-filter-pack-container h3 {
     color: var (--grey);
 }
@@ -202,7 +289,7 @@ footer {
 }
 
 .eats-filter-checkbox:checked {
-    background-color: var(--red)
+    background-color: var(--red);
 }
 
 .eats-filter-pack label {
@@ -229,7 +316,7 @@ footer {
 }
 
 .eats-card-image {
-    background-image: url('../images/Solaria Main Image.png');
+    background-image: url("../images/Solaria Main Image.png");
     background-position: center;
     background-size: cover;
     height: 13rem;
@@ -259,7 +346,8 @@ footer {
     width: 1.5rem;
     height: 1.5rem;
     opacity: 75%;
-    filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg) brightness(100%) contrast(113%);
+    filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg)
+        brightness(100%) contrast(113%);
 }
 
 .eats-card-content {
@@ -275,7 +363,7 @@ footer {
 }
 
 .eats-card-name-rating h1 {
-    color: #AE737B;
+    color: #ae737b;
     font-size: 1.2rem;
 }
 
@@ -294,7 +382,8 @@ footer {
     width: 1rem;
     height: 1rem;
     margin-right: 0.2rem;
-    filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg) brightness(103%) contrast(103%);
+    filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg)
+        brightness(103%) contrast(103%);
 }
 
 .eats-card-content p {
@@ -399,7 +488,7 @@ footer {
 }
 
 .listing-status-active {
-    background-color: #D7F6E9;
+    background-color: #d7f6e9;
     color: #188659;
     padding: 0.5rem 1rem;
     width: max-content;
@@ -408,7 +497,7 @@ footer {
 }
 
 .listing-status-approved {
-    background-color: #D7F6E9;
+    background-color: #d7f6e9;
     color: #188659;
     padding: 0.5rem 1rem;
     width: max-content;
@@ -426,7 +515,7 @@ footer {
 
 .listing-status-unapproved {
     background-color: rgba(218, 152, 152, 25%);
-    color: #B36060;
+    color: #b36060;
     padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
