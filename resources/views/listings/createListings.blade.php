@@ -67,20 +67,20 @@
                 <div class="create-image-forms">
                     <div class="create-form-image-group">
                         <label for="main_image">Main Image*</label>
-                        <input type="file" class="create-form-control" id="main_image" name="main_image"
-                            accept="image/*">
+                        <input type="file" class="create-form-control" id="main_image" name="main_image" accept="image/*"
+                            required>
                     </div>
 
                     <div class="create-form-image-group">
                         <label for="banner_image">Banner Image*</label>
                         <input type="file" class="create-form-control" id="banner_image" name="banner_image"
-                            accept="image/*">
+                            accept="image/*" required>
                     </div>
 
                     <div class="create-form-image-group">
                         <label for="carousel_images">Carousel Images*</label>
                         <input type="file" class="create-form-control" id="carousel_images" name="carousel_images[]"
-                            accept="image/*" multiple>
+                            accept="image/*" multiple required>
                     </div>
                 </div>
             </div>
@@ -95,12 +95,12 @@
                         <div class="create-checkbox-group">
                             <div class="create-checkbox-pack">
                                 <input type="radio" class="create-form-radio" id="untar_satu" name="campus"
-                                    value="untar_satu">
+                                    value="untar_satu" required>
                                 <label for="untar_satu">UNTAR 1</label>
                             </div>
                             <div class="create-checkbox-pack">
                                 <input type="radio" class="create-form-radio" id="untar_dua" name="campus"
-                                    value="untar_dua">
+                                    value="untar_dua" required>
                                 <label for="untar_dua">UNTAR 2</label>
                             </div>
                         </div>
@@ -126,28 +126,28 @@
                         <label>Cuisine*</label>
                         <div class="create-checkbox-group">
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="indonesian" name="cuisine[]"
-                                    value="indonesian">
+                                <input type="checkbox" class="create-form-checkbox" id="indonesian"
+                                    name="cuisine[]" value="indonesian">
                                 <label for="indonesian">Indonesian</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="western" name="cuisine[]"
-                                    value="western">
+                                <input type="checkbox" class="create-form-checkbox" id="western"
+                                    name="cuisine[]" value="western">
                                 <label for="western">Western</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="japanese" name="cuisine[]"
-                                    value="japanese">
+                                <input type="checkbox" class="create-form-checkbox" id="japanese"
+                                    name="cuisine[]" value="japanese">
                                 <label for="japanese">Japanese</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="chinese" name="cuisine[]"
-                                    value="chinese">
+                                <input type="checkbox" class="create-form-checkbox" id="chinese"
+                                    name="cuisine[]" value="chinese">
                                 <label for="chinese">Chinese</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="other" name="cuisine[]"
-                                    value="other">
+                                <input type="checkbox" class="create-form-checkbox" id="other"
+                                    name="cuisine[]" value="other">
                                 <label for="other">Other</label>
                             </div>
                         </div>
@@ -159,22 +159,22 @@
                         <div class="create-checkbox-group">
                             <div class="create-checkbox-pack">
                                 <input type="radio" class="create-form-radio" id="under_price" name="price_range"
-                                    value="under_price">
+                                    value="under_price" required>
                                 <label for="under_price">&lt;Rp10,000</label>
                             </div>
                             <div class="create-checkbox-pack">
                                 <input type="radio" class="create-form-radio" id="thirty_price" name="price_range"
-                                    value="thirty_price">
+                                    value="thirty_price" required>
                                 <label for="thirty_price">Rp10,000 - Rp30,0000</label>
                             </div>
                             <div class="create-checkbox-pack">
                                 <input type="radio" class="create-form-radio" id="sixty_price" name="price_range"
-                                    value="sixty_price">
+                                    value="sixty_price" required>
                                 <label for="sixty_price">Rp30,000 - Rp60,0000</label>
                             </div>
                             <div class="create-checkbox-pack">
                                 <input type="radio" class="create-form-radio" id="over_price" name="price_range"
-                                    value="over_price">
+                                    value="over_price" required>
                                 <label for="over_price">&gt;Rp60,000</label>
                             </div>
                         </div>
@@ -184,23 +184,23 @@
                         <label>Payment Options*</label>
                         <div class="create-checkbox-group">
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="cash"
-                                    name="payment_options[]" value="cash">
+                                <input type="checkbox" class="create-form-checkbox"
+                                    id="cash" name="payment_options[]" value="cash">
                                 <label for="cash">Cash</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="credit"
-                                    name="payment_options[]" value="credit">
+                                <input type="checkbox" class="create-form-checkbox"
+                                    id="credit" name="payment_options[]" value="credit">
                                 <label for="credit">Credit Card</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="debit"
-                                    name="payment_options[]" value="debit">
+                                <input type="checkbox" class="create-form-checkbox"
+                                    id="debit" name="payment_options[]" value="debit">
                                 <label for="debit">Debit Card</label>
                             </div>
                             <div class="create-checkbox-pack">
-                                <input type="checkbox" class="create-form-checkbox" id="mobile"
-                                    name="payment_options[]" value="mobile">
+                                <input type="checkbox" class="create-form-checkbox"
+                                    id="mobile" name="payment_options[]" value="mobile">
                                 <label for="mobile">Mobile Payment</label>
                             </div>
                         </div>
@@ -237,22 +237,20 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
             <div class="create-save-container">
+                <div class="alert alert-danger">
+                    @if ($errors->any())
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
                 <button type="submit" class="create-save">Save</button>
             </div>
         </form>
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
-
 @endsection

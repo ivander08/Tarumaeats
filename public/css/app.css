@@ -550,6 +550,7 @@ hr,
     font-weight: 300;
     color: black;
     font-size: 1rem;
+    margin-left: 0.5rem;
 }
 
 .create-form-radio {
@@ -582,7 +583,7 @@ hr,
 
 .create-save-container{
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
 }
 
 .create-save {
