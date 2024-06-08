@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ListingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,19 +27,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/eats', function () {
         return view('eats');
     })->name('eats');
-    
+
     Route::get('/user/listings', function () {
         return view('listings/userListings');
     })->name('userListings');
-    
+
     Route::get('/user/listings/createListings', function () {
         return view('listings/createListings');
     })->name('createListings');
 
-    
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/listings', [ListingsController::class, 'index'])->name('listings');
+    route::get('/listings/edit/{id}', [ListingsController::class, 'edit'])->name('listings.edit');
+    Route::get('/listings/create', [ListingsController::class, 'create'])->name('listings.create');
+    Route::post('/listings/store', [ListingsController::class, 'store'])->name('listings.store');
+    Route::put('/listings/update/{id}', [ListingsController::class, 'update'])->name('listings.update');
+    Route::delete('/listings/destroy/{id}', [ListingsController::class, 'destroy'])->name('listings.destroy');
+
+
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

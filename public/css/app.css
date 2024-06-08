@@ -1,11 +1,11 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap");
 
 /* Root Variables */
 :root {
-    --red: #A01627;
-    --white: #FEFEFA;
-    --slightly-darker-white: #F5F5F5;
+    --red: #a01627;
+    --white: #fefefa;
+    --slightly-darker-white: #f5f5f5;
     --grey: #858585;
 }
 
@@ -29,7 +29,7 @@ main {
 
 /* Header Styles */
 header {
-    background-image: url('../images/UNTAR Background Navbar.png');
+    background-image: url("../images/UNTAR Background Navbar.png");
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -161,7 +161,8 @@ footer {
     width: 16rem;
 }
 
-.eats-filter-container h3, hr,
+.eats-filter-container h3,
+hr,
 .eats-filter-pack-container h3 {
     color: var (--grey);
 }
@@ -202,7 +203,7 @@ footer {
 }
 
 .eats-filter-checkbox:checked {
-    background-color: var(--red)
+    background-color: var(--red);
 }
 
 .eats-filter-pack label {
@@ -229,7 +230,7 @@ footer {
 }
 
 .eats-card-image {
-    background-image: url('../images/Solaria Main Image.png');
+    background-image: url("../images/Solaria Main Image.png");
     background-position: center;
     background-size: cover;
     height: 13rem;
@@ -259,7 +260,8 @@ footer {
     width: 1.5rem;
     height: 1.5rem;
     opacity: 75%;
-    filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg) brightness(100%) contrast(113%);
+    filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg)
+        brightness(100%) contrast(113%);
 }
 
 .eats-card-content {
@@ -275,7 +277,7 @@ footer {
 }
 
 .eats-card-name-rating h1 {
-    color: #AE737B;
+    color: #ae737b;
     font-size: 1.2rem;
 }
 
@@ -294,7 +296,8 @@ footer {
     width: 1rem;
     height: 1rem;
     margin-right: 0.2rem;
-    filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg) brightness(103%) contrast(103%);
+    filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg)
+        brightness(103%) contrast(103%);
 }
 
 .eats-card-content p {
@@ -399,7 +402,7 @@ footer {
 }
 
 .listing-status-active {
-    background-color: #D7F6E9;
+    background-color: #d7f6e9;
     color: #188659;
     padding: 0.5rem 1rem;
     width: max-content;
@@ -408,7 +411,7 @@ footer {
 }
 
 .listing-status-approved {
-    background-color: #D7F6E9;
+    background-color: #d7f6e9;
     color: #188659;
     padding: 0.5rem 1rem;
     width: max-content;
@@ -426,7 +429,7 @@ footer {
 
 .listing-status-unapproved {
     background-color: rgba(218, 152, 152, 25%);
-    color: #B36060;
+    color: #b36060;
     padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
@@ -458,13 +461,138 @@ footer {
     box-sizing: border-box;
 }
 
-.user-listings-create-save {
+.user-listings-create-forms {
+    margin-top: 1.5rem;
+    padding: 0rem 15rem 2.5rem 15rem;
+    background-color: var(--slightly-darker-white);
+}
+
+.user-listings-create-forms form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.create-text-forms-container h1,
+.create-image-forms-container h1,
+.create-check-forms-container h1{
+    font-weight: 200;
+    color: var(--grey);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 0;
+}
+
+.create-text-forms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 5rem;
+    row-gap: 2.5rem;
+    width: 100%;
+    margin-left: 0.8rem;
+}
+
+.create-h-line{
+    border-top: 1px solid rgba(133, 133, 133, 25%);
+    width: 100%;
+}
+
+.create-image-forms{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0.8rem;
+}
+
+.create-form-control[type="text"],
+.create-form-control[type="email"] {
+    border: none;
+    outline: none;
+    padding: 1rem;
+    height: 4rem;
+    width: 21rem;
+    box-sizing: border-box;
+    font-weight: 100;
+}
+
+.create-form-image-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create-check-forms{
+    margin-left: 0.8rem;
+}
+
+.create-form-group{
+    margin-bottom: 2rem;
+}
+
+.create-form-group label{
+    font-weight: 400;
+    color: black;
+    font-size: 1rem;
+}
+
+.create-checkbox-group{
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.create-checkbox-pack{
+    display: flex;
+    align-items: center;
+}
+
+.create-checkbox-pack label{
+    font-weight: 300;
+    color: black;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.create-form-radio {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+}
+
+.create-form-radio:checked {
+    background-color: var(--red);
+}
+
+.create-form-checkbox {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+}
+
+.create-form-checkbox:checked {
+    background-color: var(--red);
+}
+
+.create-save-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-save {
     background-color: var(--red);
     color: var(--white);
     border: none;
     cursor: pointer;
     font-size: 1.3rem;
-    width: 7rem;
+    width: 13rem;
     height: 4.5rem;
     font-weight: 700;
     display: flex;
