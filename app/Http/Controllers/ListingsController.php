@@ -10,7 +10,8 @@ class ListingsController extends Controller
 {
     public function index()
     {
-        $listings = Listings::all();
+        $userName = auth()->user()->name;
+        $listings = Listings::where('name', $userName)->get();
         return view('listings.userListings', compact('listings'));
     }
 
@@ -164,5 +165,18 @@ class ListingsController extends Controller
         }
         $listing->delete();
         return redirect()->route('listings');
+    }
+
+    public function search(Request $request)
+    {
+        $userName = auth()->user()->name;
+        $search = $request->input('search');
+
+        // Retrieve listings belonging to the authenticated user and matching the search query
+        $listings = Listings::where('name', $userName)
+            ->where('location_name', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('listings.partials.listingsTable', compact('listings'))->render();
     }
 }

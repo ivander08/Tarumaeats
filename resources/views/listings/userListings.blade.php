@@ -27,11 +27,11 @@
                         <th style="width: 8rem;">Approval</th>
                         <th style="width: 8rem;">Last Modified</th>
                         <th style="width: 10rem; text-align: end;">
-                            <input type="text" placeholder="Search Name...">
+                            <input type="text" id="search-input" placeholder="Search Name...">
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="listings-tbody">
                     @foreach($listings as $listing)
                         <tr>
                             <td>{{ $listing->location_name }}</td>
@@ -67,4 +67,21 @@
             </table>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                var query = $(this).val();
+                $.ajax({
+                    url: "{{ route('listings.search') }}",
+                    type: "GET",
+                    data: {'search': query},
+                    success: function(data) {
+                        $('#listings-tbody').html(data);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
