@@ -44,7 +44,7 @@ header {
     color: var(--white);
     padding: 0.2rem 4rem;
     text-align: center;
-    height: 400px;
+    height: 625.5;
 }
 
 .home-content {
@@ -72,11 +72,10 @@ header {
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
     margin-right: 0.5rem;
     width: 34rem;
     height: 3rem;
-    background-image: url('../images/search.svg');
+    background-image: url("../images/search.svg");
     background-position: left center;
     background-repeat: no-repeat;
     padding-left: 2.5rem;
@@ -86,11 +85,10 @@ header {
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
     margin-right: 0.5rem;
     width: 17rem;
     height: 3rem;
-    background-image: url('../images/keyboarddown.svg');
+    background-image: url("../images/keyboarddown.svg");
     background-position: right center;
     background-repeat: no-repeat;
     -webkit-appearance: none;
@@ -118,9 +116,43 @@ header {
     background-color: var(--red);
     border: none;
     cursor: pointer;
-    border-radius: 5px;
     width: 10rem;
     height: 3rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 43rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.restaurant-button {
+    margin-right: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: none;
+    cursor: pointer;
+    width: 25rem;
+    height: 12rem;
+    box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
+}
+
+.button-container-background {
+    background-color: var(--slightly-darker-white);
+    height: 12rem;
+}
+
+.restaurant-button img {
+    margin-bottom: 10px;
 }
 
 /* Navigation Styles */

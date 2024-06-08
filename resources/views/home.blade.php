@@ -4,12 +4,19 @@
 
 @section('content')
 @auth
-<p>Welcome, {{ auth()->user()->name }}</p>
-<form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit">Logout</button>
 </form>
+<div class="button-container-background">
+    <div class="button-container">
+        <button class="restaurant-button">
+            <img src="../images/forkandknife.svg" alt="Fork and Knife Icon">
+            <span>Untar 1</span>
+        </button>
+        <button class="restaurant-button">
+            <img src="../images/forkandknife.svg" alt="Fork and Knife Icon">
+            <span>Untar 2</span>
+        </button>
+    </div>
+</div>
 @else
-<p>You are not logged in.</p>
 @endauth
 @endsection
