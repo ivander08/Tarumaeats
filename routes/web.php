@@ -36,9 +36,9 @@ Route::middleware('auth')->group(function () {
         return view('listings/createListings');
     })->name('createListings');
 
-    Route::get('/listings', [ListingsController::class, 'index'])->name('listings');
+    Route::get('/user/listings', [ListingsController::class, 'index'])->name('listings');
     route::get('/listings/edit/{id}', [ListingsController::class, 'edit'])->name('listings.edit');
-    Route::get('/listings/create', [ListingsController::class, 'create'])->name('listings.create');
+    Route::get('/user/listings/createListings', [ListingsController::class, 'create'])->name('listings.create');
     Route::post('/listings/store', [ListingsController::class, 'store'])->name('listings.store');
     Route::put('/listings/update/{id}', [ListingsController::class, 'update'])->name('listings.update');
     Route::delete('/listings/destroy/{id}', [ListingsController::class, 'destroy'])->name('listings.destroy');

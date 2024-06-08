@@ -12,7 +12,7 @@
             <a href="#">My Details</a>
             <a href="#">My Listings</a>
         </div>
-        <a href="{{ url('user/listings/createListings') }}" style="text-decoration: none;">
+        <a href="{{ route('listings.create') }}" style="text-decoration: none;">
             <button type="button" id="create-listing-btn" class="user-listings-create">Create Listing</button>
         </a>
     </div>
@@ -20,61 +20,51 @@
         <div class="user-listings-table">
             <table>
                 <thead>
-                    <th style="width: 15rem;">Name</th>
-                    <th style="width: 5rem;">Rating</th>
-                    <th style="width: 5rem;">Status</th>
-                    <th style="width: 8rem;">Approval</th>
-                    <th style="width: 8rem;">Last Modified</th>
-                    <th style="width: 10rem; text-align: end;">
-                        <input type="text" placeholder="Search Name...">
-                    </th>
+                    <tr>
+                        <th style="width: 15rem;">Name</th>
+                        <th style="width: 5rem;">Rating</th>
+                        <th style="width: 5rem;">Status</th>
+                        <th style="width: 8rem;">Approval</th>
+                        <th style="width: 8rem;">Last Modified</th>
+                        <th style="width: 10rem; text-align: end;">
+                            <input type="text" placeholder="Search Name...">
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>DLS CKN</td>
-                        <td>5.0 (3)</td>
-                        <td>
-                            <div class="listing-status-active">
-                                &#x2022; Active
-                            </div>
-                        </td>
-                        <td>
-                            <div class="listing-status-approved">
-                                &#x2022; Approved
-                            </div>
-                        </td>
-                        <td>3 minutes ago</td>
-                        <td>
-                            <div class="user-listings-table-interact">
-                                <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
-                                <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Teh Poci</td>
-                        <td>4.7 (7)</td>
-                        <td>
-                            <div class="listing-status-inactive">
-                                &#x2022; Inactive
-                            </div>
-                        </td>
-                        <td>
-                            <div class="listing-status-unapproved">
-                                &#x2022; Unapproved
-                            </div>
-                        </td>
-                        <td>3 minutes ago</td>
-                        <td>
-                            <div class="user-listings-table-interact">
-                                <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
-                                <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
-                            </div>
-                        </td>
-                    </tr>
+                    @foreach($listings as $listing)
+                        <tr>
+                            <td>{{ $listing->location_name }}</td>
+                            <td>--</td> <!-- Assuming you have a rating system to be added here -->
+                            <td>
+                                <div class="listing-status-{{ $listing->status }}">
+                                    &#x2022; {{ ucfirst($listing->status) }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="listing-status-{{ $listing->approval_status }}">
+                                    &#x2022; {{ ucfirst($listing->approval_status) }}
+                                </div>
+                            </td>
+                            <td>{{ $listing->updated_at->diffForHumans() }}</td>
+                            <td>
+                                <div class="user-listings-table-interact">
+                                    <form id="delete-form-{{ $listing->id }}" action="{{ route('listings.destroy', $listing->id) }}" method="POST" style="display:none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $listing->id }}').submit();">
+                                        <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
+                                    </a>
+                                    <a href="{{ route('listings.edit', $listing->id) }}">
+                                        <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-
 @endsection

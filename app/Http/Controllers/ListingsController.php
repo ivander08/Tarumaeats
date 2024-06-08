@@ -11,12 +11,12 @@ class ListingsController extends Controller
     public function index()
     {
         $listings = Listings::all();
-        return view('listings.index', compact('listings'));
+        return view('listings.userListings', compact('listings'));
     }
 
     public function create()
     {
-        return view('listings.create');
+        return view('listings.createListings');
     }
 
     public function store(Request $request)
