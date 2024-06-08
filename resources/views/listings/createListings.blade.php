@@ -21,154 +21,227 @@
                 <input type="hidden" name="name" value="{{ auth()->user()->name }}">
             </div>
 
-            <div class="create-text-forms">
-                <div class="create-form-group">
-                    <input type="text" class="create-form-control" placeholder="Location Name" id="location_name"
-                        name="location_name" required>
-                </div>
+            <div class="create-text-forms-container">
+                <h1>Location Information</h1>
+                <div class="create-text-forms">
+                    <div class="create-form-group">
+                        <input type="text" class="create-form-control" placeholder="Location Name*" id="location_name"
+                            name="location_name" required>
+                    </div>
 
-                <div class="create-form-group">
-                    <input type="text" class="create-form-control" placeholder="Location Address" id="location_address"
-                        name="location_address" required>
-                </div>
+                    <div class="create-form-group">
+                        <input type="text" class="create-form-control" placeholder="Location Address*"
+                            id="location_address" name="location_address" required>
+                    </div>
 
-                <div class="create-form-group">
-                    <input type="text" class="create-form-control" placeholder="Website" id="website" name="website">
-                </div>
+                    <div class="create-form-group">
+                        <input type="text" class="create-form-control" placeholder="Website" id="website"
+                            name="website">
+                    </div>
 
-                <div class="create-form-group">
-                    <input type="text" class="create-form-control" placeholder="Phone Number" id="phone_number"
-                        name="phone_number">
-                </div>
+                    <div class="create-form-group">
+                        <input type="text" class="create-form-control" placeholder="Phone Number" id="phone_number"
+                            name="phone_number">
+                    </div>
 
-                <div class="create-form-group">
-                    <input type="email" class="create-form-control" placeholder="Email" id="email" name="email">
-                </div>
+                    <div class="create-form-group">
+                        <input type="email" class="create-form-control" placeholder="Email" id="email" name="email">
+                    </div>
 
-                <div class="create-form-group">
-                    <input type="text" class="create-form-control" placeholder="Latitude" id="latitude" name="latitude">
-                </div>
+                    <div class="create-form-group">
+                        <input type="text" class="create-form-control" placeholder="Latitude" id="latitude"
+                            name="latitude">
+                    </div>
 
-                <div class="create-form-group">
-                    <input type="text" class="create-form-control" placeholder="Longitude" id="longitude"
-                        name="longitude">
+                    <div class="create-form-group">
+                        <input type="text" class="create-form-control" placeholder="Longitude" id="longitude"
+                            name="longitude">
+                    </div>
                 </div>
             </div>
 
             <div class="create-h-line"></div>
 
-            <div class="create-image-forms">
-                <div class="create-form-image-group">
-                    <label for="main_image">Main Image</label>
-                    <input type="file" class="create-form-control" id="main_image" name="main_image" accept="image/*">
-                </div>
+            <div class="create-image-forms-container">
+                <h1>Images</h1>
+                <div class="create-image-forms">
+                    <div class="create-form-image-group">
+                        <label for="main_image">Main Image*</label>
+                        <input type="file" class="create-form-control" id="main_image" name="main_image"
+                            accept="image/*">
+                    </div>
 
-                <div class="create-form-image-group">
-                    <label for="banner_image">Banner Image</label>
-                    <input type="file" class="create-form-control" id="banner_image" name="banner_image"
-                        accept="image/*">
-                </div>
+                    <div class="create-form-image-group">
+                        <label for="banner_image">Banner Image*</label>
+                        <input type="file" class="create-form-control" id="banner_image" name="banner_image"
+                            accept="image/*">
+                    </div>
 
-                <div class="create-form-image-group">
-                    <label for="carousel_images">Carousel Images</label>
-                    <input type="file" class="create-form-control" id="carousel_images" name="carousel_images[]"
-                        accept="image/*" multiple>
+                    <div class="create-form-image-group">
+                        <label for="carousel_images">Carousel Images*</label>
+                        <input type="file" class="create-form-control" id="carousel_images" name="carousel_images[]"
+                            accept="image/*" multiple>
+                    </div>
                 </div>
             </div>
 
             <div class="create-h-line"></div>
 
-            <div class="create-check-forms">
-                <div class="create-form-group">
-                    <label>Campus</label><br>
-                    <div class="create-checkbox-group">
-                        <label><input type="radio" class="create-form-radio" name="campus" value="untar_satu">UNTAR
-                            1</label><br>
-                        <label><input type="radio" class="create-form-radio" name="campus" value="untar_dua">UNTAR
-                            2</label><br>
+            <div class="create-check-forms-container">
+                <h1>Tags</h1>
+                <div class="create-check-forms">
+                    <div class="create-form-group">
+                        <label>Campus*</label>
+                        <div class="create-checkbox-group">
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="untar_satu" name="campus"
+                                    value="untar_satu">
+                                <label for="untar_satu">UNTAR 1</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="untar_dua" name="campus"
+                                    value="untar_dua">
+                                <label for="untar_dua">UNTAR 2</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label>Type</label>
+                        <div class="create-checkbox-group">
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="food_only" name="type"
+                                    value="food_only">
+                                <label for="food_only">Food Only</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="drinks_only" name="type"
+                                    value="drinks_only">
+                                <label for="drinks_only">Drinks Only</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label>Cuisine*</label>
+                        <div class="create-checkbox-group">
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="indonesian" name="cuisine[]"
+                                    value="indonesian">
+                                <label for="indonesian">Indonesian</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="western" name="cuisine[]"
+                                    value="western">
+                                <label for="western">Western</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="japanese" name="cuisine[]"
+                                    value="japanese">
+                                <label for="japanese">Japanese</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="chinese" name="cuisine[]"
+                                    value="chinese">
+                                <label for="chinese">Chinese</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="other" name="cuisine[]"
+                                    value="other">
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="create-form-group">
+                        <label>Price Range*</label>
+                        <div class="create-checkbox-group">
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="under_price" name="price_range"
+                                    value="under_price">
+                                <label for="under_price">&lt;Rp10,000</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="thirty_price" name="price_range"
+                                    value="thirty_price">
+                                <label for="thirty_price">Rp10,000 - Rp30,0000</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="sixty_price" name="price_range"
+                                    value="sixty_price">
+                                <label for="sixty_price">Rp30,000 - Rp60,0000</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="radio" class="create-form-radio" id="over_price" name="price_range"
+                                    value="over_price">
+                                <label for="over_price">&gt;Rp60,000</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label>Payment Options*</label>
+                        <div class="create-checkbox-group">
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="cash"
+                                    name="payment_options[]" value="cash">
+                                <label for="cash">Cash</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="credit"
+                                    name="payment_options[]" value="credit">
+                                <label for="credit">Credit Card</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="debit"
+                                    name="payment_options[]" value="debit">
+                                <label for="debit">Debit Card</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="mobile"
+                                    name="payment_options[]" value="mobile">
+                                <label for="mobile">Mobile Payment</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label>Special Features</label>
+                        <div class="create-checkbox-group">
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="halal"
+                                    name="special_features[]" value="halal">
+                                <label for="halal">Halal</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="nonhalal"
+                                    name="special_features[]" value="nonhalal">
+                                <label for="nonhalal">Non-Halal</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="takeaway"
+                                    name="special_features[]" value="takeaway">
+                                <label for="takeaway">Takeaway Available</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="indoor"
+                                    name="special_features[]" value="indoor">
+                                <label for="indoor">Indoor Seating</label>
+                            </div>
+                            <div class="create-checkbox-pack">
+                                <input type="checkbox" class="create-form-checkbox" id="outdoor"
+                                    name="special_features[]" value="outdoor">
+                                <label for="outdoor">Outdoor Seating</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="create-form-group">
-                    <label>Type</label><br>
-                    <div class="create-checkbox-group">
-                        <label><input type="radio" class="create-form-radio" name="type" value="food_only">Food
-                            Only</label><br>
-                        <label><input type="radio" class="create-form-radio" name="type" value="drinks_only">Drinks
-                            Only</label><br>
-                    </div>
-                </div>
-
-                <div class="create-form-group">
-                    <label>Cuisine</label><br>
-                    <div class="create-checkbox-group">
-                        <label><input type="checkbox" class="create-form-checkbox" name="cuisine[]"
-                                value="indonesian">Indonesian</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="cuisine[]"
-                                value="western">Western</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="cuisine[]"
-                                value="japanese">Japanese</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="cuisine[]"
-                                value="chinese">Chinese</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="cuisine[]"
-                                value="other">Other</label><br>
-                    </div>
-                </div>
-                <div class="create-form-group">
-                    <label>Price Range</label><br>
-                    <div class="create-checkbox-group">
-                        <label><input type="radio" class="create-form-radio" name="price_range"
-                                value="under_price">&lt;Rp10,000</label><br>
-                        <label><input type="radio" class="create-form-radio" name="price_range"
-                                value="thirty_price">Rp10,000 -
-                            Rp30,0000</label><br>
-                        <label><input type="radio" class="create-form-radio" name="price_range"
-                                value="sixty_price">Rp30,000 -
-                            Rp60,0000</label><br>
-                        <label><input type="radio" class="create-form-radio" name="price_range"
-                                value="over_price">&gt;Rp60,000</label><br>
-                    </div>
-                </div>
-
-                <div class="create-form-group">
-                    <label>Payment Options</label><br>
-                    <div class="create-checkbox-group">
-                        <label><input type="checkbox" class="create-form-checkbox" name="payment_options[]"
-                                value="cash">
-                            Cash</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="payment_options[]"
-                                value="credit">
-                            Credit Card</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="payment_options[]"
-                                value="debit">
-                            Debit Card</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="payment_options[]"
-                                value="mobile">
-                            Mobile Payment</label><br>
-                    </div>
-                </div>
-
-                <div class="create-form-group">
-                    <label>Special Features</label><br>
-                    <div class="create-checkbox-group">
-                        <label><input type="checkbox" class="create-form-checkbox" name="special_features[]"
-                                value="halal">Halal</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="special_features[]"
-                                value="nonhalal">Non-Halal</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="special_features[]"
-                                value="takeaway">Takeaway
-                            Available</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="special_features[]"
-                                value="indoor">Indoor
-                            Seating</label><br>
-                        <label><input type="checkbox" class="create-form-checkbox" name="special_features[]"
-                                value="outdoor">Outdoor
-                            Seating</label><br>
-                    </div>
-                </div>
             </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
+            <div class="create-save-container">
+                <button type="submit" class="create-save">Save</button>
+            </div>
         </form>
 
         @if ($errors->any())
