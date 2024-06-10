@@ -230,7 +230,7 @@ hr,
 }
 
 .eats-card-image {
-    background-image: url("../images/Solaria Main Image.png");
+    /* background-image: url("../images/Solaria Main Image.png"); */
     background-position: center;
     background-size: cover;
     height: 13rem;
