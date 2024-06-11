@@ -80,7 +80,7 @@ class ListingsController extends Controller
     public function edit($id)
     {
         $listing = Listings::find($id);
-        return view('listings.edit', compact('listing'));
+        return view('listings.editListings', compact('listing'));
     }
 
     public function update(Request $request, $id)
