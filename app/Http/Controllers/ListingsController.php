@@ -10,44 +10,17 @@ class ListingsController extends Controller
 {
     public function indexApproved(Request $request)
     {
-        $listings = Listings::query(); // Start with a base query
+        // Retrieve approved and online listings
+        $listings = Listings::where('approval_status', 'pending')
+            ->where('status', 'online')
+            ->get();
 
-        // Apply type filter
-        if ($request->filled('type')) {
-            $listings->whereIn('type', $request->input('type'));
-        }
+        $resultsCount = $listings->count();
 
-        // Apply cuisine filter
-        if ($request->filled('cuisine')) {
-            $listings->where(function ($query) use ($request) {
-                $query->whereIn('cuisine', $request->input('cuisine'));
-            });
-        }
-
-        // Apply price range filter
-        if ($request->filled('price_range')) {
-            $listings->whereIn('price_range', $request->input('price_range'));
-        }
-
-        // Apply payment options filter
-        if ($request->filled('payment_options')) {
-            $listings->where(function ($query) use ($request) {
-                $query->whereIn('payment_options', $request->input('payment_options'));
-            });
-        }
-
-        // Apply special features filter
-        if ($request->filled('special_features')) {
-            $listings->where(function ($query) use ($request) {
-                $query->whereIn('special_features', $request->input('special_features'));
-            });
-        }
-
-        // Retrieve the filtered listings
-        $listings = $listings->get();
+        // $listings = Listings::all();
 
         // Pass the filtered listings to the view
-        return view('eats', compact('listings'));
+        return view('eats', compact('listings', 'resultsCount'));
     }
 
     public function filter(Request $request)
@@ -58,6 +31,15 @@ class ListingsController extends Controller
         $priceRange = $request->input('price_range');
         $paymentOptions = $request->input('payment_options');
         $specialFeatures = $request->input('special_features');
+
+        // // Debugging
+        // echo '<pre>';
+        // print_r($cuisine);
+        // echo '</pre>';
+
+        // echo '<pre>';
+        // print_r($priceRange);
+        // echo '</pre>';
 
         // Query builder for listings
         $query = Listings::query();
@@ -72,7 +54,11 @@ class ListingsController extends Controller
         }
 
         if ($priceRange) {
-            $query->where('price_range', $priceRange);
+            // Idk how this logic works lol
+            if (count($priceRange) === 4) {
+            } else {
+                $query->whereIn('price_range', $priceRange);
+            }
         }
 
         if ($paymentOptions) {
@@ -83,12 +69,16 @@ class ListingsController extends Controller
             $query->whereJsonContains('special_features', $specialFeatures);
         }
 
+        // Apply the condition for approved and online listings
+        $query->where('approval_status', 'pending')->where('status', 'online');
+
         // Execute the query
         $listings = $query->get();
 
         // Pass the filtered listings to the view
         return view('eats', compact('listings'));
     }
+
 
 
 

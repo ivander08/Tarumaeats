@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="eats-search-container">
-        <p>5 Results found</p>
+        <p><?php echo e($listings->count()); ?> Results found</p>
         <div class="eats-search-bar">
             <div class="eats-search-form">
                 <img src="<?php echo e(asset('images/search.svg')); ?>" alt="Search Icon" class="eats-search-icon">
@@ -20,12 +20,13 @@
                 <div class="eats-filter-pack-container">
                     <h3>Type</h3>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="food_only" class="eats-filter-checkbox" name="type" value="food_only">
+                        <input type="checkbox" id="food_only" class="eats-filter-checkbox" name="type[]" value="food_only"
+                            <?php if(in_array('food_only', request('type', []))): ?> checked <?php endif; ?>>
                         <label for="food_only">Food Only</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="drinks_only" class="eats-filter-checkbox" name="type"
-                            value="drinks_only">
+                        <input type="checkbox" id="drinks_only" class="eats-filter-checkbox" name="type[]"
+                            value="drinks_only" <?php if(in_array('drinks_only', request('type', []))): ?> checked <?php endif; ?>>
                         <label for="drinks_only">Drinks Only</label>
                     </div>
                 </div>
@@ -34,24 +35,27 @@
                     <h3>Cuisine</h3>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="indonesian" class="eats-filter-checkbox" name="cuisine[]"
-                            value="indonesian">
+                            value="indonesian" <?php if(in_array('indonesian', request('cuisine', []))): ?> checked <?php endif; ?>>
                         <label for="indonesian">Indonesian</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="western" class="eats-filter-checkbox" name="cuisine[]" value="western">
+                        <input type="checkbox" id="western" class="eats-filter-checkbox" name="cuisine[]" value="western"
+                            <?php if(in_array('western', request('cuisine', []))): ?> checked <?php endif; ?>>
                         <label for="western">Western</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="japanese" class="eats-filter-checkbox" name="cuisine[]"
-                            value="japanese">
+                        <input type="checkbox" id="japanese" class="eats-filter-checkbox" value="japanese" name="cuisine[]"
+                            <?php if(in_array('japanese', request('cuisine', []))): ?> checked <?php endif; ?>>
                         <label for="japanese">Japanese</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="chinese" class="eats-filter-checkbox" name="cuisine[]" value="chinese">
+                        <input type="checkbox" id="chinese" class="eats-filter-checkbox" name="cuisine[]" value="chinese"
+                            <?php if(in_array('chinese', request('cuisine', []))): ?> checked <?php endif; ?>>
                         <label for="chinese">Chinese</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="other" class="eats-filter-checkbox" name="cuisine[]" value="other">
+                        <input type="checkbox" id="other" class="eats-filter-checkbox" name="cuisine[]" value="other"
+                            <?php if(in_array('other', request('cuisine', []))): ?> checked <?php endif; ?>>
                         <label for="other">Other</label>
                     </div>
                 </div>
@@ -59,23 +63,23 @@
                 <div class="eats-filter-pack-container">
                     <h3>Price Range</h3>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="under_price" class="eats-filter-checkbox" name="price_range"
-                            value="under_price">
+                        <input type="checkbox" id="under_price" class="eats-filter-checkbox" name="price_range[]"
+                            value="under_price" <?php if(in_array('under_price', request('price_range', []))): ?> checked <?php endif; ?>>
                         <label for="under_price">&lt;Rp10,000</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="thirty_price" class="eats-filter-checkbox" name="price_range"
-                            value="thirty_price">
+                        <input type="checkbox" id="thirty_price" class="eats-filter-checkbox" name="price_range[]"
+                            value="thirty_price" <?php if(in_array('thirty_price', request('price_range', []))): ?> checked <?php endif; ?>>
                         <label for="thirty_price">Rp10,000 - Rp30,000</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="sixty_price" class="eats-filter-checkbox" name="price_range"
-                            value="sixty_price">
+                        <input type="checkbox" id="sixty_price" class="eats-filter-checkbox" name="price_range[]"
+                            value="sixty_price" <?php if(in_array('sixty_price', request('price_range', []))): ?> checked <?php endif; ?>>
                         <label for="sixty_price">Rp30,000 - Rp60,000</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="over_price" class="eats-filter-checkbox" name="price_range"
-                            value="over_price">
+                        <input type="checkbox" id="over_price" class="eats-filter-checkbox" name="price_range[]"
+                            value="over_price" <?php if(in_array('over_price', request('price_range', []))): ?> checked <?php endif; ?>>
                         <label for="over_price">&gt;Rp60,000</label>
                     </div>
                 </div>
@@ -84,22 +88,22 @@
                     <h3>Payment Options</h3>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="cash" class="eats-filter-checkbox" name="payment_options[]"
-                            value="cash">
+                            value="cash" <?php if(in_array('cash', request('payment_options', []))): ?> checked <?php endif; ?>>
                         <label for="cash">Cash</label>
                     </div>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="credit" class="eats-filter-checkbox" name="payment_options[]"
-                            value="credit">
+                            value="credit" <?php if(in_array('credit', request('payment_options', []))): ?> checked <?php endif; ?>>
                         <label for="credit">Credit Card</label>
                     </div>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="debit" class="eats-filter-checkbox" name="payment_options[]"
-                            value="debit">
+                            value="debit" <?php if(in_array('debit', request('payment_options', []))): ?> checked <?php endif; ?>>
                         <label for="debit">Debit Card</label>
                     </div>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="mobile" class="eats-filter-checkbox" name="payment_options[]"
-                            value="mobile">
+                            value="mobile" <?php if(in_array('mobile', request('payment_options', []))): ?> checked <?php endif; ?>>
                         <label for="mobile">Mobile Payment</label>
                     </div>
                 </div>
@@ -108,27 +112,27 @@
                     <h3>Special Features</h3>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="halal" class="eats-filter-checkbox" name="special_features[]"
-                            value="halal">
+                            value="halal" <?php if(in_array('halal', request('special_features', []))): ?> checked <?php endif; ?>>
                         <label for="halal">Halal</label>
                     </div>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="nonhalal" class="eats-filter-checkbox" name="special_features[]"
-                            value="nonhalal">
+                            value="nonhalal" <?php if(in_array('nonhalal', request('special_features', []))): ?> checked <?php endif; ?>>
                         <label for="nonhalal">Non-Halal</label>
                     </div>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="takeaway" class="eats-filter-checkbox" name="special_features[]"
-                            value="takeaway">
+                            value="takeaway" <?php if(in_array('takeaway', request('special_features', []))): ?> checked <?php endif; ?>>
                         <label for="takeaway">Takeaway Available</label>
                     </div>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="indoor" class="eats-filter-checkbox" name="special_features[]"
-                            value="indoor">
+                            value="indoor" <?php if(in_array('indoor', request('special_features', []))): ?> checked <?php endif; ?>>
                         <label for="indoor">Indoor Seating</label>
                     </div>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="outdoor" class="eats-filter-checkbox" name="special_features[]"
-                            value="outdoor">
+                            value="outdoor" <?php if(in_array('outdoor', request('special_features', []))): ?> checked <?php endif; ?>>
                         <label for="outdoor">Outdoor Seating</label>
                     </div>
                 </div>
@@ -179,51 +183,5 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-
-<?php $__env->startPush('scripts'); ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Function to submit the filter form when the Apply Filters button is clicked
-            document.querySelector('.eats-filter-submit').addEventListener('click', function() {
-                console.log('Apply Filters button clicked'); // Debugging statement
-                const checkboxes = document.querySelectorAll('.eats-filter-checkbox:checked');
-                const formData = new FormData(document.getElementById('filterForm'));
-
-                checkboxes.forEach(function(checkbox) {
-                    formData.append(checkbox.name, checkbox.value);
-                });
-
-                // Submit the form with appended checkbox values
-                fetch('<?php echo e(route('eats.filter')); ?>', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
-                    }
-                }).then(function(response) {
-                    // Handle response as needed
-                    console.log(response);
-                }).catch(function(error) {
-                    console.error('Error:', error);
-                });
-            });
-
-            // Function to check previously selected checkboxes
-            let checkboxes = document.querySelectorAll('.eats-filter-checkbox');
-            checkboxes.forEach(function(checkbox) {
-                if (localStorage.getItem(checkbox.id) === 'checked') {
-                    checkbox.checked = true;
-                }
-            });
-
-            // Event listener to store checkbox state in localStorage
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    localStorage.setItem(checkbox.id, checkbox.checked ? 'checked' : '');
-                });
-            });
-        });
-    </script>
-<?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ivand\Documents\College\Projects\Tarumaeats\resources\views/eats.blade.php ENDPATH**/ ?>
