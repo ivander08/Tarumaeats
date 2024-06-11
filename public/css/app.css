@@ -230,19 +230,18 @@ hr,
 }
 
 .eats-card-image {
-    /* background-image: url("../images/Solaria Main Image.png"); */
     background-position: center;
     background-size: cover;
     height: 13rem;
     width: 20rem;
-    padding: 0.5rem;
-    margin-bottom: 0;
     border-radius: 15px 15px 0 0;
-    display: flex;
-    justify-content: flex-end;
+    position: relative;
 }
 
 .eats-card-heart-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -252,8 +251,6 @@ hr,
     border: none;
     padding: 0;
     cursor: pointer;
-    margin-top: 0.5rem;
-    margin-right: 0.5rem;
 }
 
 .eats-card-heart-icon {
@@ -486,7 +483,7 @@ hr,
 
 .create-text-forms-container h1,
 .create-image-forms-container h1,
-.create-check-forms-container h1{
+.create-check-forms-container h1 {
     font-weight: 200;
     color: var(--grey);
     font-size: 2rem;
@@ -503,12 +500,12 @@ hr,
     margin-left: 0.8rem;
 }
 
-.create-h-line{
+.create-h-line {
     border-top: 1px solid rgba(133, 133, 133, 25%);
     width: 100%;
 }
 
-.create-image-forms{
+.create-image-forms {
     display: flex;
     justify-content: space-between;
     margin-left: 0.8rem;
@@ -531,33 +528,33 @@ hr,
     gap: 1rem;
 }
 
-.create-check-forms{
+.create-check-forms {
     margin-left: 0.8rem;
 }
 
-.create-form-group{
+.create-form-group {
     margin-bottom: 2rem;
 }
 
-.create-form-group label{
+.create-form-group label {
     font-weight: 400;
     color: black;
     font-size: 1rem;
 }
 
-.create-checkbox-group{
+.create-checkbox-group {
     margin-top: 0.5rem;
     margin-left: 1rem;
     display: flex;
     gap: 2rem;
 }
 
-.create-checkbox-pack{
+.create-checkbox-pack {
     display: flex;
     align-items: center;
 }
 
-.create-checkbox-pack label{
+.create-checkbox-pack label {
     font-weight: 300;
     color: black;
     font-size: 1rem;
@@ -592,7 +589,7 @@ hr,
     background-color: var(--red);
 }
 
-.create-save-container{
+.create-save-container {
     display: flex;
     justify-content: space-between;
 }
