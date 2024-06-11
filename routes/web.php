@@ -20,6 +20,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/eats', [ListingsController::class, 'indexApproved'])->name('eats');
+Route::post('/eats/filter', [ListingsController::class, 'filter'])->name('eats.filter');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

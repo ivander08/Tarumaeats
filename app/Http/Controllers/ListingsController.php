@@ -8,18 +8,88 @@ use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
 {
-    public function indexApproved()
+    public function indexApproved(Request $request)
     {
-        // // Retrieve approved and online listings
-        // $listings = Listings::where('approval_status', 'approved')
-        //     ->where('status', 'online')
-        //     ->get();
+        $listings = Listings::query(); // Start with a base query
 
-        $listings = Listings::all();
+        // Apply type filter
+        if ($request->filled('type')) {
+            $listings->whereIn('type', $request->input('type'));
+        }
+
+        // Apply cuisine filter
+        if ($request->filled('cuisine')) {
+            $listings->where(function ($query) use ($request) {
+                $query->whereIn('cuisine', $request->input('cuisine'));
+            });
+        }
+
+        // Apply price range filter
+        if ($request->filled('price_range')) {
+            $listings->whereIn('price_range', $request->input('price_range'));
+        }
+
+        // Apply payment options filter
+        if ($request->filled('payment_options')) {
+            $listings->where(function ($query) use ($request) {
+                $query->whereIn('payment_options', $request->input('payment_options'));
+            });
+        }
+
+        // Apply special features filter
+        if ($request->filled('special_features')) {
+            $listings->where(function ($query) use ($request) {
+                $query->whereIn('special_features', $request->input('special_features'));
+            });
+        }
+
+        // Retrieve the filtered listings
+        $listings = $listings->get();
 
         // Pass the filtered listings to the view
         return view('eats', compact('listings'));
     }
+
+    public function filter(Request $request)
+    {
+        // Retrieve filter selections from the request
+        $type = $request->input('type');
+        $cuisine = $request->input('cuisine');
+        $priceRange = $request->input('price_range');
+        $paymentOptions = $request->input('payment_options');
+        $specialFeatures = $request->input('special_features');
+
+        // Query builder for listings
+        $query = Listings::query();
+
+        // Apply filters
+        if ($type) {
+            $query->where('type', $type);
+        }
+
+        if ($cuisine) {
+            $query->whereJsonContains('cuisine', $cuisine);
+        }
+
+        if ($priceRange) {
+            $query->where('price_range', $priceRange);
+        }
+
+        if ($paymentOptions) {
+            $query->whereJsonContains('payment_options', $paymentOptions);
+        }
+
+        if ($specialFeatures) {
+            $query->whereJsonContains('special_features', $specialFeatures);
+        }
+
+        // Execute the query
+        $listings = $query->get();
+
+        // Pass the filtered listings to the view
+        return view('eats', compact('listings'));
+    }
+
 
 
     public function index()
