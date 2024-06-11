@@ -152,23 +152,24 @@
             </div>
         </div>
         <div class="eats-results-container">
-            <?php $__currentLoopData = $listings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listing): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php
-                    function getPriceRangeDisplay($price_range) {
-                        switch ($price_range) {
-                            case 'under_price':
-                                return '&lt;Rp10,000';
-                            case 'thirty_price':
-                                return 'Rp10,000 - Rp30,000';
-                            case 'sixty_price':
-                                return 'Rp30,000 - Rp60,000';
-                            case 'over_price':
-                                return '&gt;Rp60,000';
-                            default:
-                                return 'Price range not specified';
-                        }
+            <?php
+                function PriceRangeDisplay($price_range)
+                {
+                    switch ($price_range) {
+                        case 'under_price':
+                            return '&lt;Rp10,000';
+                        case 'thirty_price':
+                            return 'Rp10,000 - Rp30,000';
+                        case 'sixty_price':
+                            return 'Rp30,000 - Rp60,000';
+                        case 'over_price':
+                            return '&gt;Rp60,000';
+                        default:
+                            return 'Price range not specified';
                     }
-                ?>
+                }
+            ?>
+            <?php $__currentLoopData = $listings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listing): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="eats-cards-container">
                     <div class="eats-card-image"
                         style="background-image: url('data:image/jpeg;base64,<?php echo e($listing->banner_image); ?>');">
@@ -184,7 +185,7 @@
                                 <h3><?php echo e($listing->rating); ?> (<?php echo e($listing->reviews_count); ?>)</h3>
                             </div>
                         </div>
-                        <p><?php echo getPriceRangeDisplay($listing->price_range); ?></p>
+                        <p><?php echo PriceRangeDisplay($listing->price_range); ?></p>
                         <h2><?php echo e($listing->location_address); ?></h2>
                     </div>
                 </div>

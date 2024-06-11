@@ -154,23 +154,24 @@
             </div>
         </div>
         <div class="eats-results-container">
-            @foreach ($listings as $listing)
-                @php
-                    function getPriceRangeDisplay($price_range) {
-                        switch ($price_range) {
-                            case 'under_price':
-                                return '&lt;Rp10,000';
-                            case 'thirty_price':
-                                return 'Rp10,000 - Rp30,000';
-                            case 'sixty_price':
-                                return 'Rp30,000 - Rp60,000';
-                            case 'over_price':
-                                return '&gt;Rp60,000';
-                            default:
-                                return 'Price range not specified';
-                        }
+            @php
+                function PriceRangeDisplay($price_range)
+                {
+                    switch ($price_range) {
+                        case 'under_price':
+                            return '&lt;Rp10,000';
+                        case 'thirty_price':
+                            return 'Rp10,000 - Rp30,000';
+                        case 'sixty_price':
+                            return 'Rp30,000 - Rp60,000';
+                        case 'over_price':
+                            return '&gt;Rp60,000';
+                        default:
+                            return 'Price range not specified';
                     }
-                @endphp
+                }
+            @endphp
+            @foreach ($listings as $listing)
                 <div class="eats-cards-container">
                     <div class="eats-card-image"
                         style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
@@ -186,7 +187,7 @@
                                 <h3>{{ $listing->rating }} ({{ $listing->reviews_count }})</h3>
                             </div>
                         </div>
-                        <p>{!! getPriceRangeDisplay($listing->price_range) !!}</p>
+                        <p>{!! PriceRangeDisplay($listing->price_range) !!}</p>
                         <h2>{{ $listing->location_address }}</h2>
                     </div>
                 </div>

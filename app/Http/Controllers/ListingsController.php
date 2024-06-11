@@ -8,6 +8,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
 {
+    public function indexApproved()
+    {
+        // // Retrieve approved and online listings
+        // $listings = Listings::where('approval_status', 'approved')
+        //     ->where('status', 'online')
+        //     ->get();
+
+        $listings = Listings::all();
+
+        // Pass the filtered listings to the view
+        return view('eats', compact('listings'));
+    }
+
+
     public function index()
     {
         $userName = auth()->user()->name;
