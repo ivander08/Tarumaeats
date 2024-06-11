@@ -73,11 +73,11 @@
                 </div>
                 <div class="eats-filter-pack">
                     <input type="checkbox" id="thirty_price" class="eats-filter-checkbox">
-                    <label for="thirty_price">Rp10,000 - Rp30,0000</label>
+                    <label for="thirty_price">Rp10,000 - Rp30,000</label>
                 </div>
                 <div class="eats-filter-pack">
                     <input type="checkbox" id="sixty_price" class="eats-filter-checkbox">
-                    <label for="sixty_price">Rp30,000 - Rp60,0000</label>
+                    <label for="sixty_price">Rp30,000 - Rp60,000</label>
                 </div>
                 <div class="eats-filter-pack">
                     <input type="checkbox" id="over_price" class="eats-filter-checkbox">
@@ -155,6 +155,22 @@
         </div>
         <div class="eats-results-container">
             @foreach ($listings as $listing)
+                @php
+                    function getPriceRangeDisplay($price_range) {
+                        switch ($price_range) {
+                            case 'under_price':
+                                return '&lt;Rp10,000';
+                            case 'thirty_price':
+                                return 'Rp10,000 - Rp30,000';
+                            case 'sixty_price':
+                                return 'Rp30,000 - Rp60,000';
+                            case 'over_price':
+                                return '&gt;Rp60,000';
+                            default:
+                                return 'Price range not specified';
+                        }
+                    }
+                @endphp
                 <div class="eats-cards-container">
                     <div class="eats-card-image"
                         style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
@@ -170,7 +186,7 @@
                                 <h3>{{ $listing->rating }} ({{ $listing->reviews_count }})</h3>
                             </div>
                         </div>
-                        <p>{{ $listing->price_range }}</p>
+                        <p>{!! getPriceRangeDisplay($listing->price_range) !!}</p>
                         <h2>{{ $listing->location_address }}</h2>
                     </div>
                 </div>
