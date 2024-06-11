@@ -1,22 +1,23 @@
 <?php $__env->startSection('title', 'Eats'); ?>
 
 <?php $__env->startSection('content'); ?>
-    <div class="eats-search-container">
-        <p><?php echo e($listings->count()); ?> Results found</p>
-        <div class="eats-search-bar">
-            <div class="eats-search-form">
-                <img src="<?php echo e(asset('images/search.svg')); ?>" alt="Search Icon" class="eats-search-icon">
-                <input type="text" placeholder="What you are looking for...">
+    <form method="POST" action="<?php echo e(route('eats.filter')); ?>">
+        <?php echo csrf_field(); ?>
+        <div class="eats-search-container">
+            <p><?php echo e($listings->count()); ?> Results found</p>
+            <div class="eats-search-bar">
+                <div class="eats-search-form">
+                    <img src="<?php echo e(asset('images/search.svg')); ?>" alt="Search Icon" class="eats-search-icon">
+                    <input type="text" name="search" placeholder="What you are looking for..."
+                        value="<?php echo e(request('search')); ?>">
+                </div>
+                <button type="submit" class="eats-search-submit">Search</button>
             </div>
-            <button type="submit" class="eats-search-submit">Search</button>
         </div>
-    </div>
-    <div class="eats-container">
-        <div class="eats-filter-container">
-            <h3>Filters</h3>
-            <hr>
-            <form method="POST" action="<?php echo e(route('eats.filter')); ?>">
-                <?php echo csrf_field(); ?>
+        <div class="eats-container">
+            <div class="eats-filter-container">
+                <h3>Filters</h3>
+                <hr>
                 <div class="eats-filter-pack-container">
                     <h3>Type</h3>
                     <div class="eats-filter-pack">
@@ -136,52 +137,52 @@
                         <label for="outdoor">Outdoor Seating</label>
                     </div>
                 </div>
-                <button type="submit" class="eats-filter-submit">Apply Filters</button>
-            </form>
-        </div>
-        <div class="eats-results-container">
-            <?php
-                if (!function_exists('PriceRangeDisplay')) {
-                    function PriceRangeDisplay($price_range)
-                    {
-                        switch ($price_range) {
-                            case 'under_price':
-                                return '&lt;Rp10,000';
-                            case 'thirty_price':
-                                return 'Rp10,000 - Rp30,000';
-                            case 'sixty_price':
-                                return 'Rp30,000 - Rp60,000';
-                            case 'over_price':
-                                return '&gt;Rp60,000';
-                            default:
-                                return 'Price range not specified';
+            </div>
+            <div class="eats-results-container">
+                <?php
+                    if (!function_exists('PriceRangeDisplay')) {
+                        function PriceRangeDisplay($price_range)
+                        {
+                            switch ($price_range) {
+                                case 'under_price':
+                                    return '&lt;Rp10,000';
+                                case 'thirty_price':
+                                    return 'Rp10,000 - Rp30,000';
+                                case 'sixty_price':
+                                    return 'Rp30,000 - Rp60,000';
+                                case 'over_price':
+                                    return '&gt;Rp60,000';
+                                default:
+                                    return 'Price range not specified';
+                            }
                         }
                     }
-                }
-            ?>
-            <?php $__currentLoopData = $listings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listing): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="eats-cards-container">
-                    <div class="eats-card-image"
-                        style="background-image: url('data:image/jpeg;base64,<?php echo e($listing->banner_image); ?>');">
-                        <button class="eats-card-heart-button" aria-label="Add to favorites">
-                            <img src="<?php echo e(asset('images/heart.svg')); ?>" alt="Heart Icon" class="eats-card-heart-icon">
-                        </button>
-                    </div>
-                    <div class="eats-card-content">
-                        <div class="eats-card-name-rating">
-                            <h1><?php echo e($listing->location_name); ?></h1>
-                            <div class="eats-card-rating">
-                                <img src="<?php echo e(asset('images/star.svg')); ?>" alt="Star Icon" class="eats-card-star-icon">
-                                <h3><?php echo e($listing->rating); ?> (<?php echo e($listing->reviews_count); ?>)</h3>
-                            </div>
+                ?>
+                <?php $__currentLoopData = $listings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listing): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="eats-cards-container">
+                        <div class="eats-card-image"
+                            style="background-image: url('data:image/jpeg;base64,<?php echo e($listing->banner_image); ?>');">
+                            <button class="eats-card-heart-button" aria-label="Add to favorites">
+                                <img src="<?php echo e(asset('images/heart.svg')); ?>" alt="Heart Icon" class="eats-card-heart-icon">
+                            </button>
                         </div>
-                        <p><?php echo PriceRangeDisplay($listing->price_range); ?></p>
-                        <h2><?php echo e($listing->location_address); ?></h2>
+                        <div class="eats-card-content">
+                            <div class="eats-card-name-rating">
+                                <h1><?php echo e($listing->location_name); ?></h1>
+                                <div class="eats-card-rating">
+                                    <img src="<?php echo e(asset('images/star.svg')); ?>" alt="Star Icon"
+                                        class="eats-card-star-icon">
+                                    <h3><?php echo e($listing->rating); ?> (<?php echo e($listing->reviews_count); ?>)</h3>
+                                </div>
+                            </div>
+                            <p><?php echo PriceRangeDisplay($listing->price_range); ?></p>
+                            <h2><?php echo e($listing->location_address); ?></h2>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
         </div>
-    </div>
+    </form>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ivand\Documents\College\Projects\Tarumaeats\resources\views/eats.blade.php ENDPATH**/ ?>

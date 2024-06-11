@@ -3,22 +3,23 @@
 @section('title', 'Eats')
 
 @section('content')
-    <div class="eats-search-container">
-        <p>{{ $listings->count() }} Results found</p>
-        <div class="eats-search-bar">
-            <div class="eats-search-form">
-                <img src="{{ asset('images/search.svg') }}" alt="Search Icon" class="eats-search-icon">
-                <input type="text" placeholder="What you are looking for...">
+    <form method="POST" action="{{ route('eats.filter') }}">
+        @csrf
+        <div class="eats-search-container">
+            <p>{{ $listings->count() }} Results found</p>
+            <div class="eats-search-bar">
+                <div class="eats-search-form">
+                    <img src="{{ asset('images/search.svg') }}" alt="Search Icon" class="eats-search-icon">
+                    <input type="text" name="search" placeholder="What you are looking for..."
+                        value="{{ request('search') }}">
+                </div>
+                <button type="submit" class="eats-search-submit">Search</button>
             </div>
-            <button type="submit" class="eats-search-submit">Search</button>
         </div>
-    </div>
-    <div class="eats-container">
-        <div class="eats-filter-container">
-            <h3>Filters</h3>
-            <hr>
-            <form method="POST" action="{{ route('eats.filter') }}">
-                @csrf
+        <div class="eats-container">
+            <div class="eats-filter-container">
+                <h3>Filters</h3>
+                <hr>
                 <div class="eats-filter-pack-container">
                     <h3>Type</h3>
                     <div class="eats-filter-pack">
@@ -138,50 +139,50 @@
                         <label for="outdoor">Outdoor Seating</label>
                     </div>
                 </div>
-                <button type="submit" class="eats-filter-submit">Apply Filters</button>
-            </form>
-        </div>
-        <div class="eats-results-container">
-            @php
-                if (!function_exists('PriceRangeDisplay')) {
-                    function PriceRangeDisplay($price_range)
-                    {
-                        switch ($price_range) {
-                            case 'under_price':
-                                return '&lt;Rp10,000';
-                            case 'thirty_price':
-                                return 'Rp10,000 - Rp30,000';
-                            case 'sixty_price':
-                                return 'Rp30,000 - Rp60,000';
-                            case 'over_price':
-                                return '&gt;Rp60,000';
-                            default:
-                                return 'Price range not specified';
+            </div>
+            <div class="eats-results-container">
+                @php
+                    if (!function_exists('PriceRangeDisplay')) {
+                        function PriceRangeDisplay($price_range)
+                        {
+                            switch ($price_range) {
+                                case 'under_price':
+                                    return '&lt;Rp10,000';
+                                case 'thirty_price':
+                                    return 'Rp10,000 - Rp30,000';
+                                case 'sixty_price':
+                                    return 'Rp30,000 - Rp60,000';
+                                case 'over_price':
+                                    return '&gt;Rp60,000';
+                                default:
+                                    return 'Price range not specified';
+                            }
                         }
                     }
-                }
-            @endphp
-            @foreach ($listings as $listing)
-                <div class="eats-cards-container">
-                    <div class="eats-card-image"
-                        style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
-                        <button class="eats-card-heart-button" aria-label="Add to favorites">
-                            <img src="{{ asset('images/heart.svg') }}" alt="Heart Icon" class="eats-card-heart-icon">
-                        </button>
-                    </div>
-                    <div class="eats-card-content">
-                        <div class="eats-card-name-rating">
-                            <h1>{{ $listing->location_name }}</h1>
-                            <div class="eats-card-rating">
-                                <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="eats-card-star-icon">
-                                <h3>{{ $listing->rating }} ({{ $listing->reviews_count }})</h3>
-                            </div>
+                @endphp
+                @foreach ($listings as $listing)
+                    <div class="eats-cards-container">
+                        <div class="eats-card-image"
+                            style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
+                            <button class="eats-card-heart-button" aria-label="Add to favorites">
+                                <img src="{{ asset('images/heart.svg') }}" alt="Heart Icon" class="eats-card-heart-icon">
+                            </button>
                         </div>
-                        <p>{!! PriceRangeDisplay($listing->price_range) !!}</p>
-                        <h2>{{ $listing->location_address }}</h2>
+                        <div class="eats-card-content">
+                            <div class="eats-card-name-rating">
+                                <h1>{{ $listing->location_name }}</h1>
+                                <div class="eats-card-rating">
+                                    <img src="{{ asset('images/star.svg') }}" alt="Star Icon"
+                                        class="eats-card-star-icon">
+                                    <h3>{{ $listing->rating }} ({{ $listing->reviews_count }})</h3>
+                                </div>
+                            </div>
+                            <p>{!! PriceRangeDisplay($listing->price_range) !!}</p>
+                            <h2>{{ $listing->location_address }}</h2>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
+    </form>
 @endsection

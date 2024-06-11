@@ -31,6 +31,7 @@ class ListingsController extends Controller
         $priceRange = $request->input('price_range');
         $paymentOptions = $request->input('payment_options');
         $specialFeatures = $request->input('special_features');
+        $search = strtolower($request->input('search'));
 
         // // Debugging
         // echo '<pre>';
@@ -67,6 +68,13 @@ class ListingsController extends Controller
 
         if ($specialFeatures) {
             $query->whereJsonContains('special_features', $specialFeatures);
+        }
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(location_address) LIKE ?', ["%{$search}%"]);
+            });
         }
 
         // Apply the condition for approved and online listings
@@ -241,14 +249,14 @@ class ListingsController extends Controller
         return redirect()->route('listings');
     }
 
+    // This one's kinda bruteforce... but it works
     public function search(Request $request)
     {
         $userName = auth()->user()->name;
-        $search = strtolower($request->input('search')); // Convert search query to lowercase
+        $search = strtolower($request->input('search'));
 
-        // Retrieve listings belonging to the authenticated user and matching the search query
         $listings = Listings::where('name', $userName)
-            ->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"]) // Convert database value to lowercase for comparison
+            ->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"])
             ->get();
 
         return view('listings.partials.listingsTable', compact('listings'))->render();
