@@ -19,6 +19,20 @@
                 <h3>Filters</h3>
                 <hr>
                 <div class="eats-filter-pack-container">
+                    <h3>Campus</h3>
+                    <div class="eats-filter-pack">
+                        <input type="checkbox" id="untar_satu" class="eats-filter-checkbox" name="campus[]" value="untar_satu"
+                            <?php if(in_array('untar_satu', request('campus', []))): ?> checked <?php endif; ?>>
+                        <label for="untar_satu">UNTAR 1</label>
+                    </div>
+                    <div class="eats-filter-pack">
+                        <input type="checkbox" id="untar_dua" class="eats-filter-checkbox" name="campus[]"
+                            value="untar_dua" <?php if(in_array('untar_dua', request('campus', []))): ?> checked <?php endif; ?>>
+                        <label for="untar_dua">UNTAR 2</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="eats-filter-pack-container">
                     <h3>Type</h3>
                     <div class="eats-filter-pack">
                         <input type="checkbox" id="food_only" class="eats-filter-checkbox" name="type[]" value="food_only"

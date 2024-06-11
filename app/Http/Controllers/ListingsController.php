@@ -26,6 +26,7 @@ class ListingsController extends Controller
     public function filter(Request $request)
     {
         // Retrieve filter selections from the request
+        $campus = $request->input('campus');
         $type = $request->input('type');
         $cuisine = $request->input('cuisine');
         $priceRange = $request->input('price_range');
@@ -46,6 +47,10 @@ class ListingsController extends Controller
         $query = Listings::query();
 
         // Apply filters
+        if ($campus) {
+            $query->where('campus', $campus);
+        }
+
         if ($type) {
             $query->where('type', $type);
         }
