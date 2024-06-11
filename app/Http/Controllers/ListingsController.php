@@ -8,6 +8,88 @@ use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
 {
+    public function indexApproved(Request $request)
+    {
+        // Retrieve approved and online listings
+        $listings = Listings::where('approval_status', 'pending')
+            ->where('status', 'online')
+            ->get();
+
+        $resultsCount = $listings->count();
+
+        // $listings = Listings::all();
+
+        // Pass the filtered listings to the view
+        return view('eats', compact('listings', 'resultsCount'));
+    }
+
+    public function filter(Request $request)
+    {
+        // Retrieve filter selections from the request
+        $type = $request->input('type');
+        $cuisine = $request->input('cuisine');
+        $priceRange = $request->input('price_range');
+        $paymentOptions = $request->input('payment_options');
+        $specialFeatures = $request->input('special_features');
+        $search = strtolower($request->input('search'));
+
+        // // Debugging
+        // echo '<pre>';
+        // print_r($cuisine);
+        // echo '</pre>';
+
+        // echo '<pre>';
+        // print_r($priceRange);
+        // echo '</pre>';
+
+        // Query builder for listings
+        $query = Listings::query();
+
+        // Apply filters
+        if ($type) {
+            $query->where('type', $type);
+        }
+
+        if ($cuisine) {
+            $query->whereJsonContains('cuisine', $cuisine);
+        }
+
+        if ($priceRange) {
+            // Idk how this logic works lol
+            if (count($priceRange) === 4) {
+            } else {
+                $query->whereIn('price_range', $priceRange);
+            }
+        }
+
+        if ($paymentOptions) {
+            $query->whereJsonContains('payment_options', $paymentOptions);
+        }
+
+        if ($specialFeatures) {
+            $query->whereJsonContains('special_features', $specialFeatures);
+        }
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(location_address) LIKE ?', ["%{$search}%"]);
+            });
+        }
+
+        // Apply the condition for approved and online listings
+        $query->where('approval_status', 'pending')->where('status', 'online');
+
+        // Execute the query
+        $listings = $query->get();
+
+        // Pass the filtered listings to the view
+        return view('eats', compact('listings'));
+    }
+
+
+
+
     public function index()
     {
         $userName = auth()->user()->name;
@@ -167,14 +249,14 @@ class ListingsController extends Controller
         return redirect()->route('listings');
     }
 
+    // This one's kinda bruteforce... but it works
     public function search(Request $request)
     {
         $userName = auth()->user()->name;
-        $search = strtolower($request->input('search')); // Convert search query to lowercase
+        $search = strtolower($request->input('search'));
 
-        // Retrieve listings belonging to the authenticated user and matching the search query
         $listings = Listings::where('name', $userName)
-            ->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"]) // Convert database value to lowercase for comparison
+            ->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"])
             ->get();
 
         return view('listings.partials.listingsTable', compact('listings'))->render();
