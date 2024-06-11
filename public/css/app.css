@@ -592,12 +592,14 @@ hr,
     background-color: var(--red);
 }
 
-.create-save-container{
+.create-save-container,
+.edit-submit-contaniner{
     display: flex;
     justify-content: space-between;
 }
 
-.create-save {
+.create-save,
+.edit-submit {
     background-color: var(--red);
     color: var(--white);
     border: none;
