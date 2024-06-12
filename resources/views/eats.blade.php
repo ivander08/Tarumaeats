@@ -178,9 +178,6 @@
                     <div class="eats-cards-container">
                         <div class="eats-card-image"
                             style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
-                            <button class="eats-card-heart-button" aria-label="Add to favorites">
-                                <img src="{{ asset('images/heart.svg') }}" alt="Heart Icon" class="eats-card-heart-icon">
-                            </button>
                         </div>
                         <div class="eats-card-content">
                             <div class="eats-card-name-rating">

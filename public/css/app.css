@@ -238,29 +238,6 @@ hr,
     position: relative;
 }
 
-.eats-card-heart-button {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.eats-card-heart-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    opacity: 75%;
-    filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg)
-        brightness(100%) contrast(113%);
-}
-
 .eats-card-content {
     padding: 0 1rem 1rem 1rem;
     background-color: var(--slightly-darker-white);

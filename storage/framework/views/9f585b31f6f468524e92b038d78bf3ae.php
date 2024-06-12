@@ -176,17 +176,21 @@
                     <div class="eats-cards-container">
                         <div class="eats-card-image"
                             style="background-image: url('data:image/jpeg;base64,<?php echo e($listing->banner_image); ?>');">
-                            <button class="eats-card-heart-button" aria-label="Add to favorites">
-                                <img src="<?php echo e(asset('images/heart.svg')); ?>" alt="Heart Icon" class="eats-card-heart-icon">
-                            </button>
                         </div>
                         <div class="eats-card-content">
                             <div class="eats-card-name-rating">
                                 <h1><?php echo e($listing->location_name); ?></h1>
                                 <div class="eats-card-rating">
-                                    <img src="<?php echo e(asset('images/star.svg')); ?>" alt="Star Icon"
-                                        class="eats-card-star-icon">
-                                    <h3><?php echo e($listing->rating); ?> (<?php echo e($listing->reviews_count); ?>)</h3>
+                                    <img src="<?php echo e(asset('images/star.svg')); ?>" alt="Star Icon" class="eats-card-star-icon">
+                                    <?php
+                                        $ratingsCount = optional($listing->ratings)->count() ?: 0;
+                                        $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+                                    ?>
+                                    <?php if($ratingsCount > 0): ?>
+                                        <h3><?php echo e($averageRating); ?> (<?php echo e($ratingsCount); ?>)</h3>
+                                    <?php else: ?>
+                                        <h3>No ratings yet</h3>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <p><?php echo PriceRangeDisplay($listing->price_range); ?></p>
