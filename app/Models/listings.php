@@ -43,4 +43,9 @@ class listings extends Model
     ];
 
     protected $table = 'listings';
+    
+    public function ratings() {
+        return $this->hasMany(ratings::class, 'location_name', 'location_name');
+    }
+    
 }

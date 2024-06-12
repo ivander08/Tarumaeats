@@ -186,13 +186,16 @@
                             <div class="eats-card-name-rating">
                                 <h1>{{ $listing->location_name }}</h1>
                                 <div class="eats-card-rating">
-                                    <img src="{{ asset('images/star.svg') }}" alt="Star Icon"
-                                        class="eats-card-star-icon">
-                                        @if ($listing->ratings_count > 0)
-                                            <h3>{{ $listing->ratings / $listing->ratings_count }} ({{ $listing->ratings_count }})</h3>
-                                        @else
-                                            <h3>No ratings yet</h3>
-                                        @endif
+                                    <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="eats-card-star-icon">
+                                    @php
+                                        $ratingsCount = optional($listing->ratings)->count() ?: 0;
+                                        $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+                                    @endphp
+                                    @if ($ratingsCount > 0)
+                                        <h3>{{ $averageRating }} ({{ $ratingsCount }})</h3>
+                                    @else
+                                        <h3>No ratings yet</h3>
+                                    @endif
                                 </div>
                             </div>
                             <p>{!! PriceRangeDisplay($listing->price_range) !!}</p>

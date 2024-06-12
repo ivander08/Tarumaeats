@@ -11,7 +11,8 @@ class ListingsController extends Controller
     public function indexApproved(Request $request)
     {
         // Retrieve approved and online listings
-        $listings = Listings::where('approval_status', 'pending')
+        $listings = Listings::with('ratings')
+            ->where('approval_status', 'pending')
             ->where('status', 'online')
             ->get();
 
