@@ -23,13 +23,13 @@
                 <div class="eats-filter-pack-container">
                     <h3>Campus</h3>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="untar_satu" class="eats-filter-checkbox" name="campus[]" value="untar_satu"
-                            @if (in_array('untar_satu', request('campus', []))) checked @endif>
+                        <input type="checkbox" id="untar_satu" class="eats-filter-checkbox" name="campus[]"
+                            value="untar_satu" @if (in_array('untar_satu', request('campus', []))) checked @endif>
                         <label for="untar_satu">UNTAR 1</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="untar_dua" class="eats-filter-checkbox" name="campus[]"
-                            value="untar_dua" @if (in_array('untar_dua', request('campus', []))) checked @endif>
+                        <input type="checkbox" id="untar_dua" class="eats-filter-checkbox" name="campus[]" value="untar_dua"
+                            @if (in_array('untar_dua', request('campus', []))) checked @endif>
                         <label for="untar_dua">UNTAR 2</label>
                     </div>
                 </div>
@@ -176,17 +176,23 @@
                 @endphp
                 @foreach ($listings as $listing)
                     <div class="eats-cards-container">
-                        <div class="eats-card-image"
-                            style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
-                        </div>
+                        <a href="{{ route('eats.show', $listing->id) }}">
+                            <div class="eats-card-image"
+                                style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
+                            </div>
+                        </a>
                         <div class="eats-card-content">
                             <div class="eats-card-name-rating">
                                 <h1>{{ $listing->location_name }}</h1>
                                 <div class="eats-card-rating">
-                                    <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="eats-card-star-icon">
+                                    <img src="{{ asset('images/star.svg') }}" alt="Star Icon"
+                                        class="eats-card-star-icon">
                                     @php
                                         $ratingsCount = optional($listing->ratings)->count() ?: 0;
-                                        $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+                                        $averageRating =
+                                            $ratingsCount > 0
+                                                ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '')
+                                                : 0;
                                     @endphp
                                     @if ($ratingsCount > 0)
                                         <h3>{{ $averageRating }} ({{ $ratingsCount }})</h3>

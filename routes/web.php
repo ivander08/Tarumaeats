@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::get('/eats', [ListingsController::class, 'indexApproved'])->name('eats');
 Route::post('/eats/filter', [ListingsController::class, 'filter'])->name('eats.filter');
+Route::get('/eats/{id}', [ListingsController::class, 'show'])->name('eats.show');
 
 
 Route::get('/dashboard', function () {

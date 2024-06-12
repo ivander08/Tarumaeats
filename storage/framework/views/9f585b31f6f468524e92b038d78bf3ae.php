@@ -21,13 +21,13 @@
                 <div class="eats-filter-pack-container">
                     <h3>Campus</h3>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="untar_satu" class="eats-filter-checkbox" name="campus[]" value="untar_satu"
-                            <?php if(in_array('untar_satu', request('campus', []))): ?> checked <?php endif; ?>>
+                        <input type="checkbox" id="untar_satu" class="eats-filter-checkbox" name="campus[]"
+                            value="untar_satu" <?php if(in_array('untar_satu', request('campus', []))): ?> checked <?php endif; ?>>
                         <label for="untar_satu">UNTAR 1</label>
                     </div>
                     <div class="eats-filter-pack">
-                        <input type="checkbox" id="untar_dua" class="eats-filter-checkbox" name="campus[]"
-                            value="untar_dua" <?php if(in_array('untar_dua', request('campus', []))): ?> checked <?php endif; ?>>
+                        <input type="checkbox" id="untar_dua" class="eats-filter-checkbox" name="campus[]" value="untar_dua"
+                            <?php if(in_array('untar_dua', request('campus', []))): ?> checked <?php endif; ?>>
                         <label for="untar_dua">UNTAR 2</label>
                     </div>
                 </div>
@@ -174,17 +174,23 @@
                 ?>
                 <?php $__currentLoopData = $listings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listing): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="eats-cards-container">
-                        <div class="eats-card-image"
-                            style="background-image: url('data:image/jpeg;base64,<?php echo e($listing->banner_image); ?>');">
-                        </div>
+                        <a href="<?php echo e(route('eats.show', $listing->id)); ?>">
+                            <div class="eats-card-image"
+                                style="background-image: url('data:image/jpeg;base64,<?php echo e($listing->banner_image); ?>');">
+                            </div>
+                        </a>
                         <div class="eats-card-content">
                             <div class="eats-card-name-rating">
                                 <h1><?php echo e($listing->location_name); ?></h1>
                                 <div class="eats-card-rating">
-                                    <img src="<?php echo e(asset('images/star.svg')); ?>" alt="Star Icon" class="eats-card-star-icon">
+                                    <img src="<?php echo e(asset('images/star.svg')); ?>" alt="Star Icon"
+                                        class="eats-card-star-icon">
                                     <?php
                                         $ratingsCount = optional($listing->ratings)->count() ?: 0;
-                                        $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+                                        $averageRating =
+                                            $ratingsCount > 0
+                                                ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '')
+                                                : 0;
                                     ?>
                                     <?php if($ratingsCount > 0): ?>
                                         <h3><?php echo e($averageRating); ?> (<?php echo e($ratingsCount); ?>)</h3>

@@ -257,6 +257,13 @@ class ListingsController extends Controller
         return redirect()->route('listings');
     }
 
+    public function show($id)
+    {
+        $listing = Listings::with('ratings')->findOrFail($id);
+        return view('show', compact('listing'));
+    }
+
+
     // This one's kinda bruteforce... but it works
     public function search(Request $request)
     {

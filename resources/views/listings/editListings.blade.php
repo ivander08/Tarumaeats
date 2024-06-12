@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'User - Edit Listing')
+@section('title', 'Edit Listing')
 
 @section('content')
     <div class="user-listings-head">
