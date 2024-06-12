@@ -188,7 +188,11 @@
                                 <div class="eats-card-rating">
                                     <img src="{{ asset('images/star.svg') }}" alt="Star Icon"
                                         class="eats-card-star-icon">
-                                    <h3>{{ $listing->rating }} ({{ $listing->reviews_count }})</h3>
+                                        @if ($listing->ratings_count > 0)
+                                            <h3>{{ $listing->ratings / $listing->ratings_count }} ({{ $listing->ratings_count }})</h3>
+                                        @else
+                                            <h3>No ratings yet</h3>
+                                        @endif
                                 </div>
                             </div>
                             <p>{!! PriceRangeDisplay($listing->price_range) !!}</p>
