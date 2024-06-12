@@ -36,12 +36,16 @@
                     @foreach ($listings as $listing)
                         <tr>
                             <td>{{ $listing->location_name }}</td>
-                            @if ($listing->ratings_count > 0)
-                            <td>{{ $listing->ratings / $listing->ratings_count }} ({{ $listing->ratings_count }})</td>
-                            @else
-                            <td>--</td>
-                            @endif
-                            <td>
+                            @php
+                                $ratingsCount = optional($listing->ratings)->count() ?: 0;
+                                $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+                            @endphp
+                            @if ($ratingsCount > 0)
+                                <td>{{ $averageRating }} ({{ $ratingsCount }})</td>
+                                @else
+                                    <td>--</td>
+                                @endif
+                                <td>
                                 <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}"
                                     data-status="{{ $listing->status }}">
                                     &#x2022; {{ ucfirst($listing->status) }}
