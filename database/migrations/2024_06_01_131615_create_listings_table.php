@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('location_name');
+            $table->string('location_name')->unique();
             $table->string('campus');
             $table->string('location_address');
             $table->string('website')->nullable();
@@ -32,8 +32,6 @@ return new class extends Migration
             $table->json('special_features')->nullable();
             $table->enum('approval_status', ['pending', 'approved', 'declined'])->default('pending');
             $table->enum('status', ['online', 'offline'])->default('online');
-            $table->float('ratings')->default(0); //total ratings
-            $table->float('ratings_count')->default(0); //total users who rated, show rating = ratings/ratings_count
             $table->timestamps();
         });
     }
