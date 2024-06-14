@@ -38,5 +38,10 @@
                 <button type="submit">Search</button>
             </div>
         </div>
+        <div class="user-listings-head-text-settings">
+                <div class="vl-red"></div>
+                <h1>Featured Eats</h1>
+                <p>The best eats recommended by us.</p>
+            </div>
         @endif
     </header>
