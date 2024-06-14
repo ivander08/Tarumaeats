@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ListingsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RatingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::get('/', function () {
 Route::get('/eats', [ListingsController::class, 'indexApproved'])->name('eats');
 Route::post('/eats/filter', [ListingsController::class, 'filter'])->name('eats.filter');
 Route::get('/eats/{id}', [ListingsController::class, 'show'])->name('eats.show');
-
+Route::post('/ratings/store', [RatingsController::class, 'store'])->name('ratings.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

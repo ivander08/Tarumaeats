@@ -2,23 +2,25 @@
 
 @section('title', $listing->location_name)
 
-@php
-    function PriceRangeDisplay($price_range)
-    {
-        switch ($price_range) {
-            case 'under_price':
-                return '&lt;Rp10,000';
-            case 'thirty_price':
-                return 'Rp10,000 - Rp30,000';
-            case 'sixty_price':
-                return 'Rp30,000 - Rp60,000';
-            case 'over_price':
-                return '&gt;Rp60,000';
-            default:
-                return 'Price range not specified';
+@if (!function_exists('PriceRangeDisplay'))
+    @php
+        function PriceRangeDisplay($price_range)
+        {
+            switch ($price_range) {
+                case 'under_price':
+                    return '&lt;Rp10,000';
+                case 'thirty_price':
+                    return 'Rp10,000 - Rp30,000';
+                case 'sixty_price':
+                    return 'Rp30,000 - Rp60,000';
+                case 'over_price':
+                    return '&gt;Rp60,000';
+                default:
+                    return 'Price range not specified';
+            }
         }
-    }
-@endphp
+    @endphp
+@endif
 
 @section('content')
     <div class="show-background-image-container"
@@ -54,13 +56,26 @@
                             <h3>No ratings yet</h3>
                         @endif
                     </div>
-                    <div class="show-rating-interact">
-                        <input type="radio" name="star" id="star1" value="1"><label for="star1"></label>
-                        <input type="radio" name="star" id="star2" value="2"><label for="star2"></label>
-                        <input type="radio" name="star" id="star3" value="3"><label for="star3"></label>
-                        <input type="radio" name="star" id="star4" value="4"><label for="star4"></label>
-                        <input type="radio" name="star" id="star5" value="5"><label for="star5"></label>
-                    </div>
+                    @auth
+                        <form id="ratingForm" action="{{ route('ratings.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_name" value="{{ auth()->user()->name }}">
+                            <input type="hidden" name="location_name" value="{{ $listing->location_name }}">
+                            <div class="show-rating-interact">
+                                <input type="radio" name="rating" id="star1" value="1"><label
+                                    for="star1"></label>
+                                <input type="radio" name="rating" id="star2" value="2"><label
+                                    for="star2"></label>
+                                <input type="radio" name="rating" id="star3" value="3"><label
+                                    for="star3"></label>
+                                <input type="radio" name="rating" id="star4" value="4"><label
+                                    for="star4"></label>
+                                <input type="radio" name="rating" id="star5" value="5"><label
+                                    for="star5"></label>
+                            </div>
+                        </form>
+                    @endauth
+
                 </div>
             </div>
             <div class="show-tags">
@@ -77,9 +92,13 @@
             const starInputs = document.querySelectorAll('.show-rating-interact input[type="radio"]');
             const starLabels = document.querySelectorAll('.show-rating-interact label');
 
+            const userRating = {{ $userRating ?? 0 }};
+
             starInputs.forEach((input, index) => {
                 input.addEventListener('change', () => {
-                    updateStars(index + 1);
+                    const rating = index + 1;
+                    updateStars(rating);
+                    document.getElementById('ratingForm').submit();
                 });
 
                 input.addEventListener('mouseover', () => {
@@ -87,9 +106,7 @@
                 });
 
                 input.addEventListener('mouseout', () => {
-                    const checkedStar = document.querySelector(
-                        '.show-rating-interact input[type="radio"]:checked');
-                    fillStars(checkedStar ? parseInt(checkedStar.value) : 0);
+                    fillStars(userRating);
                 });
             });
 
@@ -104,8 +121,7 @@
                 });
             }
 
-            const initialCheckedStar = document.querySelector('.show-rating-interact input[type="radio"]:checked');
-            fillStars(initialCheckedStar ? parseInt(initialCheckedStar.value) : 0);
+            fillStars(userRating);
         });
     </script>
 @endsection
