@@ -30,13 +30,39 @@
     </div>
     <div class="show-info-container">
         <div class="show-name-tags">
-            <div class="show-name-review">
-                <div class="vl-red"></div>
-                <h1>{{ $listing->location_name }}</h1>
+            <div class="show-top">
+                <div class="show-name-address">
+                    <div class="show-name">
+                        <div class="vl-red"></div>
+                        <h1>{{ $listing->location_name }} </h1>
+                    </div>
+                    <div class="show-address">
+                        <div class="vl-grey"></div>
+                        <h2>{{ $listing->location_address }}</h2>
+                    </div>
+                </div>
+                <div class="show-rating">
+                    <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="show-star-icon">
+                    @php
+                        $ratingsCount = optional($listing->ratings)->count() ?: 0;
+                        $averageRating =
+                            $ratingsCount > 0
+                                ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '')
+                                : 0;
+                    @endphp
+                    @if ($ratingsCount > 0)
+                        <h3>{{ $averageRating }} ({{ $ratingsCount }})</h3>
+                    @else
+                        <h3>No ratings yet</h3>
+                    @endif
+                </div>
+            </div>
+            <div class="show-tags">
+
             </div>
         </div>
         <div class="show-contact">
-            
+
         </div>
     </div>
 @endsection

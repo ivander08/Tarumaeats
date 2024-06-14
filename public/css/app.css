@@ -623,14 +623,60 @@ hr,
     padding: 2.5rem 5rem;
 }
 
-.show-name-review{
+.show-top {
     display: flex;
-    align-items: center;
+    align-items: top;
+    justify-content: space-between;
 }
 
-.show-name-review h1{
+.show-name{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.show-name h1{
     margin-left: 1rem;
     font-weight: 400;
     color: var(--grey);
     font-size: 2.5rem;
+}
+
+.vl-grey {
+    border-left: 2px solid var(--grey);
+    position: absolute;
+    height: 1.5rem;
+}
+
+.show-address {
+    display: flex;
+    align-items: top;
+    margin-top: 0;
+}
+
+.show-address h2 {
+    margin-top: 0.25rem;
+    margin-left: 1.25rem;
+    font-weight: 200;
+    color: var(--grey);
+    font-size: 1rem;
+}
+
+.show-rating {
+    display: flex;
+    align-items: center;
+}
+
+.show-rating h3 {
+    font-size: 1.5rem;
+    opacity: 75%;
+    color: var(--grey);
+}
+
+.show-star-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.2rem;
+    filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg)
+        brightness(103%) contrast(103%);
 }
