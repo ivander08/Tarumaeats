@@ -37,6 +37,11 @@ header {
     text-align: center;
 }
 
+header.show-header {
+    background-image: none;
+    opacity: 1;
+}
+
 /* Navigation Styles */
 nav {
     display: flex;
@@ -585,4 +590,15 @@ hr,
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.show-background-image-container {
+    background-size: cover;
+    background-position: center;
+}
+
+.show-background-image-container header {
+    top: 0;
+    left: 0;
+    background: none; 
 }

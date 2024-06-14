@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['headerClass' => 'show-header'])
 
 @section('title', $listing->location_name)
 
@@ -21,5 +21,8 @@
 @endphp
 
 @section('content')
-
+    <div class="show-background-image-container">
+        @include('partials.header', ['class' => 'show-header'])
+    </div>
+    <!-- Rest of your content goes here -->
 @endsection

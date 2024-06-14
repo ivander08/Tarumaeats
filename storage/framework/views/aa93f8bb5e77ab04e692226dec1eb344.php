@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="<?php echo e($class ?? ''); ?>">
         <nav>
             <div class="nav-left">
                 <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Tarumaeats Logo">
@@ -23,5 +23,20 @@
                 </ul>
             </div>
         </nav>
-    </header>
-<?php /**PATH C:\Users\ivand\Documents\College\Projects\Tarumaeats\resources\views/partials/header.blade.php ENDPATH**/ ?>
+        <?php if($class === 'home-header'): ?>
+        <div class="home-content">
+            <h1>FIND THE BEST EATS NEAR UNTAR</h1>
+            <p>Find the local places that you love according to your taste.</p>
+            <div class="search-container">
+                <input class="search-input" type="search" placeholder="What you are looking for...">
+                <input class="type-input" list="types" type="search" placeholder="All Types">
+                <datalist id="types">
+                    <option value="Type 1">
+                    <option value="Type 2">
+                    <option value="Type 3">
+                </datalist>
+                <button type="submit">Search</button>
+            </div>
+        </div>
+        <?php endif; ?>
+    </header><?php /**PATH C:\Users\ivand\Documents\College\Projects\Tarumaeats\resources\views/partials/header.blade.php ENDPATH**/ ?>
