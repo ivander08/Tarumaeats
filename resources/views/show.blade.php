@@ -21,8 +21,22 @@
 @endphp
 
 @section('content')
-    <div class="show-background-image-container">
+    <div class="show-background-image-container"
+        style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
         @include('partials.header', ['class' => 'show-header'])
     </div>
-    <!-- Rest of your content goes here -->
+    <div class="show-red-bar">
+        <h2>Description</h2>
+    </div>
+    <div class="show-info-container">
+        <div class="show-name-tags">
+            <div class="show-name-review">
+                <div class="vl-red"></div>
+                <h1>{{ $listing->location_name }}</h1>
+            </div>
+        </div>
+        <div class="show-contact">
+            
+        </div>
+    </div>
 @endsection

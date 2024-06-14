@@ -39,7 +39,6 @@ header {
 
 header.show-header {
     background-image: none;
-    opacity: 1;
 }
 
 /* Navigation Styles */
@@ -572,7 +571,7 @@ hr,
 }
 
 .create-save-container,
-.edit-submit-contaniner{
+.edit-submit-contaniner {
     display: flex;
     justify-content: space-between;
 }
@@ -595,10 +594,43 @@ hr,
 .show-background-image-container {
     background-size: cover;
     background-position: center;
+    height: 70vh;
+    width: auto;
 }
 
 .show-background-image-container header {
     top: 0;
     left: 0;
-    background: none; 
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.show-red-bar {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    width: 100%;
+    background-color: var(--red);
+}
+
+.show-red-bar h2 {
+    margin: 0;
+    padding-left: 5rem;
+    color: var(--white);
+    font-weight: 200;
+}
+.show-info-container{
+    padding: 2.5rem 5rem;
+}
+
+.show-name-review{
+    display: flex;
+    align-items: center;
+}
+
+.show-name-review h1{
+    margin-left: 1rem;
+    font-weight: 400;
+    color: var(--grey);
+    font-size: 2.5rem;
 }
