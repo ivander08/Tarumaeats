@@ -3,160 +3,292 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\listings;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Models\Listings;
 use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
 {
+    public function indexApproved(Request $request)
+    {
+        // Retrieve approved and online listings
+        $listings = Listings::with('ratings')
+            ->where('approval_status', 'pending')
+            ->where('status', 'online')
+            ->get();
+
+        $resultsCount = $listings->count();
+
+        // $listings = Listings::all();
+
+        // Pass the filtered listings to the view
+        return view('eats', compact('listings', 'resultsCount'));
+    }
+
+    public function filter(Request $request)
+    {
+        // Retrieve filter selections from the request
+        $campus = $request->input('campus');
+        $type = $request->input('type');
+        $cuisine = $request->input('cuisine');
+        $priceRange = $request->input('price_range');
+        $paymentOptions = $request->input('payment_options');
+        $specialFeatures = $request->input('special_features');
+        $search = strtolower($request->input('search'));
+
+        // // Debugging
+        // echo '<pre>';
+        // print_r($cuisine);
+        // echo '</pre>';
+
+        // echo '<pre>';
+        // print_r($priceRange);
+        // echo '</pre>';
+
+        // Query builder for listings
+        $query = Listings::query();
+
+        // Apply filters
+        if ($campus) {
+            $query->where('campus', $campus);
+        }
+
+        if ($type) {
+            $query->where('type', $type);
+        }
+
+        if ($cuisine) {
+            $query->whereJsonContains('cuisine', $cuisine);
+        }
+
+        if ($priceRange) {
+            // Idk how this logic works lol
+            if (count($priceRange) === 4) {
+            } else {
+                $query->whereIn('price_range', $priceRange);
+            }
+        }
+
+        if ($paymentOptions) {
+            $query->whereJsonContains('payment_options', $paymentOptions);
+        }
+
+        if ($specialFeatures) {
+            $query->whereJsonContains('special_features', $specialFeatures);
+        }
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"])
+                    ->orWhereRaw('LOWER(location_address) LIKE ?', ["%{$search}%"]);
+            });
+        }
+
+        // Apply the condition for approved and online listings
+        $query->where('approval_status', 'pending')->where('status', 'online');
+
+        // Execute the query
+        $listings = $query->get();
+
+        // Pass the filtered listings to the view
+        return view('eats', compact('listings'));
+    }
+
+
+
+
     public function index()
     {
-        $listings = listings::all();
-        return view('listings.index', compact('listings'));
+        $userName = auth()->user()->name;
+        $listings = Listings::where('name', $userName)->get();
+        return view('listings.userListings', compact('listings'));
     }
 
     public function create()
     {
-        return view('listings.create');
+        return view('listings.createListings');
     }
 
-    public function store(Request $request){
-
-        // dd($request->all());
-
-         // Validate the form data
-         $request->validate([
+    public function store(Request $request)
+    {
+        // Validate the form data
+        $request->validate([
             'location_name' => 'required|string|max:255',
+            'campus' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
-            'price_range' => 'required|string|max:255',
             'website' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
-            'tags' => 'nullable|array',
+            'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'carousel_images' => 'required|array',
+            'carousel_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'campus' => 'required|string|max:255',
+            'type' => 'nullable|string|max:255',
+            'cuisine' => 'required|array',
+            'price_range' => 'required|string',
+            'payment_options' => 'required|array',
             'special_features' => 'nullable|array',
-            'price_per_person' => 'nullable|string',
-            'payment_options' => 'nullable|array',
-            'open_hours' => 'nullable|string',
-            'closed_hours' => 'nullable|string',
         ]);
 
-        // dd($request->all());
+        // Handle the image file uploads and encode them as base64
+        $mainImage = base64_encode(file_get_contents($request->file('main_image')->getRealPath()));
+        $bannerImage = base64_encode(file_get_contents($request->file('banner_image')->getRealPath()));
 
-        // Handle the image file upload
-        $imageData = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                // Read the image file and encode it as base64
-                $imageData[] = base64_encode(file_get_contents($image->getRealPath()));
-            }
+        $carouselImages = [];
+        foreach ($request->file('carousel_images') as $carouselImage) {
+            $carouselImages[] = base64_encode(file_get_contents($carouselImage->getRealPath()));
         }
 
         // Create the listing
-        listings::create([
+        Listings::create([
+            'name' => auth()->user()->name,
             'location_name' => $request->location_name,
+            'campus' => $request->campus,
             'location_address' => $request->location_address,
-            'price_range' => $request->price_range,
             'website' => $request->website,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'images' => json_encode($imageData),
-            'tags' => json_encode($request->tags),
-            'special_features' => json_encode($request->special_features),
-            'price_per_person' => $request->price_per_person,
+            'main_image' => $mainImage,
+            'banner_image' => $bannerImage,
+            'carousel_images' => json_encode($carouselImages),
+            'campus' => $request->campus,
+            'type' => $request->type,
+            'cuisine' => json_encode($request->cuisine),
+            'price_range' => $request->price_range,
             'payment_options' => json_encode($request->payment_options),
-            'open_hours' => $request->open_hours,
-            'closed_hours' => $request->closed_hours,
+            'special_features' => json_encode($request->special_features),
         ]);
 
-        return redirect()-> route('listings');
+        return redirect()->route('listings');
     }
 
-    public function edit($id){
-        $listing = listings::find($id);
-        $tags = explode(',', $listing->tags);
-        return view('listings.edit', compact('listing'));
+
+    public function edit($id)
+    {
+        $listing = Listings::find($id);
+        return view('listings.editListings', compact('listing'));
     }
 
-    public function update(Request $request, $id){
-        $listing = listings::find($id);
+    public function update(Request $request, $id)
+    {
+        $listing = Listings::find($id);
 
         if (!$listing) {
             return redirect()->route('listings')->with('error', 'Listing not found.');
         }
-    
+
+        // Validate the form data
         $request->validate([
             'location_name' => 'required|string|max:255',
+            'campus' => 'required|string|max:255',
             'location_address' => 'required|string|max:255',
-            'price_range' => 'required|string|max:255',
             'website' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
-            'images' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
-            'tags' => 'nullable|array',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'carousel_images' => 'nullable|array',
+            'carousel_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
+            'type' => 'nullable|string|max:255',
+            'cuisine' => 'required|array',
+            'price_range' => 'required|string',
+            'payment_options' => 'required|array',
             'special_features' => 'nullable|array',
-            'price_per_person' => 'nullable|string',
-            'payment_options' => 'nullable|array',
-            'open_hours' => 'nullable|string',
-            'closed_hours' => 'nullable|string',
         ]);
-    
-        if ($request->has('remove_images')) {
-            foreach ($request->remove_images as $index) {
-                $images = json_decode($listing->images, true);
-                $imageUrl = $images[$index];
-                Storage::delete($imageUrl);
-                unset($images[$index]);
-            }
-            $listing->images = json_encode(array_values($images));
-            $listing->save();
-        }
-    
-        $imageData = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imageData[] = base64_encode(file_get_contents($image->getRealPath()));
-            }
-            $existingImages = json_decode($listing->images, true);
-            $mergedImages = array_merge($existingImages ?? [], $imageData);
-            $listing->images = json_encode($mergedImages);
-            $listing->save();
-        }
-    
+
         // Update the listing attributes
         $listing->update([
+            'name' => auth()->user()->name,
             'location_name' => $request->location_name,
+            'campus' => $request->campus,
             'location_address' => $request->location_address,
-            'price_range' => $request->price_range,
             'website' => $request->website,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'tags' => json_encode($request->tags),
-            'special_features' => json_encode($request->special_features),
-            'price_per_person' => $request->price_per_person,
+            'type' => $request->type,
+            'cuisine' => json_encode($request->cuisine),
+            'price_range' => $request->price_range,
             'payment_options' => json_encode($request->payment_options),
-            'open_hours' => $request->open_hours,
-            'closed_hours' => $request->closed_hours,
+            'special_features' => json_encode($request->special_features),
         ]);
-    
+
+        // Handle image updates
+        if ($request->hasFile('main_image')) {
+            Storage::delete($listing->main_image);
+            $listing->main_image = base64_encode(file_get_contents($request->file('main_image')->getRealPath()));
+        }
+
+        if ($request->hasFile('banner_image')) {
+            Storage::delete($listing->banner_image);
+            $listing->banner_image = base64_encode(file_get_contents($request->file('banner_image')->getRealPath()));
+        }
+
+        if ($request->hasFile('carousel_images')) {
+            $carouselImages = [];
+            foreach ($request->file('carousel_images') as $carouselImage) {
+                $carouselImages[] = base64_encode(file_get_contents($carouselImage->getRealPath()));
+            }
+            Storage::delete(json_decode($listing->carousel_images));
+            $listing->carousel_images = json_encode($carouselImages);
+        }
+
+        $listing->save();
+
         return redirect()->route('listings');
-}
+    }
 
 
-    public function destroy($id){
-        $listing = listings::find($id);
+    public function destroy($id)
+    {
+        $listing = Listings::find($id);
+        Storage::delete([$listing->main_image, $listing->banner_image]);
+        foreach (json_decode($listing->carousel_images) as $carouselImage) {
+            Storage::delete($carouselImage);
+        }
         $listing->delete();
-        return redirect()-> route('listings');
+        return redirect()->route('listings');
+    }
+
+    public function show($id)
+    {
+        $listing = Listings::with('ratings')->findOrFail($id);
+        return view('show', compact('listing'));
+    }
+
+
+    // This one's kinda bruteforce... but it works
+    public function search(Request $request)
+    {
+        $userName = auth()->user()->name;
+        $search = strtolower($request->input('search'));
+
+        $listings = Listings::where('name', $userName)
+            ->whereRaw('LOWER(location_name) LIKE ?', ["%{$search}%"])
+            ->get();
+
+        return view('listings.partials.listingsTable', compact('listings'))->render();
+    }
+
+
+    public function updateStatus(Request $request)
+    {
+        $listing = Listings::find($request->id);
+
+        if ($listing) {
+            $listing->status = $request->status;
+            $listing->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Listing not found'], 404);
     }
 }

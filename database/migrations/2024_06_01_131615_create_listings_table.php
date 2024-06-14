@@ -13,22 +13,23 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->default("testUser");
-            $table->string('location_name');
+            $table->string('name');
+            $table->string('location_name')->unique();
+            $table->string('campus');
             $table->string('location_address');
-            $table->string('price_range');
             $table->string('website')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->text('images')->nullable();
-            $table->json('tags')->nullable();
+            $table->text('main_image')->nullable();
+            $table->text('banner_image')->nullable();
+            $table->json('carousel_images')->nullable();
+            $table->string('type')->nullable();
+            $table->json('cuisine');
+            $table->string('price_range');
+            $table->json('payment_options');
             $table->json('special_features')->nullable();
-            $table->string('price_per_person')->nullable();
-            $table->json('payment_options')->nullable();
-            $table->string('open_hours')->nullable();
-            $table->string('closed_hours')->nullable();
             $table->enum('approval_status', ['pending', 'approved', 'declined'])->default('pending');
             $table->enum('status', ['online', 'offline'])->default('online');
             $table->timestamps();

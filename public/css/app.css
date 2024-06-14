@@ -352,8 +352,6 @@ hr,
     background-size: cover;
     height: 13rem;
     width: 20rem;
-    padding: 0.5rem;
-    margin-bottom: 0;
     border-radius: 15px 15px 0 0;
     display: flex;
     justify-content: flex-end;
@@ -379,6 +377,7 @@ hr,
     opacity: 75%;
     filter: invert(76%) sepia(88%) saturate(7020%) hue-rotate(337deg)
         brightness(100%) contrast(113%);
+    position: relative;
 }
 
 .eats-card-content {
@@ -518,13 +517,17 @@ hr,
     background-color: var(--slightly-darker-white);
 }
 
-.listing-status-active {
+
+
+
+.listing-status-online {
     background-color: #d7f6e9;
     color: #188659;
     padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .listing-status-approved {
@@ -536,15 +539,25 @@ hr,
     font-weight: 500;
 }
 
-.listing-status-inactive {
+.listing-status-offline {
     background-color: rgba(133, 133, 133, 25%);
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.listing-status-pending {
+    background-color: rgba(218, 215, 152, 0.25);
+    color: #b3a560;
     padding: 0.5rem 1rem;
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
 }
 
-.listing-status-unapproved {
+.listing-status-declined {
     background-color: rgba(218, 152, 152, 25%);
     color: #b36060;
     padding: 0.5rem 1rem;
@@ -578,13 +591,140 @@ hr,
     box-sizing: border-box;
 }
 
-.user-listings-create-save {
+.user-listings-create-forms {
+    margin-top: 1.5rem;
+    padding: 0rem 15rem 2.5rem 15rem;
+    background-color: var(--slightly-darker-white);
+}
+
+.user-listings-create-forms form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.create-text-forms-container h1,
+.create-image-forms-container h1,
+.create-check-forms-container h1 {
+    font-weight: 200;
+    color: var(--grey);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 0;
+}
+
+.create-text-forms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 5rem;
+    row-gap: 2.5rem;
+    width: 100%;
+    margin-left: 0.8rem;
+}
+
+.create-h-line {
+    border-top: 1px solid rgba(133, 133, 133, 25%);
+    width: 100%;
+}
+
+.create-image-forms {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0.8rem;
+}
+
+.create-form-control[type="text"],
+.create-form-control[type="email"] {
+    border: none;
+    outline: none;
+    padding: 1rem;
+    height: 4rem;
+    width: 21rem;
+    box-sizing: border-box;
+    font-weight: 100;
+}
+
+.create-form-image-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create-check-forms {
+    margin-left: 0.8rem;
+}
+
+.create-form-group {
+    margin-bottom: 2rem;
+}
+
+.create-form-group label {
+    font-weight: 400;
+    color: black;
+    font-size: 1rem;
+}
+
+.create-checkbox-group {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.create-checkbox-pack {
+    display: flex;
+    align-items: center;
+}
+
+.create-checkbox-pack label {
+    font-weight: 300;
+    color: black;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.create-form-radio {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+}
+
+.create-form-radio:checked {
+    background-color: var(--red);
+}
+
+.create-form-checkbox {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+}
+
+.create-form-checkbox:checked {
+    background-color: var(--red);
+}
+
+.create-save-container,
+.edit-submit-contaniner{
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-save,
+.edit-submit {
     background-color: var(--red);
     color: var(--white);
     border: none;
     cursor: pointer;
     font-size: 1.3rem;
-    width: 7rem;
+    width: 13rem;
     height: 4.5rem;
     font-weight: 700;
     display: flex;
