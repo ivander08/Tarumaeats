@@ -619,7 +619,7 @@ hr,
     color: var(--white);
     font-weight: 200;
 }
-.show-info-container{
+.show-info-container {
     padding: 2.5rem 5rem;
 }
 
@@ -629,13 +629,13 @@ hr,
     justify-content: space-between;
 }
 
-.show-name{
+.show-name {
     display: flex;
     align-items: center;
     margin-bottom: 0;
 }
 
-.show-name h1{
+.show-name h1 {
     margin-left: 1rem;
     font-weight: 400;
     color: var(--grey);
@@ -679,4 +679,77 @@ hr,
     margin-right: 0.2rem;
     filter: invert(80%) sepia(49%) saturate(513%) hue-rotate(333deg)
         brightness(103%) contrast(103%);
+}
+
+.show-name-address-line {
+    display: flex;
+    align-items: center;
+}
+
+.show-vl {
+    position: relative;
+    height: 5rem;
+}
+
+.show-vl::before,
+.show-vl::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 2px;
+}
+
+.show-vl::before {
+    background-color: var(--red);
+    height: 3rem;
+    top: 0;
+}
+
+.show-vl::after {
+    background-color: var(--grey);
+    height: 2rem;
+    top: 3rem;
+}
+
+.show-name-address {
+    margin-left: 1.5rem;
+}
+
+.show-name-address h1 {
+    font-size: 2rem;
+    color: var(--grey);
+    font-weight: 400;
+}
+
+.show-name-address h2 {
+    font-size: 1.2rem;
+    color: var(--grey);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+
+.show-rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.show-rating-interact label {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url('../images/starunfill.svg') no-repeat center center;
+    background-size: contain;
+    display: inline-block;
+    cursor: pointer;
+    filter: invert(93%) sepia(89%) saturate(741%) hue-rotate(312deg) brightness(101%) contrast(101%);
+}
+
+.show-rating-interact input[type="radio"]:checked ~ label {
+    background: url('../images/starfill.svg') no-repeat center center;
+    background-size: contain;
+    filter: invert(93%) sepia(89%) saturate(741%) hue-rotate(312deg) brightness(101%) contrast(101%);
+}
+
+.show-rating-interact input[type="radio"] {
+    display: none;
 }
