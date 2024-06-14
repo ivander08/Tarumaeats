@@ -21,15 +21,21 @@ class RatingsController extends Controller
             'location_name' => $request->location_name,
         ])->first();
 
-        // If the user has already rated, update the rating; otherwise, create a new one
-        if ($existingRating) {
-            $existingRating->update(['rating' => $request->rating]);
+        // If the user has already rated and the new rating is the same, delete the rating
+        if ($existingRating && $existingRating->rating == $request->rating) {
+            $existingRating->delete();
         } else {
-            Ratings::create([
-                'name' => auth()->user()->name,
-                'location_name' => $request->location_name,
-                'rating' => $request->rating,
-            ]);
+            // If the user has already rated but the new rating is different, update the rating
+            if ($existingRating) {
+                $existingRating->update(['rating' => $request->rating]);
+            } else {
+                // If the user has not rated yet, create a new rating
+                Ratings::create([
+                    'name' => auth()->user()->name,
+                    'location_name' => $request->location_name,
+                    'rating' => $request->rating,
+                ]);
+            }
         }
 
         return redirect()->back();
