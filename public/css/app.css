@@ -37,6 +37,7 @@ header {
     text-align: center;
 }
 
+/* Home Styles */
 .home-header {
     background-image: url("../images/UNTAR Background.png");
     background-size: cover;
@@ -152,6 +153,40 @@ header {
 
 .restaurant-button img {
     margin-bottom: 10px;
+}
+
+.vl-home {
+    width: 2px;
+    height: 5rem; /* total height of both lines */
+    background: linear-gradient(var(--red) 0% 75%, var(--grey) 75% 100%);
+    position: absolute;
+}
+
+.home-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5rem 15rem 0rem 15rem;
+    align-items: flex-end;
+}
+
+.home-head-text-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.home-head-text-settings h1 {
+    margin-top: -0.3rem;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-left: 1rem;
+}
+
+.home-head-text-settings p {
+    margin-top: -0.7rem;
+    font-size: 1rem;
+    margin-left: 1rem;
 }
 
 /* Navigation Styles */
@@ -454,6 +489,11 @@ hr,
 .user-listings-head-text-settings h1 {
     font-size: 2rem;
     font-weight: 400;
+    margin-left: 1rem;
+}
+
+.user-listings-head-text-settings p {
+    font-size: 1rem;
     margin-left: 1rem;
 }
 

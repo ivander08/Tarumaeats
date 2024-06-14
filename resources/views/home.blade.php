@@ -17,6 +17,15 @@
         </button>
     </div>
 </div>
+<div class="home-head">
+        <div class="home-head-text">
+            <div class="home-head-text-settings">
+                <div class="vl-home"></div>
+                <h1>Featured Eats</h1>
+                <p>The best eats recommended by us.</p>
+            </div>
+        </div>
+    </div>
 @else
 @endauth
 @endsection
