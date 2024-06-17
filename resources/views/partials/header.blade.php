@@ -26,18 +26,21 @@
                 </ul>
             </div>
         </nav>
-        @if($class === 'home-header')
-        <div class="home-content">
-            <h1>FIND THE BEST EATS NEAR UNTAR</h1>
-            <p>Find the local places that you love according to your taste.</p>
-            <div class="home-search-bar">
-                <div class="home-search-form">
-                    <img src="{{ asset('images/search.svg') }}" alt="Search Icon" class="home-search-icon">
-                    <input type="text" name="search" placeholder="What you are looking for..."
-                        value="{{ request('search') }}">
+        @if ($class === 'home-header')
+            <div class="home-content">
+                <h1>FIND THE BEST EATS NEAR UNTAR</h1>
+                <p>Find the local places that you love according to your taste.</p>
+                <div class="home-search-bar">
+                    <form method="POST" action="{{ route('eats.filter') }}">
+                        @csrf
+                        <div class="home-search-form">
+                            <img src="{{ asset('images/search.svg') }}" alt="Search Icon" class="home-search-icon">
+                            <input type="text" name="search" placeholder="What you are looking for..."
+                                value="{{ request('search') }}">
+                        </div>
+                        <button type="submit" class="home-search-submit">Search</button>
+                    </form>
                 </div>
-                <button type="submit" class="home-search-submit">Search</button>
             </div>
-        </div>
         @endif
     </header>

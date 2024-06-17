@@ -112,6 +112,13 @@ header {
     align-items: center;
 }
 
+.home-search-bar form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;

@@ -94,9 +94,6 @@ class ListingsController extends Controller
         return view('eats', compact('listings'));
     }
 
-
-
-
     public function index()
     {
         $userName = auth()->user()->name;
