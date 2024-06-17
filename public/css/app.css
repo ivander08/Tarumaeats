@@ -617,6 +617,7 @@ hr,
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .listing-status-offline {
@@ -635,6 +636,7 @@ hr,
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .listing-status-declined {
@@ -644,6 +646,47 @@ hr,
     width: max-content;
     border-radius: 15px;
     font-weight: 500;
+    cursor: pointer;
+}
+
+.listing-status-0 {
+    background-color: rgba(218, 152, 152, 25%);
+    color: #b36060;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.listing-status-1 {
+    background-color: #d7f6e9;
+    color: #188659;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.user-status-1 {
+    background-color: #d7f6e9;
+    color: #188659;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.user-status-0{
+    background-color: #d7f6e9;
+    color: #b3a560;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    border-radius: 15px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .user-listings-table-interact {
