@@ -119,6 +119,11 @@ header {
     width: 100%;
 }
 
+.button-container form {
+    display: flex;
+    justify-content: space-between;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;

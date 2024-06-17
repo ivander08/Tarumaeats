@@ -28,7 +28,7 @@
         </nav>
         @if ($class === 'home-header')
             <div class="home-content">
-                <h1>FIND THE BEST EATS NEAR UNTAR</h1>
+                <h1>FIND THE BEST EATS IN UNTAR</h1>
                 <p>Find the local places that you love according to your taste.</p>
                 <div class="home-search-bar">
                     <form method="POST" action="{{ route('eats.filter') }}">
