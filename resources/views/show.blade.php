@@ -144,7 +144,33 @@
             </div>
         </div>
         <div class="show-contact">
-
+            <div class="show-website">
+                <div class="show-website-icon">
+                    <img src="{{ asset('images/website.svg') }}" alt="Website Icon" class="show-website-icon">
+                </div>
+                <div class="show-website-info">
+                    <h2>Website</h2>
+                    <h3>{{ $listing->website ?? 'N/A' }}</h3>
+                </div>
+            </div>
+            <div class="show-phone">
+                <div class="show-phone-icon">
+                    <img src="{{ asset('images/phone.svg') }}" alt="Phone Icon" class="show-phone-icon">
+                </div>
+                <div class="show-phone-info">
+                    <h2>Phone</h2>
+                    <h3>{{ $listing->phone ?? 'N/A' }}</h3>
+                </div>
+            </div>
+            <div class="show-email">
+                <div class="show-email-icon">
+                    <img src="{{ asset('images/email.svg') }}" alt="Email Icon" class="show-email-icon">
+                </div>
+                <div class="show-email-info">
+                    <h2>Email</h2>
+                    <h3>{{ $listing->email ?? 'N/A' }}</h3>
+                </div>
+            </div>
         </div>
     </div>
 

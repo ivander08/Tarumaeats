@@ -681,6 +681,12 @@ hr,
         brightness(103%) contrast(103%);
 }
 
+.show-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .show-name-address-line {
     display: flex;
     align-items: center;
@@ -752,4 +758,50 @@ hr,
 
 .show-rating-interact input[type="radio"] {
     display: none;
+}
+
+.show-contact {
+    background-color: var(--slightly-darker-white);
+    padding: 2.5rem;
+    border-radius: 15px;
+}
+
+.show-website,
+.show-phone,
+.show-email {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.show-website-icon,
+.show-phone-icon,
+.show-email-icon {
+    padding: 0.6rem;
+    background-color: #DCDCDC;
+    border-radius: 15px;
+}
+
+.show-website-icon img,
+.show-phone-icon img,
+.show-email-icon img {
+    height: 2.5rem;
+}
+
+.show-website-info h2,
+.show-phone-info h2,
+.show-email-info h2 {
+    font-weight: 300;
+    color: #686868;
+    margin-bottom: 0.5rem;
+}
+
+.show-website-info h3,
+.show-phone-info h3,
+.show-email-info h3 {
+    font-weight: 300;
+    color: var(--grey);
+    margin-top: 0.5rem;
+    opacity: 75%;
+    font-size: 1rem;
 }
