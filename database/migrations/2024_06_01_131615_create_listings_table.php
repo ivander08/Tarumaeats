@@ -32,6 +32,7 @@ return new class extends Migration
             $table->json('special_features')->nullable();
             $table->enum('approval_status', ['pending', 'approved', 'declined'])->default('pending');
             $table->enum('status', ['online', 'offline'])->default('online');
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }
