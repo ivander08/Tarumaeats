@@ -118,7 +118,8 @@ header {
     position: absolute;
     top: 43rem;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -75%);
+    gap: 2.5rem;
 }
 
 .restaurant-button {
@@ -128,11 +129,28 @@ header {
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
-    background-color: #f8f9fa;
+    background-color: var(--white);
     border: none;
     cursor: pointer;
-    width: 25rem;
-    height: 12rem;
+    width: 20rem;
+    height: 8rem;
+    box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
+}
+
+.restaurant-button-dua {
+    margin-right: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: var(--red);
+    border: none;
+    cursor: pointer;
+    width: 20rem;
+    height: 8rem;
     box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
     -webkit-box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
     -moz-box-shadow: 1px 1px 5px 0px rgba(158, 158, 158, 0.75);
@@ -140,11 +158,25 @@ header {
 
 .button-container-background {
     background-color: var(--slightly-darker-white);
-    height: 12rem;
+    height: 8rem;
 }
 
-.restaurant-button img {
-    margin-bottom: 10px;
+.restaurant-button span {
+    background-color: var(--white);
+    color: var(--red);
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+}
+
+.button-dua {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
 }
 
 .vl-home {

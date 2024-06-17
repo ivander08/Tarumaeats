@@ -8,12 +8,10 @@
         <div class="button-container-background">
             <div class="button-container">
                 <button class="restaurant-button">
-                    <img src="../images/forkandknife.svg" alt="Fork and Knife Icon">
-                    <span>Untar 1</span>
+                    <span>UNTAR 1</span>
                 </button>
-                <button class="restaurant-button">
-                    <img src="../images/forkandknife.svg" alt="Fork and Knife Icon">
-                    <span>Untar 2</span>
+                <button class="restaurant-button-dua">
+                    <span class="button-dua">UNTAR 2</span>
                 </button>
             </div>
         </div>
