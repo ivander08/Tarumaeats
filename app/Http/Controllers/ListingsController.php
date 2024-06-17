@@ -9,11 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
 {
+    public function home(){
+        $listings = listings::with('ratings')
+                  ->where('approval_status', 'approved')
+                  ->where('is_featured', true)
+                  ->get();
+
+        return view("home", compact("listings"));
+    }
+
     public function indexApproved(Request $request)
     {
         // Retrieve approved and online listings
         $listings = Listings::with('ratings')
-            ->where('approval_status', 'pending')
+            ->where('approval_status', 'approved')
             ->where('status', 'online')
             ->get();
 
