@@ -3,21 +3,22 @@
 @section('title', 'Home')
 
 @section('content')
-@auth
-</form>
-<div class="button-container-background">
-    <div class="button-container">
-        <button class="restaurant-button">
-            <img src="../images/forkandknife.svg" alt="Fork and Knife Icon">
-            <span>Untar 1</span>
-        </button>
-        <button class="restaurant-button">
-            <img src="../images/forkandknife.svg" alt="Fork and Knife Icon">
-            <span>Untar 2</span>
-        </button>
+    </form>
+    <div class="button-container-background">
+        <div class="button-container">
+            <form id="filterForm" method="POST" action="{{ route('eats.filter') }}">
+                @csrf
+                <input type="hidden" name="campus[]" id="campusType" value="">
+                <button class="restaurant-button" onclick="submitForm('untar_satu')">
+                    <span>UNTAR 1</span>
+                </button>
+                <button class="restaurant-button-dua" onclick="submitForm('untar_dua')">
+                    <span class="button-dua">UNTAR 2</span>
+                </button>
+            </form>
+        </div>
     </div>
-</div>
-<div class="home-head">
+    <div class="home-head">
         <div class="home-head-text">
             <div class="home-head-text-settings">
                 <div class="vl-home"></div>
@@ -26,6 +27,11 @@
             </div>
         </div>
     </div>
-@else
-@endauth
+
+    <script>
+        function submitForm(campusType) {
+            document.getElementById('campusType').value = campusType;
+            document.getElementById('filterForm').submit();
+        }
+    </script>
 @endsection
