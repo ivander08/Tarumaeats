@@ -75,10 +75,71 @@
                             </div>
                         </form>
                     @endauth
-
                 </div>
             </div>
+            <hr>
             <div class="show-tags">
+                @if ($listing->campus)
+                    <span class="tag">{{ tagLabel($listing->campus) }}</span>
+                @endif
+
+                @if ($listing->type)
+                    <span class="tag">{{ tagLabel($listing->type) }}</span>
+                @endif
+
+                @if ($listing->cuisine)
+                    @foreach (json_decode($listing->cuisine) as $cuisine)
+                        <span class="tag">{{ tagLabel($cuisine) }}</span>
+                    @endforeach
+                @endif
+
+                @if ($listing->price_range)
+                    <span class="tag">{{ tagLabel($listing->price_range) }}</span>
+                @endif
+
+                @if ($listing->payment_options)
+                    @foreach (json_decode($listing->payment_options) as $paymentOption)
+                        <span class="tag">{{ tagLabel($paymentOption) }}</span>
+                    @endforeach
+                @endif
+
+                @if ($listing->special_features)
+                    @foreach (json_decode($listing->special_features) as $feature)
+                        <span class="tag">{{ tagLabel($feature) }}</span>
+                    @endforeach
+                @endif
+
+                @php
+                    function tagLabel($value)
+                    {
+                        $labels = [
+                            'untar_satu' => 'UNTAR 1',
+                            'untar_dua' => 'UNTAR 2',
+                            'food_only' => 'Food Only',
+                            'drinks_only' => 'Drinks Only',
+                            'indonesian' => 'Indonesian',
+                            'western' => 'Western',
+                            'japanese' => 'Japanese',
+                            'chinese' => 'Chinese',
+                            'other' => 'Other',
+                            'under_price' => '<Rp10,000',
+                            'thirty_price' => 'Rp10,000 - Rp30,000',
+                            'sixty_price' => 'Rp30,000 - Rp60,000',
+                            'over_price' => '>Rp60,000',
+                            'cash' => 'Cash',
+                            'credit' => 'Credit Card',
+                            'debit' => 'Debit Card',
+                            'mobile' => 'Mobile Payment',
+                            'halal' => 'Halal',
+                            'nonhalal' => 'Non-Halal',
+                            'takeaway' => 'Takeaway Available',
+                            'indoor' => 'Indoor Seating',
+                            'outdoor' => 'Outdoor Seating',
+                        ];
+
+                        return $labels[$value] ?? $value;
+                    }
+                @endphp
 
             </div>
         </div>
