@@ -779,7 +779,6 @@ hr,
     font-size: 1rem;
 }
 
-
 .show-contact {
     background-color: var(--slightly-darker-white);
     padding: 2.5rem;
@@ -824,4 +823,23 @@ hr,
     margin-top: 0.5rem;
     opacity: 75%;
     font-size: 1rem;
+}
+
+.glide__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.show-carousel-container {
+    margin: 2.5rem 5rem;
+    padding: 2.5rem;
+    background-color: var(--slightly-darker-white);
+    border-radius: 15px;
+}
+
+.show-carousel-container img {
+    height: 25rem;
+    width: auto;
 }

@@ -148,8 +148,31 @@
             </div>
         </div>
     </div>
+    <div class="show-carousel-container">
+        @if ($listing->carousel_images)
+            <div class="glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        @foreach (json_decode($listing->carousel_images) as $index => $image)
+                            <li class="glide__slide">
+                                <img src="data:image/jpeg;base64,{{ $image }}" alt="Slide {{ $index + 1 }}">
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @else
+            <p>No images available</p>
+        @endif
+    </div>
 
     <script>
+        new Glide('.glide', {
+            type: 'carousel',
+            perView: 1,
+            focusAt: 'center'
+        }).mount();
+
         document.addEventListener('DOMContentLoaded', (event) => {
             const starInputs = document.querySelectorAll('.show-rating-interact input[type="radio"]');
             const starLabels = document.querySelectorAll('.show-rating-interact label');
