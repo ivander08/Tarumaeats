@@ -2,25 +2,50 @@
 
 @section('title', $listing->location_name)
 
-@if (!function_exists('PriceRangeDisplay'))
-    @php
-        function PriceRangeDisplay($price_range)
-        {
-            switch ($price_range) {
-                case 'under_price':
-                    return '&lt;Rp10,000';
-                case 'thirty_price':
-                    return 'Rp10,000 - Rp30,000';
-                case 'sixty_price':
-                    return 'Rp30,000 - Rp60,000';
-                case 'over_price':
-                    return '&gt;Rp60,000';
-                default:
-                    return 'Price range not specified';
-            }
-        }
-    @endphp
-@endif
+@php
+    function PriceRangeDisplay($price_range)
+    {
+        $ranges = [
+            'under_price' => '&lt;Rp10,000',
+            'thirty_price' => 'Rp10,000 - Rp30,000',
+            'sixty_price' => 'Rp30,000 - Rp60,000',
+            'over_price' => '&gt;Rp60,000',
+        ];
+        return $ranges[$price_range] ?? 'Price range not specified';
+    }
+
+    function tagLabel($value)
+    {
+        $labels = [
+            'untar_satu' => 'UNTAR 1',
+            'untar_dua' => 'UNTAR 2',
+            'food_only' => 'FOOD ONLY',
+            'drinks_only' => 'DRINKS ONLY',
+            'indonesian' => 'INDONESIAN',
+            'western' => 'WESTERN',
+            'japanese' => 'JAPANESE',
+            'chinese' => 'CHINESE',
+            'other' => 'OTHER',
+            'under_price' => '<RP10,000',
+            'thirty_price' => 'RP10,000 - RP30,000',
+            'sixty_price' => 'RP30,000 - RP60,000',
+            'over_price' => '>RP60,000',
+            'cash' => 'CASH',
+            'credit' => 'CREDIT CARD',
+            'debit' => 'DEBIT CARD',
+            'mobile' => 'MOBILE PAYMENT',
+            'halal' => 'HALAL',
+            'nonhalal' => 'NON-HALAL',
+            'takeaway' => 'TAKEAWAY AVAILABLE',
+            'indoor' => 'INDOOR SEATING',
+            'outdoor' => 'OUTDOOR SEATING',
+        ];
+        return $labels[$value] ?? $value;
+    }
+
+    $ratingsCount = optional($listing->ratings)->count() ?: 0;
+    $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+@endphp
 
 @section('content')
     <div class="show-background-image-container"
@@ -36,20 +61,13 @@
                 <div class="show-name-address-line">
                     <div class="show-vl"></div>
                     <div class="show-name-address">
-                        <h1>{{ $listing->location_name }} </h1>
-                        <h2>{{ $listing->location_address }} </h2>
+                        <h1>{{ $listing->location_name }}</h1>
+                        <h2>{{ $listing->location_address }}</h2>
                     </div>
                 </div>
                 <div class="show-rating-container">
                     <div class="show-rating">
                         <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="show-star-icon">
-                        @php
-                            $ratingsCount = optional($listing->ratings)->count() ?: 0;
-                            $averageRating =
-                                $ratingsCount > 0
-                                    ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '')
-                                    : 0;
-                        @endphp
                         @if ($ratingsCount > 0)
                             <h3>{{ $averageRating }} ({{ $ratingsCount }})</h3>
                         @else
@@ -62,16 +80,11 @@
                             <input type="hidden" name="user_name" value="{{ auth()->user()->name }}">
                             <input type="hidden" name="location_name" value="{{ $listing->location_name }}">
                             <div class="show-rating-interact">
-                                <input type="radio" name="rating" id="star1" value="1"><label
-                                    for="star1"></label>
-                                <input type="radio" name="rating" id="star2" value="2"><label
-                                    for="star2"></label>
-                                <input type="radio" name="rating" id="star3" value="3"><label
-                                    for="star3"></label>
-                                <input type="radio" name="rating" id="star4" value="4"><label
-                                    for="star4"></label>
-                                <input type="radio" name="rating" id="star5" value="5"><label
-                                    for="star5"></label>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <input type="radio" name="rating" id="star{{ $i }}"
+                                        value="{{ $i }}">
+                                    <label for="star{{ $i }}"></label>
+                                @endfor
                             </div>
                         </form>
                     @endauth
@@ -82,65 +95,27 @@
                 @if ($listing->campus)
                     <span class="tag">{{ tagLabel($listing->campus) }}</span>
                 @endif
-
                 @if ($listing->type)
                     <span class="tag">{{ tagLabel($listing->type) }}</span>
                 @endif
-
                 @if ($listing->cuisine)
                     @foreach (json_decode($listing->cuisine) as $cuisine)
                         <span class="tag">{{ tagLabel($cuisine) }}</span>
                     @endforeach
                 @endif
-
                 @if ($listing->price_range)
-                    <span class="tag">{{ tagLabel($listing->price_range) }}</span>
+                    <span class="tag">{{ PriceRangeDisplay($listing->price_range) }}</span>
                 @endif
-
                 @if ($listing->payment_options)
                     @foreach (json_decode($listing->payment_options) as $paymentOption)
                         <span class="tag">{{ tagLabel($paymentOption) }}</span>
                     @endforeach
                 @endif
-
                 @if ($listing->special_features)
                     @foreach (json_decode($listing->special_features) as $feature)
                         <span class="tag">{{ tagLabel($feature) }}</span>
                     @endforeach
                 @endif
-
-                @php
-                    function tagLabel($value)
-                    {
-                        $labels = [
-                            'untar_satu' => 'UNTAR 1',
-                            'untar_dua' => 'UNTAR 2',
-                            'food_only' => 'Food Only',
-                            'drinks_only' => 'Drinks Only',
-                            'indonesian' => 'Indonesian',
-                            'western' => 'Western',
-                            'japanese' => 'Japanese',
-                            'chinese' => 'Chinese',
-                            'other' => 'Other',
-                            'under_price' => '<Rp10,000',
-                            'thirty_price' => 'Rp10,000 - Rp30,000',
-                            'sixty_price' => 'Rp30,000 - Rp60,000',
-                            'over_price' => '>Rp60,000',
-                            'cash' => 'Cash',
-                            'credit' => 'Credit Card',
-                            'debit' => 'Debit Card',
-                            'mobile' => 'Mobile Payment',
-                            'halal' => 'Halal',
-                            'nonhalal' => 'Non-Halal',
-                            'takeaway' => 'Takeaway Available',
-                            'indoor' => 'Indoor Seating',
-                            'outdoor' => 'Outdoor Seating',
-                        ];
-
-                        return $labels[$value] ?? $value;
-                    }
-                @endphp
-
             </div>
         </div>
         <div class="show-contact">
