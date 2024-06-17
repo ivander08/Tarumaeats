@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('location_name');
             $table->integer('rating');
+            $table->timestamps();
             $table->foreign('location_name')->references('location_name')->on('listings')->onDelete('cascade');
         });
         

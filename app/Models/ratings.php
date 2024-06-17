@@ -10,12 +10,19 @@ class ratings extends Model
     use HasFactory;
 
     protected $fillable = [
-        'rating',
+        'name', 
+        'location_name', 
+        'rating'
     ];
 
     protected $table = 'ratings';
 
     public function listings() {
         return $this->belongsTo(listings::class, 'location_name', 'location_name');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'name', 'name');
     }
 }

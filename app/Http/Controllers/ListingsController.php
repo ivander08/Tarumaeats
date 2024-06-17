@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Listings;
+use App\Models\ratings;
 use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
@@ -260,6 +261,16 @@ class ListingsController extends Controller
     public function show($id)
     {
         $listing = Listings::with('ratings')->findOrFail($id);
+
+        if (auth()->check()) {
+            $userRating = ratings::where([
+                'name' => auth()->user()->name,
+                'location_name' => $listing->location_name,
+            ])->value('rating');
+
+            return view('show', compact('listing', 'userRating'));
+        }
+
         return view('show', compact('listing'));
     }
 
