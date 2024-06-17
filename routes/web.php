@@ -3,6 +3,7 @@
 use App\Http\Controllers\ListingsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RatingsController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/', [ListingsController::class, 'home'])->name('home');
 Route::get('/eats', [ListingsController::class, 'indexApproved'])->name('eats');
 Route::post('/eats/filter', [ListingsController::class, 'filter'])->name('eats.filter');
 Route::get('/eats/{id}', [ListingsController::class, 'show'])->name('eats.show');
@@ -42,6 +44,16 @@ Route::middleware('auth')->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/listings', [AdminController::class, 'listingsIndex'])->name('admin.listings');
+    Route::get('/admin/users', [AdminController::class, 'usersIndex'])->name('admin.users');
+    Route::post('/admin/listings/updateStatus', [AdminController::class, 'updateStatus'])->name('admin.listings.updateStatus');
+    Route::post('/admin/listings/updateApproval', [AdminController::class, 'updateApproval'])->name('admin.listings.updateApproval');
+    Route::post('/admin/listings/updateFeatured', [AdminController::class, 'updateFeatured'])->name('admin.listings.updateFeatured');
+    Route::post('/admin/users/updateRole', [AdminController::class, 'updateRole'])->name('admin.user.updateRole');
+    Route::get('/admin/listings/preview/{id}', [AdminController::class, 'show'])->name('admin.preview');
 });
 
 require __DIR__ . '/auth.php';
