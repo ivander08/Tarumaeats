@@ -48,6 +48,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 
+    // Made a mistake by not including User $user in previous method, and I'm too lazy to rework it so I just make a new method lol
     private function saveUserDetails(User $user, array $data)
     {
         $user->name = $data['username'];

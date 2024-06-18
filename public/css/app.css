@@ -513,6 +513,12 @@ hr,
     height: 3rem;
 }
 
+.user-log-delete-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
 .user-details-form-wrapper {
     margin-top: 1.5rem;
     padding: 2.5rem 15rem 2.5rem 15rem;

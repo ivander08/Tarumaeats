@@ -16,11 +16,18 @@
                 <a href="{{ route('admin.listings') }}">Manage Listings</a>
             @endif
         </div>
-        <form action="{{ route('user.delete') }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="user-save">Delete Account</button>
-        </form>
+        <div class="user-log-delete-container">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="user-save">Log Out</button>
+            </form>
+            
+            <form action="{{ route('user.delete') }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="user-save">Delete Account</button>
+            </form>
+        </div>
     </div>
     <div class="user-details-form-wrapper">
         <form id="user-details-form" action="{{ route('user.update') }}" method="POST">
@@ -43,7 +50,8 @@
 
                     <div class="user-details-form-group">
                         <label for="password">Current Password</label>
-                        <input type="password" class="user-details-form-control" id="currentPassword" name="currentPassword">
+                        <input type="password" class="user-details-form-control" id="currentPassword"
+                            name="currentPassword">
                     </div>
 
                     <div class="user-details-form-group">
@@ -53,7 +61,8 @@
 
                     <div class="user-details-form-group">
                         <label for="password">Confirm New Password</label>
-                        <input type="password" class="user-details-form-control" id="newPassword_confirmation" name="newPassword_confirmation">
+                        <input type="password" class="user-details-form-control" id="newPassword_confirmation"
+                            name="newPassword_confirmation">
                     </div>
                 </div>
             </div>
