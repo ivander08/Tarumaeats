@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ListingsController extends Controller
 {
-    public function home(){
+    public function home()
+    {
         $listings = listings::with('ratings')
-                  ->where('approval_status', 'approved')
-                  ->where('is_featured', true)
-                  ->get();
+            ->where('approval_status', 'approved')
+            ->where('is_featured', true)
+            ->get();
 
         return view("home", compact("listings"));
     }
@@ -259,6 +260,11 @@ class ListingsController extends Controller
     public function show($id)
     {
         $listing = Listings::with('ratings')->findOrFail($id);
+
+        // Check if the listing is approved or pending and online
+        if (($listing->approval_status !== 'approved' && $listing->approval_status !== 'pending') || $listing->status !== 'online') {
+            return redirect()->route('eats'); // Redirect to the eats page
+        }
 
         if (auth()->check()) {
             $userRating = ratings::where([
