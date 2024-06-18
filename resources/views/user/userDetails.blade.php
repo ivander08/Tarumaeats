@@ -24,24 +24,34 @@
                 <div class="user-details-text-forms">
                     <div class="user-details-form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="user-details-form-control" id="username" name="username" value="{{ auth()->user()->name }}" required>
+                        <input type="text" class="user-details-form-control" id="username" name="username"
+                            value="{{ auth()->user()->name }}" required>
                     </div>
 
                     <div class="user-details-form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="user-details-form-control" id="email" name="email" value="{{ auth()->user()->email }}" required>
+                        <input type="email" class="user-details-form-control" id="email" name="email"
+                            value="{{ auth()->user()->email }}" required>
                     </div>
 
                     <div class="user-details-form-group">
                         <label for="password">Password</label>
                         <input type="password" class="user-details-form-control" id="password" name="password">
-                        <small>Leave blank if you don't want to change the password</small>
                     </div>
                 </div>
             </div>
 
             <div class="user-details-save-container">
-                <button type="submit" class="user-details-save">Update Details</button>
+                <div class="alert alert-danger">
+                    @if ($errors->any())
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+                <button type="submit" class="user-save">Save</button>
             </div>
         </form>
     </div>

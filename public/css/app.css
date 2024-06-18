@@ -513,6 +513,59 @@ hr,
     height: 3rem;
 }
 
+.user-details-form-wrapper {
+    margin-top: 1.5rem;
+    padding: 2.5rem 15rem 2.5rem 15rem;
+    background-color: var(--slightly-darker-white);
+}
+
+.user-details-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.user-details-text-forms-container h1 {
+    font-weight: 200;
+    color: var(--grey);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 0;
+}
+
+.user-details-text-forms {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+}
+
+.user-details-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.user-details-form-group label {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--grey);
+}
+
+.user-details-form-control[type="text"],
+.user-details-form-control[type="email"],
+.user-details-form-control[type="password"] {
+    border: none;
+    outline: none;
+    padding: 1rem;
+    height: 4rem;
+    width: 21rem;
+    box-sizing: border-box;
+    font-weight: 100;
+    margin-bottom: 2.5rem;
+    color: var(--grey);
+}
+
+
 .user-listings-head {
     display: flex;
     justify-content: space-between;
@@ -596,9 +649,6 @@ hr,
 .user-listings-table tbody tr:nth-child(even) {
     background-color: var(--slightly-darker-white);
 }
-
-
-
 
 .listing-status-online {
     background-color: #d7f6e9;
@@ -835,13 +885,15 @@ hr,
 }
 
 .create-save-container,
-.edit-submit-contaniner {
+.edit-submit-contaniner,
+.user-details-save-container {
     display: flex;
     justify-content: space-between;
 }
 
 .create-save,
-.edit-submit {
+.edit-submit,
+.user-save {
     background-color: var(--red);
     color: var(--white);
     border: none;
