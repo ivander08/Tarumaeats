@@ -37,8 +37,18 @@
                     </div>
 
                     <div class="user-details-form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="user-details-form-control" id="password" name="password">
+                        <label for="password">Current Password</label>
+                        <input type="password" class="user-details-form-control" id="currentPassword" name="currentPassword">
+                    </div>
+
+                    <div class="user-details-form-group">
+                        <label for="password">New Password</label>
+                        <input type="password" class="user-details-form-control" id="newPassword" name="newPassword">
+                    </div>
+
+                    <div class="user-details-form-group">
+                        <label for="password">Confirm New Password</label>
+                        <input type="password" class="user-details-form-control" id="newPassword_confirmation" name="newPassword_confirmation">
                     </div>
                 </div>
             </div>

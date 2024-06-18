@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Listings;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -21,7 +22,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:255|unique:users,name,' . auth()->id(), // Update the unique rule
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
-            'password' => 'nullable|string|min:8|confirmed',
+            'currentPassword' => 'nullable|string|min:8', // Optional: Current password
+            'newPassword' => ['nullable', 'string', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()], // New password validation
         ]);
     
         if ($validator->fails()) {
@@ -31,9 +33,16 @@ class UserController extends Controller
         $user = auth()->user();
         $originalUsername = $user->name;
 
+        if ($request->filled('currentPassword') && !Hash::check($request->currentPassword, $user->password)) {
+            return redirect()->back()->withErrors(['currentPassword' => 'The current password is incorrect.'])->withInput();
+        }
+        
+        if ($request->filled('newPassword')) {
+            $user->password = Hash::make($request->newPassword);
+        }
+
         // Update the user details using the custom save method
         $this->saveUserDetails(auth()->user(), $request->all());
-
         Listings::where('name', $originalUsername)->update(['name' => $user->name]);
 
         return redirect()->back()->with('success', 'Profile updated successfully.');
