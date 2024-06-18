@@ -7,7 +7,7 @@
         <div class="user-listings-head-text">
             <div class="user-listings-head-text-settings">
                 <div class="vl-red"></div>
-                <h1>User Details</h1>
+                <h1>Manage Listings</h1>
             </div>
             <a href="{{ route('user') }}">My Details</a>
             <a href="{{ route('listings') }}">My Listings</a>

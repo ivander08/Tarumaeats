@@ -70,7 +70,7 @@ class AdminController extends Controller
             $user = User::where('name', $request->name)->first();
 
             if (!$user) {
-                return redirect()->route('admin.listings.edit', ['id' => $id])->with('error', 'User not found.');
+                return redirect()->route('admin.listings.edit', ['id' => $id])->withErrors(['name' => 'User not found.']);
             }
 
             // Update the listing attributes

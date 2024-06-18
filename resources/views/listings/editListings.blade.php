@@ -183,7 +183,7 @@
                 </div>
             </div>
 
-            <div class="edit-submit-container">
+            <div class="create-save-container">
                 <div class="alert alert-danger">
                     @if ($errors->any())
                         <ul>
@@ -193,7 +193,7 @@
                         </ul>
                     @endif
                 </div>
-                <button type="submit" class="edit-submit">Update Listing</button>
+                <button type="submit" class="create-save">Update</button>
             </div>
         </form>
     </div>
