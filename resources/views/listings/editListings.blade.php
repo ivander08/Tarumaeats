@@ -50,16 +50,6 @@
                         <input type="email" class="create-form-control" placeholder="Email" id="email" name="email"
                             value="{{ $listing->email }}">
                     </div>
-
-                    <div class="create-form-group">
-                        <input type="text" class="create-form-control" placeholder="Latitude" id="latitude"
-                            name="latitude" value="{{ $listing->latitude }}">
-                    </div>
-
-                    <div class="create-form-group">
-                        <input type="text" class="create-form-control" placeholder="Longitude" id="longitude"
-                            name="longitude" value="{{ $listing->longitude }}">
-                    </div>
                 </div>
             </div>
 
