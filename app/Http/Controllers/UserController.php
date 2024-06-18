@@ -19,13 +19,13 @@ class UserController extends Controller
     {
         // Validate the incoming data
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,name,' . auth()->id(), // Update the unique rule
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
             'password' => 'nullable|string|min:8|confirmed',
         ]);
-
+    
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->route('user')->withErrors($validator)->withInput();
         }
 
         $user = auth()->user();
