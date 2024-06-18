@@ -84,7 +84,21 @@
                             </td>
                             <td>{{ $listing->updated_at->diffForHumans() }}</td>
                             <td>
-                                <a href="{{ route('admin.preview', $listing->id) }}">(Preview Icon)</a>
+                                <div class="user-listings-table-interact">
+                                    <form id="delete-form-{{ $listing->id }}"
+                                        action="{{ route('listings.destroy', $listing->id) }}" method="POST"
+                                        style="display:none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <a href="javascript:void(0);"
+                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $listing->id }}').submit();">
+                                        <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
+                                    </a>
+                                    <a href="{{ route('admin.listings.edit', $listing->id) }}">
+                                        <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -129,24 +143,24 @@
             });
 
             $('.listing-status-approved, .listing-status-declined, .listing-status-pending').on('click',
-        function() {
-                var listingId = $(this).data('id');
-                var currentStatus = $(this).data('status');
-                var newStatus = currentStatus === 'approved' ? 'declined' : 'approved';
+                function() {
+                    var listingId = $(this).data('id');
+                    var currentStatus = $(this).data('status');
+                    var newStatus = currentStatus === 'approved' ? 'declined' : 'approved';
 
-                $.ajax({
-                    url: "{{ route('admin.listings.updateApproval') }}",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: listingId,
-                        status: newStatus
-                    },
-                    success: function(response) {
-                        location.reload();
-                    }
+                    $.ajax({
+                        url: "{{ route('admin.listings.updateApproval') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: listingId,
+                            status: newStatus
+                        },
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
                 });
-            });
 
             $('.listing-status-0, .listing-status-1').on('click', function() {
                 var listingId = $(this).data('id');

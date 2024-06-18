@@ -28,6 +28,15 @@ class AdminController extends Controller
         return redirect('/');
     }
 
+    public function editListing($id)
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $listing = Listings::find($id);
+            return view('admin.adminEditListings', compact('listing'));
+        }
+        return redirect('/');
+    }
+
     public function updateStatus(Request $request)
     {
         if (Auth::check() && Auth::user()->is_admin) {
