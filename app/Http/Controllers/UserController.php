@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Listings;
 
 class UserController extends Controller
 {
@@ -27,8 +28,13 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $user = auth()->user();
+        $originalUsername = $user->name;
+
         // Update the user details using the custom save method
         $this->saveUserDetails(auth()->user(), $request->all());
+
+        Listings::where('name', $originalUsername)->update(['name' => $user->name]);
 
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
