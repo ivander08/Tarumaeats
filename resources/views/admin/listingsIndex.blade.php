@@ -82,7 +82,10 @@
                                     @endif
                                 </div>
                             </td>
-                            <td>{{ $listing->updated_at->diffForHumans() }}</td>
+                            <!-- Inside the <td> tag for the "Last Modified" column -->
+                            <td data-date="{{ $listing->updated_at->timestamp }}">
+                                {{ $listing->updated_at->diffForHumans() }}</td>
+
                             <td>
                                 <div class="user-listings-table-interact">
                                     <form id="delete-form-{{ $listing->id }}"
@@ -182,28 +185,59 @@
             });
 
             // Function to sort table data
+            // THIS SOME CHATGPT SHIT IT AINT WORKING BRO FOR RATINGS
             function sortTable(column, order) {
                 var tbody = $('#listings-tbody');
                 var rows = tbody.find('tr').toArray();
 
                 rows.sort(function(a, b) {
-                    var aValue = $(a).find('td').eq(column).text();
-                    var bValue = $(b).find('td').eq(column).text();
+                    var aValue, bValue;
 
-                    if (column === 4) { // If sorting by date, parse date strings
-                        aValue = new Date(aValue);
-                        bValue = new Date(bValue);
+                    // Get column values for sorting
+                    switch (column) {
+                        case 2: // For the "Rating" column // Doesn't work yet
+                            aValue = parseFloat($(a).find('td').eq(column).text().split(' ')[0]);
+                            bValue = parseFloat($(b).find('td').eq(column).text().split(' ')[0]);
+                            break;
+                        case 3: // For the "Status" column
+                            aValue = $(a).find('td').eq(column).text();
+                            bValue = $(b).find('td').eq(column).text();
+                            break;
+                        case 4: // For the "Approval" column
+                            var statusOrder = {
+                                'approved': 1,
+                                'pending': 2,
+                                'declined': 3
+                            };
+                            aValue = statusOrder[$(a).find('td').eq(column).text().toLowerCase()];
+                            bValue = statusOrder[$(b).find('td').eq(column).text().toLowerCase()];
+                            break;
+                        case 5: // For the "Featured" column
+                            aValue = $(a).find('td').eq(column).text() === 'Yes' ? 1 : 0;
+                            bValue = $(b).find('td').eq(column).text() === 'Yes' ? 1 : 0;
+                            break;
+                        case 6: // For the "Last Modified" column
+                            aValue = parseInt($(a).find('td').eq(column).attr('data-date'));
+                            bValue = parseInt($(b).find('td').eq(column).attr('data-date'));
+                            break;
+                        default: // For other columns
+                            aValue = $(a).find('td').eq(column).text().toLowerCase();
+                            bValue = $(b).find('td').eq(column).text().toLowerCase();
+                            break;
                     }
 
+                    // Perform sorting based on column values
                     if (order === 'asc') {
-                        return aValue.localeCompare(bValue);
+                        return aValue > bValue ? 1 : -1;
                     } else {
-                        return bValue.localeCompare(aValue);
+                        return aValue < bValue ? 1 : -1;
                     }
                 });
 
+                // Rebuild the table with sorted rows
                 tbody.empty().append(rows);
             }
+
 
             // Click event for sorting table
             $('.sort').on('click', function() {

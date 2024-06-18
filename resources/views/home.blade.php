@@ -25,7 +25,7 @@
                 <h1>Featured Eats</h1>
                 <p>The best eats recommended by us.</p>
             </div>
-            <div class="eats-results-container">
+            <div class="home-results-container">
                 @php
                     if (!function_exists('PriceRangeDisplay')) {
                         function PriceRangeDisplay($price_range)
@@ -54,7 +54,7 @@
                         </a>
                         <div class="eats-card-content">
                             <div class="eats-card-name-rating">
-                                <h1>{{ $listing->location_name }}</h1>
+                                <h1 class="eats-card-name">{{ $listing->location_name }}</h1>
                                 <div class="eats-card-rating">
                                     <img src="{{ asset('images/star.svg') }}" alt="Star Icon"
                                         class="eats-card-star-icon">

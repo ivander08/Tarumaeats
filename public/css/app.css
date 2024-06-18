@@ -193,7 +193,7 @@ header {
 
 .vl-home {
     width: 2px;
-    height: 5rem; /* total height of both lines */
+    height: 4rem; /* total height of both lines */
     background: linear-gradient(var(--red) 0% 75%, var(--grey) 75% 100%);
     position: absolute;
 }
@@ -412,6 +412,16 @@ hr,
     font-size: 0.8rem;
 }
 
+.home-results-container {
+    margin-top: 1.5rem;
+    margin-bottom: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 5rem;
+    column-gap: 8rem;
+    height: fit-content;
+}
+
 .eats-results-container {
     margin-top: 0;
     display: grid;
@@ -459,6 +469,13 @@ hr,
     padding: 0 1rem 1rem 1rem;
     background-color: var(--slightly-darker-white);
     border-radius: 0 0 15px 15px;
+}
+
+.eats-card-name {
+    white-space: nowrap;
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .eats-card-name-rating {
@@ -824,6 +841,12 @@ hr,
 }
 
 .create-form-image-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.carousel-images-preview {
     display: flex;
     flex-direction: column;
     gap: 1rem;
