@@ -79,6 +79,8 @@
                         <label for="carousel_images">Carousel Images*</label>
                         <input type="file" class="create-form-control" id="carousel_images" name="carousel_images[]"
                             accept="image/*" multiple required>
+                        <!-- Carousel image previews will be dynamically generated here -->
+                        <div id="carousel_images_preview" class="carousel-images-preview"></div>
                     </div>
                 </div>
             </div>
@@ -275,6 +277,26 @@
             };
 
             reader.readAsDataURL(e.target.files[0]);
+        };
+
+        // Carousel Images Preview
+        document.getElementById('carousel_images').onchange = function(e) {
+            var carouselImagesPreview = document.getElementById('carousel_images_preview');
+            carouselImagesPreview.innerHTML = ''; // Clear previous previews
+
+            // Loop through selected files
+            for (var i = 0; i < e.target.files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.alt = 'Carousel Image Preview';
+                    img.style.maxHeight = '200px';
+                    img.style.objectFit = 'cover';
+                    carouselImagesPreview.appendChild(img);
+                };
+                reader.readAsDataURL(e.target.files[i]);
+            }
         };
     </script>
 @endsection

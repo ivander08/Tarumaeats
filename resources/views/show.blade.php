@@ -3,44 +3,48 @@
 @section('title', $listing->location_name)
 
 @php
-    function PriceRangeDisplay($price_range)
-    {
-        $ranges = [
-            'under_price' => '&lt;Rp10,000',
-            'thirty_price' => 'Rp10,000 - Rp30,000',
-            'sixty_price' => 'Rp30,000 - Rp60,000',
-            'over_price' => '&gt;Rp60,000',
-        ];
-        return $ranges[$price_range] ?? 'Price range not specified';
+    if (!function_exists('PriceRangeDisplay')) {
+        function PriceRangeDisplay($price_range)
+        {
+            $ranges = [
+                'under_price' => '<Rp10,000',
+                'thirty_price' => 'Rp10,000 - Rp30,000',
+                'sixty_price' => 'Rp30,000 - Rp60,000',
+                'over_price' => '>Rp60,000',
+            ];
+            return $ranges[$price_range] ?? 'Price range not specified';
+        }
     }
 
-    function tagLabel($value)
-    {
-        $labels = [
-            'untar_satu' => 'UNTAR 1',
-            'untar_dua' => 'UNTAR 2',
-            'food_only' => 'FOOD ONLY',
-            'drinks_only' => 'DRINKS ONLY',
-            'indonesian' => 'INDONESIAN',
-            'western' => 'WESTERN',
-            'japanese' => 'JAPANESE',
-            'chinese' => 'CHINESE',
-            'other' => 'OTHER',
-            'under_price' => '<RP10,000',
-            'thirty_price' => 'RP10,000 - RP30,000',
-            'sixty_price' => 'RP30,000 - RP60,000',
-            'over_price' => '>RP60,000',
-            'cash' => 'CASH',
-            'credit' => 'CREDIT CARD',
-            'debit' => 'DEBIT CARD',
-            'mobile' => 'MOBILE PAYMENT',
-            'halal' => 'HALAL',
-            'nonhalal' => 'NON-HALAL',
-            'takeaway' => 'TAKEAWAY AVAILABLE',
-            'indoor' => 'INDOOR SEATING',
-            'outdoor' => 'OUTDOOR SEATING',
-        ];
-        return $labels[$value] ?? $value;
+    if (!function_exists('tagLabel')) {
+        function tagLabel($value)
+        {
+            $labels = [
+                'untar_satu' => 'UNTAR 1',
+                'untar_dua' => 'UNTAR 2',
+                'food_only' => 'FOOD ONLY',
+                'drinks_only' => 'DRINKS ONLY',
+                'indonesian' => 'INDONESIAN',
+                'western' => 'WESTERN',
+                'japanese' => 'JAPANESE',
+                'chinese' => 'CHINESE',
+                'other' => 'OTHER',
+                'under_price' => '<RP10,000',
+                'thirty_price' => 'RP10,000 - RP30,000',
+                'sixty_price' => 'RP30,000 - RP60,000',
+                'over_price' => '>RP60,000',
+                'cash' => 'CASH',
+                'credit' => 'CREDIT CARD',
+                'debit' => 'DEBIT CARD',
+                'mobile' => 'MOBILE PAYMENT',
+                'halal' => 'HALAL',
+                'nonhalal' => 'NON-HALAL',
+                'takeaway' => 'TAKEAWAY AVAILABLE',
+                'indoor' => 'INDOOR SEATING',
+                'outdoor' => 'OUTDOOR SEATING',
+            ];
+            return $labels[$value] ?? $value;
+        }
     }
 
     $ratingsCount = optional($listing->ratings)->count() ?: 0;
@@ -112,10 +116,11 @@
                     @endforeach
                 @endif
                 @if ($listing->special_features)
-                    @foreach (json_decode($listing->special_features) as $feature)
+                    @foreach (json_decode($listing->special_features) ?? [] as $feature)
                         <span class="tag">{{ tagLabel($feature) }}</span>
                     @endforeach
                 @endif
+
             </div>
         </div>
         <div class="show-contact">

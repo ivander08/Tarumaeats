@@ -183,7 +183,7 @@
                         </a>
                         <div class="eats-card-content">
                             <div class="eats-card-name-rating">
-                                <h1>{{ $listing->location_name }}</h1>
+                                <h1 class="eats-card-name">{{ $listing->location_name }}</h1>
                                 <div class="eats-card-rating">
                                     <img src="{{ asset('images/star.svg') }}" alt="Star Icon"
                                         class="eats-card-star-icon">
