@@ -9,8 +9,12 @@
                 <div class="vl-red"></div>
                 <h1>Create Listings</h1>
             </div>
-            <a href="#">My Details</a>
-            <a href="#">My Listings</a>
+            <a href="{{ route('user') }}">My Details</a>
+            <a href="{{ route('listings') }}">My Listings</a>
+            @if (auth()->user()->is_admin)
+                <a href="{{ route('admin.users') }}">Manage Users</a>
+                <a href="{{ route('admin.listings') }}">Manage Listings</a>
+            @endif
         </div>
     </div>
     <div class="user-listings-create-forms">
