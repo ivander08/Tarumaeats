@@ -52,6 +52,23 @@
                                     @endif
                                 </div>
                             </td>
+                            <td>
+                                <div class="user-listings-table-interact">
+                                    <form id="delete-form-{{ $user->id }}"
+                                        action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
+                                        style="display:none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <a href="javascript:void(0);"
+                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->id }}').submit();">
+                                        <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
+                                    </a>
+                                    <a href="{{ route('admin.users.edit', $user->id) }}">
+                                        <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

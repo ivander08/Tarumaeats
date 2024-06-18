@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/admin/listings', [AdminController::class, 'listingsIndex'])->name('admin.listings');
     Route::get('/admin/users', [AdminController::class, 'usersIndex'])->name('admin.users');
+    Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}/update', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
     Route::post('/admin/listings/updateStatus', [AdminController::class, 'updateStatus'])->name('admin.listings.updateStatus');
     Route::post('/admin/listings/updateApproval', [AdminController::class, 'updateApproval'])->name('admin.listings.updateApproval');
     Route::post('/admin/listings/updateFeatured', [AdminController::class, 'updateFeatured'])->name('admin.listings.updateFeatured');
