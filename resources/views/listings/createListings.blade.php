@@ -51,16 +51,6 @@
                     <div class="create-form-group">
                         <input type="email" class="create-form-control" placeholder="Email" id="email" name="email">
                     </div>
-
-                    <div class="create-form-group">
-                        <input type="text" class="create-form-control" placeholder="Latitude" id="latitude"
-                            name="latitude">
-                    </div>
-
-                    <div class="create-form-group">
-                        <input type="text" class="create-form-control" placeholder="Longitude" id="longitude"
-                            name="longitude">
-                    </div>
                 </div>
             </div>
 

@@ -7,7 +7,7 @@
         <div class="user-listings-head-text">
             <div class="user-listings-head-text-settings">
                 <div class="vl-red"></div>
-                <h1>User Details</h1>
+                <h1>Manage Listings</h1>
             </div>
             <a href="{{ route('user') }}">My Details</a>
             <a href="{{ route('listings') }}">My Listings</a>
@@ -22,13 +22,20 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Added By</th>
-                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Location Name</th>
-                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="rating" data-order="asc">Rating</th>
-                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status</th>
-                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status" data-order="asc">Approval</th>
-                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="asc">Featured</th>
-                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="desc">Last Modified
+                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Added
+                            By</th>
+                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">
+                            Location Name</th>
+                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="rating" data-order="asc">Rating
+                        </th>
+                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status
+                        </th>
+                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status"
+                            data-order="asc">Approval</th>
+                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="asc">
+                            Featured</th>
+                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="desc">
+                            Last Modified
                         </th>
                         <th style="cursor:pointer; width: 10rem; text-align: end;">
                             <input type="text" id="search-input" placeholder="Search Name...">
@@ -39,17 +46,20 @@
                     @foreach ($listings as $listing)
                         <tr>
                             <td>{{ $listing->name }}</td>
-                            <td>{{ $listing->location_name }}</td>
+                            <td><a href="{{ route('admin.preview', $listing->id) }}">{{ $listing->location_name }}</a></td>
                             @php
                                 $ratingsCount = optional($listing->ratings)->count() ?: 0;
-                                $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+                                $averageRating =
+                                    $ratingsCount > 0
+                                        ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '')
+                                        : 0;
                             @endphp
                             @if ($ratingsCount > 0)
                                 <td>{{ $averageRating }} ({{ $ratingsCount }})</td>
-                                @else
-                                    <td>--</td>
-                                @endif
-                                <td>
+                            @else
+                                <td>--</td>
+                            @endif
+                            <td>
                                 <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}"
                                     data-status="{{ $listing->status }}">
                                     &#x2022; {{ ucfirst($listing->status) }}
@@ -57,12 +67,13 @@
                             </td>
                             <td>
                                 <div class="listing-status-{{ $listing->approval_status }}" data-id="{{ $listing->id }}"
-                                data-status="{{ $listing->approval_status }}">
+                                    data-status="{{ $listing->approval_status }}">
                                     &#x2022; {{ ucfirst($listing->approval_status) }}
                                 </div>
                             </td>
                             <td>
-                                <div class="listing-status-{{ $listing->is_featured ? '1' : '0' }}" data-id="{{ $listing->id }}" data-status="{{ $listing->is_featured }}">
+                                <div class="listing-status-{{ $listing->is_featured ? '1' : '0' }}"
+                                    data-id="{{ $listing->id }}" data-status="{{ $listing->is_featured }}">
                                     &#x2022;
                                     @if ($listing->is_featured)
                                         Yes
@@ -73,7 +84,20 @@
                             </td>
                             <td>{{ $listing->updated_at->diffForHumans() }}</td>
                             <td>
-                                    <a href="{{ route('admin.preview', $listing->id) }}">(Preview Icon)</a>
+                                <div class="user-listings-table-interact">
+                                    <form id="delete-form-{{ $listing->id }}"
+                                        action="{{ route('listings.destroy', $listing->id) }}" method="POST"
+                                        style="display:none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <a href="javascript:void(0);"
+                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $listing->id }}').submit();">
+                                        <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
+                                    </a>
+                                    <a href="{{ route('admin.listings.edit', $listing->id) }}">
+                                        <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
+                                    </a>
                                 </div>
                             </td>
                         </tr>
@@ -82,7 +106,7 @@
             </table>
         </div>
     </div>
-    
+
     <script>
         $(document).ready(function() {
             $('#search-input').on('keyup', function() {
@@ -118,24 +142,25 @@
                 });
             });
 
-            $('.listing-status-approved, .listing-status-declined, .listing-status-pending').on('click', function() {
-                var listingId = $(this).data('id');
-                var currentStatus = $(this).data('status');
-                var newStatus = currentStatus === 'approved' ? 'declined' : 'approved';
+            $('.listing-status-approved, .listing-status-declined, .listing-status-pending').on('click',
+                function() {
+                    var listingId = $(this).data('id');
+                    var currentStatus = $(this).data('status');
+                    var newStatus = currentStatus === 'approved' ? 'declined' : 'approved';
 
-                $.ajax({
-                    url: "{{ route('admin.listings.updateApproval') }}",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: listingId,
-                        status: newStatus
-                    },
-                    success: function(response) {
-                        location.reload();
-                    }
+                    $.ajax({
+                        url: "{{ route('admin.listings.updateApproval') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: listingId,
+                            status: newStatus
+                        },
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
                 });
-            });
 
             $('.listing-status-0, .listing-status-1').on('click', function() {
                 var listingId = $(this).data('id');

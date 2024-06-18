@@ -14,15 +14,10 @@
         </div>
     </div>
     <div class="user-listings-create-forms">
-        <form id="edit-listing-form" action="{{ route('listings.update', $listing->id) }}" method="POST"
+        <form id="edit-listing-form" action="{{ route('admin.listings.update', $listing->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
-            <div class="form-group">
-                <input type="hidden" name="name" value="{{ auth()->user()->name }}">
-            </div>
-
             <div class="create-text-forms-container">
                 <h1>Location Information</h1>
                 <div class="create-text-forms">
@@ -49,6 +44,11 @@
                     <div class="create-form-group">
                         <input type="email" class="create-form-control" placeholder="Email" id="email" name="email"
                             value="{{ $listing->email }}">
+                    </div>
+
+                    <div class="create-form-group">
+                        <input type="text" class="create-form-control" placeholder="Owner Name" id="name" name="name"
+                            value="{{ $listing->name }}">
                     </div>
                 </div>
             </div>

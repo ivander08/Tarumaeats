@@ -35,11 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/details', [UserController::class, 'show'])->name('user');
     Route::put('/user/details/update', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/details/delete', [UserController::class, 'delete'])->name('user.delete');
-
+    
 
     Route::get('/user/listings', [ListingsController::class, 'index'])->name('listings');
     Route::get('/user/listings/create', [ListingsController::class, 'create'])->name('listings.create');
-    route::get('user/listings/edit/{id}', [ListingsController::class, 'edit'])->name('listings.edit');
+    Route::get('user/listings/edit/{id}', [ListingsController::class, 'edit'])->name('listings.edit');
     Route::post('user/listings/store', [ListingsController::class, 'store'])->name('listings.store');
     Route::put('user/listings/update/{id}', [ListingsController::class, 'update'])->name('listings.update');
     Route::delete('user/listings/destroy/{id}', [ListingsController::class, 'destroy'])->name('listings.destroy');
@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
     Route::put('/admin/users/{user}/update', [AdminController::class, 'updateUser'])->name('admin.users.update');
     Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+    Route::get('admin/listings/edit/{id}', [AdminController::class, 'editListing'])->name('admin.listings.edit');
+    Route::put('admin/listings/update/{id}', [AdminController::class, 'updateListing'])->name('admin.listings.update');
     Route::post('/admin/listings/updateStatus', [AdminController::class, 'updateStatus'])->name('admin.listings.updateStatus');
     Route::post('/admin/listings/updateApproval', [AdminController::class, 'updateApproval'])->name('admin.listings.updateApproval');
     Route::post('/admin/listings/updateFeatured', [AdminController::class, 'updateFeatured'])->name('admin.listings.updateFeatured');
