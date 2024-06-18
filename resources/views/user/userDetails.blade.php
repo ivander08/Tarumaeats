@@ -66,5 +66,12 @@
                 <button type="submit" class="user-save">Save</button>
             </div>
         </form>
+
+        <form action="{{ route('user.delete') }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="user-save">Delete Account</button>
+        </form>
+        
     </div>
 @endsection

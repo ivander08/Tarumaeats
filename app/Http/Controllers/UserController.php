@@ -25,7 +25,7 @@ class UserController extends Controller
             'currentPassword' => 'nullable|string|min:8', // Optional: Current password
             'newPassword' => ['nullable', 'string', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()], // New password validation
         ]);
-    
+
         if ($validator->fails()) {
             return redirect()->route('user')->withErrors($validator)->withInput();
         }
@@ -36,7 +36,7 @@ class UserController extends Controller
         if ($request->filled('currentPassword') && !Hash::check($request->currentPassword, $user->password)) {
             return redirect()->back()->withErrors(['currentPassword' => 'The current password is incorrect.'])->withInput();
         }
-        
+
         if ($request->filled('newPassword')) {
             $user->password = Hash::make($request->newPassword);
         }
@@ -56,5 +56,15 @@ class UserController extends Controller
             $user->password = Hash::make($data['password']);
         }
         $user->save();
+    }
+
+    public function delete()
+    {
+        $userId = auth()->id();
+
+        Listings::where('name', auth()->user()->name)->delete();
+        User::destroy($userId);
+
+        return redirect()->route('home')->with('success', 'Your account has been deleted successfully.');
     }
 }
