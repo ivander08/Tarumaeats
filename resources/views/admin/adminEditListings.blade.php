@@ -18,11 +18,6 @@
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
-            <div class="form-group">
-                <input type="hidden" name="name" value="{{ auth()->user()->name }}">
-            </div>
-
             <div class="create-text-forms-container">
                 <h1>Location Information</h1>
                 <div class="create-text-forms">
