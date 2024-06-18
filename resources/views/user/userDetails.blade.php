@@ -18,7 +18,9 @@
         </div>
     </div>
     <div class="user-details-form-wrapper">
-        <form id="user-details-form">
+        <form id="user-details-form" action="{{ route('user.update') }}" method="POST">
+            @csrf
+            @method('PUT')
             <div class="user-details-text-forms-container">
                 <h1>User Information</h1>
                 <div class="user-details-text-forms">

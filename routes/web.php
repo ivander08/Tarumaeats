@@ -33,6 +33,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/user/details', [UserController::class, 'show'])->name('user');
+    Route::put('/user/details/update', [UserController::class, 'update'])->name('user.update');
 
     Route::get('/user/listings', [ListingsController::class, 'index'])->name('listings');
     Route::get('/user/listings/create', [ListingsController::class, 'create'])->name('listings.create');
