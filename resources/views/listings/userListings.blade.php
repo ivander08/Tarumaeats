@@ -9,8 +9,12 @@
                 <div class="vl-red"></div>
                 <h1>Settings</h1>
             </div>
-            <a href="#">My Details</a>
-            <a href="#">My Listings</a>
+            <a href="{{ route('user') }}">My Details</a>
+            <a href="{{ route('listings') }}">My Listings</a>
+            @if (auth()->user()->is_admin)
+                <a href="#">Manage Users</a>
+                <a href="#">Manage Listings</a>
+            @endif
         </div>
         <a href="{{ route('listings.create') }}" style="text-decoration: none;">
             <button type="button" id="create-listing-btn" class="user-listings-create">Create Listing</button>
@@ -21,11 +25,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Name</th>
+                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Name
+                        </th>
                         <th style="cursor:pointer; width: 5rem;">Rating</th>
-                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status</th>
-                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status" data-order="asc">Approval</th>
-                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="desc">Last Modified
+                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status
+                        </th>
+                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status"
+                            data-order="asc">Approval</th>
+                        <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="desc">
+                            Last Modified
                         </th>
                         <th style="cursor:pointer; width: 10rem; text-align: end;">
                             <input type="text" id="search-input" placeholder="Search Name...">
@@ -38,14 +46,17 @@
                             <td>{{ $listing->location_name }}</td>
                             @php
                                 $ratingsCount = optional($listing->ratings)->count() ?: 0;
-                                $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
+                                $averageRating =
+                                    $ratingsCount > 0
+                                        ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '')
+                                        : 0;
                             @endphp
                             @if ($ratingsCount > 0)
                                 <td>{{ $averageRating }} ({{ $ratingsCount }})</td>
-                                @else
-                                    <td>--</td>
-                                @endif
-                                <td>
+                            @else
+                                <td>--</td>
+                            @endif
+                            <td>
                                 <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}"
                                     data-status="{{ $listing->status }}">
                                     &#x2022; {{ ucfirst($listing->status) }}
@@ -80,7 +91,7 @@
             </table>
         </div>
     </div>
-    
+
     <script>
         $(document).ready(function() {
             $('#search-input').on('keyup', function() {

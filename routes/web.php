@@ -32,6 +32,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/user/details', [UserController::class, 'show'])->name('user');
+
     Route::get('/user/listings', [ListingsController::class, 'index'])->name('listings');
     Route::get('/user/listings/create', [ListingsController::class, 'create'])->name('listings.create');
     route::get('user/listings/edit/{id}', [ListingsController::class, 'edit'])->name('listings.edit');
