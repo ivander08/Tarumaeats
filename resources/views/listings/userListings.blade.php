@@ -7,13 +7,13 @@
         <div class="user-listings-head-text">
             <div class="user-listings-head-text-settings">
                 <div class="vl-red"></div>
-                <h1>Settings</h1>
+                <h1>Listings</h1>
             </div>
             <a href="{{ route('user') }}">My Details</a>
             <a href="{{ route('listings') }}">My Listings</a>
             @if (auth()->user()->is_admin)
-                <a href="#">Manage Users</a>
-                <a href="#">Manage Listings</a>
+                <a href="{{ route('admin.users') }}">Manage Users</a>
+                <a href="{{ route('admin.listings') }}">Manage Listings</a>
             @endif
         </div>
         <a href="{{ route('listings.create') }}" style="text-decoration: none;">
