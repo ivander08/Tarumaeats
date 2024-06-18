@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
             $table->text('main_image')->nullable();
             $table->text('banner_image')->nullable();
             $table->json('carousel_images')->nullable();

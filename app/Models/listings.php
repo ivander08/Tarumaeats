@@ -18,8 +18,6 @@ class listings extends Model
         'website',
         'phone_number',
         'email',
-        'latitude',
-        'longitude',
         'main_image',
         'banner_image',
         'carousel_images',
@@ -32,8 +30,6 @@ class listings extends Model
 
 
     protected $casts = [
-        'latitude' => 'string',
-        'longitude' => 'string',
         'main_image' => 'string',
         'banner_image' => 'string',
         'carousel_images' => 'array',
