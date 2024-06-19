@@ -210,12 +210,6 @@ class ListingsController extends Controller
             'special_features' => 'nullable|array',
         ]);
 
-        $existingListing = Listings::where('location_name', $request->location_name)->first();
-
-        if ($existingListing) {
-            return redirect()->back()->withInput()->withErrors(['location_name' => 'Location name already exists.']);
-        }
-
         // Update the listing attributes
         $listing->update([
             'name' => auth()->user()->name,
