@@ -43,7 +43,7 @@
                 <tbody id="listings-tbody">
                     @foreach ($listings as $listing)
                         <tr>
-                            <td>{{ $listing->location_name }}</td>
+                            <td style="max-width: 15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $listing->location_name }}</td>
                             @php
                                 $ratingsCount = optional($listing->ratings)->count() ?: 0;
                                 $averageRating =

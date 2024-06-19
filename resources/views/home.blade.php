@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <p>{!! PriceRangeDisplay($listing->price_range) !!}</p>
-                            <h2>{{ $listing->location_address }}</h2>
+                            <h2 style="max-width: 15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $listing->location_address }}</h2>
                         </div>
                     </div>
                 @endforeach

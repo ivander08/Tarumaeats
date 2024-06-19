@@ -46,7 +46,7 @@
                     @foreach ($listings as $listing)
                         <tr>
                             <td>{{ $listing->name }}</td>
-                            <td><a href="{{ route('admin.preview', $listing->id) }}">{{ $listing->location_name }}</a></td>
+                            <td style="max-width: 12rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><a href="{{ route('admin.preview', $listing->id) }}">{{ $listing->location_name }}</a></td>
                             @php
                                 $ratingsCount = optional($listing->ratings)->count() ?: 0;
                                 $averageRating =
