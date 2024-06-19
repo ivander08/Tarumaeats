@@ -830,7 +830,8 @@ hr,
 }
 
 .create-form-control[type="text"],
-.create-form-control[type="email"] {
+.create-form-control[type="email"],
+.create-form-control[type="number"]{
     border: none;
     outline: none;
     padding: 1rem;

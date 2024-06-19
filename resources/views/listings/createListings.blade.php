@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="create-form-group">
-                        <input type="text" class="create-form-control" placeholder="Phone Number" id="phone_number"
+                        <input type="number" class="create-form-control" placeholder="Phone Number" id="phone_number"
                             name="phone_number">
                     </div>
 
