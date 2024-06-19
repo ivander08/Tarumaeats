@@ -77,6 +77,71 @@
     </div>
 
     <script>
+        function sortTable(column, order) {
+            var tbody = $('#listings-tbody');
+            var rows = tbody.find('tr').toArray();
+
+            rows.sort(function(a, b) {
+                var aValue, bValue;
+
+                // Get column values for sorting
+                switch (column) {
+                    case 0: // For the "Name" column
+                        aValue = $(a).find('td').eq(column).text().toLowerCase();
+                        bValue = $(b).find('td').eq(column).text().toLowerCase();
+                        break;
+                    case 1: // For the "Email" column
+                        aValue = $(a).find('td').eq(column).text().toLowerCase();
+                        bValue = $(b).find('td').eq(column).text().toLowerCase();
+                        break;
+                    case 2: // For the "Verified At" column
+                        aValue = new Date($(a).find('td').eq(column).text());
+                        bValue = new Date($(b).find('td').eq(column).text());
+                        break;
+                    case 3: // For the "Role" column
+                        aValue = $(a).find('td').eq(column).find('div').data('is_admin') ? 'admin' : 'user';
+                        bValue = $(b).find('td').eq(column).find('div').data('is_admin') ? 'admin' : 'user';
+                        break;
+                    default:
+                        aValue = $(a).find('td').eq(column).text().toLowerCase();
+                        bValue = $(b).find('td').eq(column).text().toLowerCase();
+                        break;
+                    }
+
+                    // Perform sorting based on column values
+                    if (order === 'asc') {
+                        return aValue > bValue ? 1 : -1;
+                    } else {
+                        return aValue < bValue ? 1 : -1;
+                    }
+                });
+
+                // Rebuild the table with sorted rows
+                tbody.empty().append(rows);
+            }
+
+        // Click event for sorting table
+        $('.sort').on('click', function() {
+            var column = $(this).data('column');
+            var order = $(this).data('order');
+
+            // Toggle sort order
+            if (order === 'asc') {
+                $(this).data('order', 'desc');
+            } else {
+                $(this).data('order', 'asc');
+            }
+
+            // Remove sort indicator from other columns
+            $(this).siblings().removeAttr('data-order');
+
+            // Add sort indicator to current column
+            $(this).attr('data-order', order === 'asc' ? 'desc' : 'asc');
+
+            // Sort table
+            sortTable(column, order);
+        });
+
         $(document).ready(function() {
             $('.user-status-0, .user-status-1').on('click', function() {
                 var userId = $(this).data('id');
