@@ -27,7 +27,7 @@
                     <tr>
                         <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Name
                         </th>
-                        <th style="cursor:pointer; width: 5rem;">Rating</th>
+                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="name" data-order="asc">Rating</th>
                         <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status
                         </th>
                         <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status"
