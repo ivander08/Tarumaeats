@@ -62,26 +62,33 @@
                         <label for="main_image">Main Image*</label>
                         <input type="file" class="create-form-control" id="main_image" name="main_image"
                             accept="image/*">
-                        <img id="main_image_preview" src="{{ 'data:image;base64,' . $listing->main_image }}"
-                            alt="Main Image Preview" style="max-height: 200px; object-fit: cover;">
+                        <img id="main_image_preview" src="#" alt="Main Image Preview"
+                            style="display: none; max-height: 200px; object-fit: cover;">
+                        <img id="main_image_preview_database" src="{{ 'data:image;base64,' . $listing->main_image }}"
+                            alt="Main Image Preview Database" style="max-height: 200px; object-fit: cover;">
                     </div>
 
                     <div class="create-form-image-group">
                         <label for="banner_image">Banner Image*</label>
                         <input type="file" class="create-form-control" id="banner_image" name="banner_image"
                             accept="image/*">
-                        <img id="banner_image_preview" src="{{ 'data:image;base64,' . $listing->banner_image }}"
-                            alt="Banner Image Preview" style="max-height: 200px; object-fit: cover;">
+                        <img id="banner_image_preview" src="#" alt="Banner Image Preview"
+                            style="display: none; max-height: 200px; object-fit: cover;">
+                        <img id="banner_image_preview_database" src="{{ 'data:image;base64,' . $listing->banner_image }}"
+                            alt="Banner Image Preview Database" style="max-height: 200px; object-fit: cover;">
                     </div>
 
                     <div class="create-form-image-group">
                         <label for="carousel_images">Carousel Images*</label>
                         <input type="file" class="create-form-control" id="carousel_images" name="carousel_images[]"
                             accept="image/*" multiple>
-                        @foreach (json_decode($listing->carousel_images) as $carouselImage)
-                            <img src="{{ 'data:image;base64,' . $carouselImage }}" alt="Carousel Image Preview"
-                                style="max-height: 200px; object-fit: cover;">
-                        @endforeach
+                        <div id="carousel_images_preview" class="carousel-images-preview"></div>
+                        <div id="carousel_image_preview_database" style="display:flex; flex-direction:column; gap:1rem;">
+                            @foreach (json_decode($listing->carousel_images) as $carouselImage)
+                                <img src="{{ 'data:image;base64,' . $carouselImage }}" alt="Carousel Image Preview"
+                                    style="max-height: 200px; object-fit: cover;">
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -197,42 +204,54 @@
             </div>
         </form>
     </div>
-@endsection
 
-@section('scripts')
     <script>
-        document.getElementById('main_image').addEventListener('change', function(event) {
-            let reader = new FileReader();
-            reader.onload = function() {
-                let output = document.getElementById('main_image_preview');
-                output.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        });
+        document.getElementById('main_image').onchange = function(e) {
+            var reader = new FileReader();
 
-        document.getElementById('banner_image').addEventListener('change', function(event) {
-            let reader = new FileReader();
-            reader.onload = function() {
-                let output = document.getElementById('banner_image_preview');
-                output.src = reader.result;
+            reader.onload = function(event) {
+                document.getElementById('main_image_preview').src = event.target.result;
+                document.getElementById('main_image_preview').style.display = 'block';
+                document.getElementById('main_image_preview_database').style.display =
+                'none'; // Hide database preview
             };
-            reader.readAsDataURL(event.target.files[0]);
-        });
 
-        document.getElementById('carousel_images').addEventListener('change', function(event) {
-            let outputContainer = document.querySelector('.create-form-image-group');
-            outputContainer.innerHTML = '';
-            Array.from(event.target.files).forEach(file => {
-                let reader = new FileReader();
-                reader.onload = function() {
-                    let img = document.createElement('img');
-                    img.src = reader.result;
+            reader.readAsDataURL(e.target.files[0]);
+        };
+
+        document.getElementById('banner_image').onchange = function(e) {
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                document.getElementById('banner_image_preview').src = event.target.result;
+                document.getElementById('banner_image_preview').style.display = 'block';
+                document.getElementById('banner_image_preview_database').style.display =
+                'none'; // Hide database preview
+            };
+
+            reader.readAsDataURL(e.target.files[0]);
+        };
+
+        document.getElementById('carousel_images').onchange = function(e) {
+            var carouselImagesPreview = document.getElementById('carousel_images_preview');
+            carouselImagesPreview.innerHTML = ''; // Clear previous previews
+
+            // Loop through selected files
+            for (var i = 0; i < e.target.files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.alt = 'Carousel Image Preview';
                     img.style.maxHeight = '200px';
                     img.style.objectFit = 'cover';
-                    outputContainer.appendChild(img);
+                    carouselImagesPreview.appendChild(img);
                 };
-                reader.readAsDataURL(file);
-            });
-        });
+                reader.readAsDataURL(e.target.files[i]);
+            }
+
+            // Hide database preview
+            document.getElementById('carousel_image_preview_database').style.display = 'none';
+        };
     </script>
 @endsection
