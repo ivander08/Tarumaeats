@@ -65,8 +65,8 @@
                 <div class="show-name-address-line">
                     <div class="show-vl"></div>
                     <div class="show-name-address">
-                        <h1 style="max-width: 60rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $listing->location_name }}</h1>
-                        <h2 style="max-width: 60rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $listing->location_address }}</h2>
+                        <h1 style="max-width: 35rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $listing->location_name }}</h1>
+                        <h2 style="max-width: 35rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $listing->location_address }}</h2>
                     </div>
                 </div>
                 <div class="show-rating-container">
