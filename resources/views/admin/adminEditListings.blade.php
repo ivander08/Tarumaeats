@@ -192,7 +192,7 @@
             </div>
 
             <div class="create-save-container">
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" style="color: red;">
                     @if ($errors->any())
                         <ul>
                             @foreach ($errors->all() as $error)

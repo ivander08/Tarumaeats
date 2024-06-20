@@ -138,6 +138,12 @@ class ListingsController extends Controller
             'special_features' => 'nullable|array',
         ]);
 
+        $existingListing = Listings::where('location_name', $request->location_name)->first();
+
+        if ($existingListing) {
+            return redirect()->back()->withInput()->withErrors(['location_name' => 'Location name already exists.']);
+        }
+
         // Handle the image file uploads and encode them as base64
         $mainImage = base64_encode(file_get_contents($request->file('main_image')->getRealPath()));
         $bannerImage = base64_encode(file_get_contents($request->file('banner_image')->getRealPath()));

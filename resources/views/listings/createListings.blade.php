@@ -240,15 +240,16 @@
             </div>
 
             <div class="create-save-container">
-                <div class="alert alert-danger">
-                    @if ($errors->any())
+                @if ($errors->any())
+                    <div class="alert alert-danger" style="color: red">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
-                    @endif
-                </div>
+                    </div>
+                @endif
+
                 <button type="submit" class="create-save">Save</button>
             </div>
         </form>

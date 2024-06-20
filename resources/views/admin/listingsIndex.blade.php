@@ -13,7 +13,7 @@
             <a href="{{ route('listings') }}">My Listings</a>
             @if (auth()->user()->is_admin)
                 <a href="{{ route('admin.users') }}">Manage Users</a>
-                <a href="{{ route('admin.listings') }}">Manage Listings</a>
+                <a href="{{ route('admin.listings') }}" style="font-weight: bold; text-decoration: underline;">Manage Listings</a>
             @endif
         </div>
     </div>
@@ -38,7 +38,7 @@
                             Last Modified
                         </th>
                         <th style="cursor:pointer; width: 10rem; text-align: end;">
-                            <input type="text" id="search-input" placeholder="Search Name...">
+                            Action
                         </th>
                     </tr>
                 </thead>
@@ -111,21 +111,6 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $('#search-input').on('keyup', function() {
-                var query = $(this).val();
-                $.ajax({
-                    url: "{{ route('listings.search') }}",
-                    type: "GET",
-                    data: {
-                        'search': query
-                    },
-                    success: function(data) {
-                        $('#listings-tbody').html(data);
-                    }
-                });
-            });
-
             $('.listing-status-online, .listing-status-offline').on('click', function() {
                 var listingId = $(this).data('id');
                 var currentStatus = $(this).data('status');
@@ -260,6 +245,5 @@
                 // Sort table
                 sortTable(column, order);
             });
-        });
     </script>
 @endsection

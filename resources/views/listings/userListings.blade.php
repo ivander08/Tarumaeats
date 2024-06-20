@@ -10,7 +10,7 @@
                 <h1>Listings</h1>
             </div>
             <a href="{{ route('user') }}">My Details</a>
-            <a href="{{ route('listings') }}">My Listings</a>
+            <a href="{{ route('listings') }}" style="font-weight: bold; text-decoration: underline;">My Listings</a>
             @if (auth()->user()->is_admin)
                 <a href="{{ route('admin.users') }}">Manage Users</a>
                 <a href="{{ route('admin.listings') }}">Manage Listings</a>

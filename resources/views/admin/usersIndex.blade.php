@@ -12,7 +12,7 @@
             <a href="{{ route('user') }}">My Details</a>
             <a href="{{ route('listings') }}">My Listings</a>
             @if (auth()->user()->is_admin)
-                <a href="{{ route('admin.users') }}">Manage Users</a>
+                <a href="{{ route('admin.users') }}" style="font-weight: bold; text-decoration: underline;">Manage Users</a>
                 <a href="{{ route('admin.listings') }}">Manage Listings</a>
             @endif
         </div>
@@ -31,7 +31,7 @@
                         <th style="cursor:pointer; width: 5rem;" class="sort" data-column="is_admin" data-order="asc">Role
                         </th>
                         <th style="cursor:pointer; width: 10rem; text-align: end;">
-                            <input type="text" id="search-input" placeholder="Search Name...">
+                            Action
                         </th>
                     </tr>
                 </thead>
