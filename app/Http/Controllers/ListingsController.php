@@ -95,7 +95,7 @@ class ListingsController extends Controller
         }
 
         // Apply the condition for approved and online listings
-        $query->where('approval_status', 'pending')->where('status', 'online');
+        $query->where('approval_status', 'approved')->where('status', 'online');
 
         // Execute the query
         $listings = $query->get();
