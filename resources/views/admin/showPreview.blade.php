@@ -182,6 +182,8 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             const starInputs = document.querySelectorAll('.show-rating-interact input[type="radio"]');
             const starLabels = document.querySelectorAll('.show-rating-interact label');
+            const filledStar = "{{ asset('images/starfill.svg') }}";
+            const unfilledStar = "{{ asset('images/starunfill.svg') }}";
 
             const userRating = {{ $userRating ?? 0 }};
 
@@ -207,8 +209,7 @@
 
             function fillStars(rating) {
                 starLabels.forEach((label, idx) => {
-                    label.style.backgroundImage = idx < rating ? "url('../images/starfill.svg')" :
-                        "url('../images/starunfill.svg')";
+                    label.style.backgroundImage = idx < rating ? `url(${filledStar})` : `url(${unfilledStar})`;
                 });
             }
 

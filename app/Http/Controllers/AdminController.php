@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\listings;
 use App\Models\User;
+use App\Models\ratings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -174,8 +175,12 @@ class AdminController extends Controller
     public function show($id)
     {
         if (Auth::check() && Auth::user()->is_admin) {
-            $listing = listings::find($id);
-            return view('admin.showPreview', compact('listing'));
+            $listing = Listings::with('ratings')->findOrFail($id);
+            $userRating = ratings::where([
+                'name' => auth()->user()->name,
+                'location_name' => $listing->location_name,
+            ])->value('rating');
+            return view('admin.showPreview', compact('listing', 'userRating'));
         }
         return redirect('/');
     }
