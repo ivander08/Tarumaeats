@@ -312,4 +312,9 @@ class ListingsController extends Controller
 
         return response()->json(['success' => false, 'message' => 'Listing not found'], 404);
     }
+
+    public function preview($id){
+        $listing = listings::find($id);
+        return view('listings.showPreview', compact('listing'));
+    }
 }
