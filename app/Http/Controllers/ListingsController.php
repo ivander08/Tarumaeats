@@ -314,7 +314,14 @@ class ListingsController extends Controller
     }
 
     public function preview($id){
-        $listing = listings::find($id);
-        return view('listings.showPreview', compact('listing'));
+        $listing = Listings::with('ratings')->findOrFail($id);
+        if (auth()->check()) {
+            $userRating = ratings::where([
+                'name' => auth()->user()->name,
+                'location_name' => $listing->location_name,
+            ])->value('rating');
+
+            return view('listings.showPreview', compact('listing', 'userRating'));
+        }
     }
 }

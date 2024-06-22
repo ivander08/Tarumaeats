@@ -73,13 +73,27 @@
                 </div>
                 <div class="show-rating-container">
                     <div class="show-rating">
-                        <img src="{{ asset('images/star.svg') }}" alt="Star Icon" class="show-star-icon">
+                        <img src="{{ asset('/images/star.svg') }}" alt="Star Icon" class="show-star-icon">
                         @if ($ratingsCount > 0)
                             <h3>{{ $averageRating }} ({{ $ratingsCount }})</h3>
                         @else
                             <h3>No ratings yet</h3>
                         @endif
                     </div>
+                    @auth
+                        <form id="ratingForm" action="{{ route('ratings.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_name" value="{{ auth()->user()->name }}">
+                            <input type="hidden" name="location_name" value="{{ $listing->location_name }}">
+                            <div class="show-rating-interact">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <input type="radio" name="rating" id="star{{ $i }}"
+                                        value="{{ $i }}">
+                                    <label for="star{{ $i }}"></label>
+                                @endfor
+                            </div>
+                        </form>
+                    @endauth
                 </div>
             </div>
             <hr>
@@ -164,5 +178,43 @@
             perView: 1,
             focusAt: 'center'
         }).mount();
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const starInputs = document.querySelectorAll('.show-rating-interact input[type="radio"]');
+            const starLabels = document.querySelectorAll('.show-rating-interact label');
+            const filledStar = "{{ asset('images/starfill.svg') }}";
+            const unfilledStar = "{{ asset('images/starunfill.svg') }}";
+
+
+            const userRating = {{ $userRating ?? 0 }};
+
+            starInputs.forEach((input, index) => {
+                input.addEventListener('change', () => {
+                    const rating = index + 1;
+                    updateStars(rating);
+                    document.getElementById('ratingForm').submit();
+                });
+
+                input.addEventListener('mouseover', () => {
+                    fillStars(index + 1);
+                });
+
+                input.addEventListener('mouseout', () => {
+                    fillStars(userRating);
+                });
+            });
+
+            function updateStars(rating) {
+                fillStars(rating);
+            }
+
+            function fillStars(rating) {
+                starLabels.forEach((label, idx) => {
+                    label.style.backgroundImage = idx < rating ? `url(${filledStar})` : `url(${unfilledStar})`;
+                });
+            }
+
+            fillStars(userRating);
+        });
     </script>
 @endsection
