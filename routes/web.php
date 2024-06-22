@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('user/listings/destroy/{id}', [ListingsController::class, 'destroy'])->name('listings.destroy');
     Route::get('user/listings/search', [ListingsController::class, 'search'])->name('listings.search');
     Route::post('user/listings/updateStatus', [ListingsController::class, 'updateStatus'])->name('listings.updateStatus');
+    Route::get('/user/listings/preview/{id}', [ListingsController::class, 'preview'])->name('listings.preview');
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
