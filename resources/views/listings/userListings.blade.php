@@ -27,14 +27,14 @@
                     <tr>
                         <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Name
                         </th>
-                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="name" data-order="asc">Rating</th>
+                        <th style="cursor:pointer; width: 5rem;" class="sort" data-column="rating" data-order="asc">Rating
+                        </th>
                         <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status
                         </th>
                         <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status"
                             data-order="asc">Approval</th>
                         <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="desc">
-                            Last Modified
-                        </th>
+                            Last Modified</th>
                         <th style="cursor:pointer; width: 10rem; text-align: end;">
                             <input type="text" id="search-input" placeholder="Search Name...">
                         </th>
@@ -43,7 +43,9 @@
                 <tbody id="listings-tbody">
                     @foreach ($listings as $listing)
                         <tr>
-                            <td style="max-width: 15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><a href="{{ route('listings.preview', $listing->id) }}">{{ $listing->location_name }}</a></td>
+                            <td style="max-width: 15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <a href="{{ route('listings.preview', $listing->id) }}">{{ $listing->location_name }}</a>
+                            </td>
                             @php
                                 $ratingsCount = optional($listing->ratings)->count() ?: 0;
                                 $averageRating =
@@ -54,7 +56,7 @@
                             @if ($ratingsCount > 0)
                                 <td>{{ $averageRating }} ({{ $ratingsCount }})</td>
                             @else
-                                <td>--</td>
+                                <td>0</td>
                             @endif
                             <td>
                                 <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}"
@@ -63,12 +65,14 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="listing-status-{{ $listing->approval_status }}">
+                                <div class="listing-status-{{ $listing->approval_status }}"
+                                    data-approval-status="{{ $listing->approval_status }}">
                                     &#x2022; {{ ucfirst($listing->approval_status) }}
                                 </div>
                             </td>
                             <td data-date="{{ $listing->updated_at->timestamp }}">
-                                {{ $listing->updated_at->diffForHumans() }}</td>
+                                {{ $listing->updated_at->diffForHumans() }}
+                            </td>
                             <td>
                                 <div class="user-listings-table-interact">
                                     <form id="delete-form-{{ $listing->id }}"
@@ -128,6 +132,17 @@
                 });
             });
 
+            const statusOrder = {
+                online: 1,
+                offline: 2
+            };
+
+            const approvalStatusOrder = {
+                approved: 1,
+                pending: 2,
+                declined: 3
+            };
+
             // Function to sort table data
             function sortTable(column, order) {
                 var tbody = $('#listings-tbody');
@@ -138,30 +153,27 @@
 
                     // Get column values for sorting
                     switch (column) {
-                        case 1: // For the "Rating" column // Doesn't work
-                            aValue = parseFloat($(a).find('td').eq(column).text().split(' ')[0]);
-                            bValue = parseFloat($(b).find('td').eq(column).text().split(' ')[0]);
+                        case 'name':
+                            aValue = $(a).find('td').eq(0).text().trim();
+                            bValue = $(b).find('td').eq(0).text().trim();
                             break;
-                        case 2: // For the "Status" column
-                            aValue = $(a).find('td').eq(column).text();
-                            bValue = $(b).find('td').eq(column).text();
+                        case 'rating':
+                            aValue = parseFloat($(a).find('td').eq(1).text());
+                            bValue = parseFloat($(b).find('td').eq(1).text());
                             break;
-                        case 3: // For the "Approval" column
-                            var statusOrder = {
-                                'approved': 1,
-                                'pending': 2,
-                                'declined': 3
-                            };
-                            aValue = statusOrder[$(a).find('td').eq(column).text().toLowerCase()];
-                            bValue = statusOrder[$(b).find('td').eq(column).text().toLowerCase()];
+                        case 'status':
+                            aValue = $(a).find('td').eq(2).attr('data-status');
+                            bValue = $(b).find('td').eq(2).attr('data-status');
                             break;
-                        case 4: // For the "Last Modified" column
-                            aValue = parseInt($(a).find('td').eq(column).attr('data-date'));
-                            bValue = parseInt($(b).find('td').eq(column).attr('data-date'));
+                        case 'approval_status':
+                            aValue = $(a).find('td').eq(3).attr('data-approval-status');
+                            bValue = $(b).find('td').eq(3).attr('data-approval-status');
                             break;
-                        default: // For other columns
-                            aValue = $(a).find('td').eq(column).text().toLowerCase();
-                            bValue = $(b).find('td').eq(column).text().toLowerCase();
+                        case 'updated_at':
+                            aValue = parseInt($(a).find('td').eq(4).attr('data-date'));
+                            bValue = parseInt($(b).find('td').eq(4).attr('data-date'));
+                            break;
+                        default:
                             break;
                     }
 
@@ -179,7 +191,7 @@
 
             // Click event for sorting table
             $('.sort').on('click', function() {
-                var column = $(this).index();
+                var column = $(this).data('column');
                 var order = $(this).data('order');
 
                 // Toggle sort order
