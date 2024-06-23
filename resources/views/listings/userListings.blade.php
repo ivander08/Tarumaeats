@@ -58,18 +58,16 @@
                             @else
                                 <td>0</td>
                             @endif
-                            <td>
-                                <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}"
-                                    data-status="{{ $listing->status }}">
+                            <td data-status="{{ $listing->status }}">
+                                <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}">
                                     &#x2022; {{ ucfirst($listing->status) }}
                                 </div>
                             </td>
-                            <td>
-                                <div class="listing-status-{{ $listing->approval_status }}"
-                                    data-approval-status="{{ $listing->approval_status }}">
-                                    &#x2022; {{ ucfirst($listing->approval_status) }}
-                                </div>
-                            </td>
+                                <td data-approval-status="{{ $listing->approval_status }}">
+                                    <div class="listing-status-{{ $listing->approval_status }}">
+                                        &#x2022; {{ ucfirst($listing->approval_status) }}
+                                    </div>
+                                </td>
                             <td data-date="{{ $listing->updated_at->timestamp }}">
                                 {{ $listing->updated_at->diffForHumans() }}
                             </td>
@@ -132,17 +130,6 @@
                 });
             });
 
-            const statusOrder = {
-                online: 1,
-                offline: 2
-            };
-
-            const approvalStatusOrder = {
-                approved: 1,
-                pending: 2,
-                declined: 3
-            };
-
             // Function to sort table data
             function sortTable(column, order) {
                 var tbody = $('#listings-tbody');
@@ -177,6 +164,9 @@
                             break;
                     }
 
+                    // Debug logs to see values being compared
+                    console.log(`Sorting ${column} column: aValue=${aValue}, bValue=${bValue}`);
+
                     // Perform sorting based on column values
                     if (order === 'asc') {
                         return aValue > bValue ? 1 : -1;
@@ -185,9 +175,13 @@
                     }
                 });
 
+                // Debug logs to see final sorted rows
+                console.log("Sorted rows:", rows);
+
                 // Rebuild the table with sorted rows
                 tbody.empty().append(rows);
             }
+
 
             // Click event for sorting table
             $('.sort').on('click', function() {
