@@ -73,4 +73,4 @@ Untuk mengatur Tarumaeats secara lokal, ikuti langkah-langkah berikut:
 ### Akun Admin
 Gunakan kredensial akun admin berikut untuk mengakses fitur admin:
 - **Email**: ivanderseah08@gmail.com
-- **Password**: Hotdog08123
+- **Password**: Hotdog08123!
