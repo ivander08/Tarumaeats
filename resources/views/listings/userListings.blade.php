@@ -59,15 +59,16 @@
                                 <td>0</td>
                             @endif
                             <td data-status="{{ $listing->status }}">
-                                <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}">
+                                <div class="listing-status-{{ $listing->status }}" data-status="{{ $listing->status }}"
+                                    data-id="{{ $listing->id }}">
                                     &#x2022; {{ ucfirst($listing->status) }}
                                 </div>
                             </td>
-                                <td data-approval-status="{{ $listing->approval_status }}">
-                                    <div class="listing-status-{{ $listing->approval_status }}">
-                                        &#x2022; {{ ucfirst($listing->approval_status) }}
-                                    </div>
-                                </td>
+                            <td data-approval-status="{{ $listing->approval_status }}">
+                                <div class="listing-status-{{ $listing->approval_status }}">
+                                    &#x2022; {{ ucfirst($listing->approval_status) }}
+                                </div>
+                            </td>
                             <td data-date="{{ $listing->updated_at->timestamp }}">
                                 {{ $listing->updated_at->diffForHumans() }}
                             </td>
@@ -97,21 +98,8 @@
 
     <script>
         $(document).ready(function() {
-            $('#search-input').on('keyup', function() {
-                var query = $(this).val();
-                $.ajax({
-                    url: "{{ route('listings.search') }}",
-                    type: "GET",
-                    data: {
-                        'search': query
-                    },
-                    success: function(data) {
-                        $('#listings-tbody').html(data);
-                    }
-                });
-            });
-
-            $('.listing-status-online, .listing-status-offline').on('click', function() {
+            // Event delegation for status update
+            $('#listings-tbody').on('click', '.listing-status-online, .listing-status-offline', function() {
                 var listingId = $(this).data('id');
                 var currentStatus = $(this).data('status');
                 var newStatus = currentStatus === 'online' ? 'offline' : 'online';
@@ -164,9 +152,6 @@
                             break;
                     }
 
-                    // Debug logs to see values being compared
-                    console.log(`Sorting ${column} column: aValue=${aValue}, bValue=${bValue}`);
-
                     // Perform sorting based on column values
                     if (order === 'asc') {
                         return aValue > bValue ? 1 : -1;
@@ -175,13 +160,9 @@
                     }
                 });
 
-                // Debug logs to see final sorted rows
-                console.log("Sorted rows:", rows);
-
                 // Rebuild the table with sorted rows
                 tbody.empty().append(rows);
             }
-
 
             // Click event for sorting table
             $('.sort').on('click', function() {
