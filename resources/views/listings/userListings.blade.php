@@ -98,6 +98,21 @@
 
     <script>
         $(document).ready(function() {
+            // Searching for listings
+            $('#search-input').on('keyup', function() {
+                var query = $(this).val();
+                $.ajax({
+                    url: "{{ route('listings.search') }}",
+                    type: "GET",
+                    data: {
+                        'search': query
+                    },
+                    success: function(data) {
+                        $('#listings-tbody').html(data);
+                    }
+                });
+            });
+
             // Event delegation for status update
             $('#listings-tbody').on('click', '.listing-status-online, .listing-status-offline', function() {
                 var listingId = $(this).data('id');

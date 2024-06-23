@@ -13,7 +13,8 @@
             <a href="{{ route('listings') }}">My Listings</a>
             @if (auth()->user()->is_admin)
                 <a href="{{ route('admin.users') }}">Manage Users</a>
-                <a href="{{ route('admin.listings') }}" style="font-weight: bold; text-decoration: underline;">Manage Listings</a>
+                <a href="{{ route('admin.listings') }}" style="font-weight: bold; text-decoration: underline;">Manage
+                    Listings</a>
             @endif
         </div>
     </div>
@@ -24,7 +25,8 @@
                     <tr>
                         <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">Added
                             By</th>
-                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="name" data-order="asc">
+                        <th style="cursor:pointer; width: 15rem;" class="sort" data-column="location_name"
+                            data-order="asc">
                             Location Name</th>
                         <th style="cursor:pointer; width: 5rem;" class="sort" data-column="rating" data-order="asc">Rating
                         </th>
@@ -46,7 +48,8 @@
                     @foreach ($listings as $listing)
                         <tr>
                             <td>{{ $listing->name }}</td>
-                            <td style="max-width: 12rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><a href="{{ route('admin.preview', $listing->id) }}">{{ $listing->location_name }}</a></td>
+                            <td style="max-width: 12rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><a
+                                    href="{{ route('admin.preview', $listing->id) }}">{{ $listing->location_name }}</a></td>
                             @php
                                 $ratingsCount = optional($listing->ratings)->count() ?: 0;
                                 $averageRating =
@@ -57,61 +60,60 @@
                             @if ($ratingsCount > 0)
                                 <td>{{ $averageRating }} ({{ $ratingsCount }})</td>
                             @else
-                                <td>--</td>
+                                <td>0</td>
                             @endif
-                            <td>
-                                <div class="listing-status-{{ $listing->status }}" data-id="{{ $listing->id }}"
-                                    data-status="{{ $listing->status }}">
+                            <td data-status="{{ $listing->status }}">
+                                <div class="listing-status-{{ $listing->status }}" data-status="{{ $listing->status }}"
+                                    data-id="{{ $listing->id }}">
                                     &#x2022; {{ ucfirst($listing->status) }}
                                 </div>
                             </td>
-                            <td>
-                                <div class="listing-status-{{ $listing->approval_status }}" data-id="{{ $listing->id }}"
-                                    data-status="{{ $listing->approval_status }}">
+                            <td data-approval-status="{{ $listing->approval_status }}">
+                                <div class="listing-status-{{ $listing->approval_status }}">
                                     &#x2022; {{ ucfirst($listing->approval_status) }}
                                 </div>
                             </td>
-                            <td>
+                            <td data-featured="{{ $listing->is_featured }}>
                                 <div class="listing-status-{{ $listing->is_featured ? '1' : '0' }}"
-                                    data-id="{{ $listing->id }}" data-status="{{ $listing->is_featured }}">
-                                    &#x2022;
-                                    @if ($listing->is_featured)
-                                        Yes
-                                    @else
-                                        No
-                                    @endif
-                                </div>
-                            </td>
-                            <!-- Inside the <td> tag for the "Last Modified" column -->
-                            <td data-date="{{ $listing->updated_at->timestamp }}">
-                                {{ $listing->updated_at->diffForHumans() }}</td>
-
-                            <td>
-                                <div class="user-listings-table-interact">
-                                    <form id="delete-form-{{ $listing->id }}"
-                                        action="{{ route('listings.destroy', $listing->id) }}" method="POST"
-                                        style="display:none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                    <a href="javascript:void(0);"
-                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $listing->id }}').submit();">
-                                        <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
-                                    </a>
-                                    <a href="{{ route('admin.listings.edit', $listing->id) }}">
-                                        <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                data-id="{{ $listing->id }}">
+                                &#x2022;
+                                @if ($listing->is_featured)
+                                    Yes
+                                @else
+                                    No
+                                @endif
         </div>
+        </td>
+        <td data-date="{{ $listing->updated_at->timestamp }}">
+            {{ $listing->updated_at->diffForHumans() }}</td>
+
+        <td>
+            <div class="user-listings-table-interact">
+                <form id="delete-form-{{ $listing->id }}" action="{{ route('listings.destroy', $listing->id) }}"
+                    method="POST" style="display:none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                <a href="javascript:void(0);"
+                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $listing->id }}').submit();">
+                    <img src="{{ asset('images/Trash.png') }}" alt="Delete" class="delete-button">
+                </a>
+                <a href="{{ route('admin.listings.edit', $listing->id) }}">
+                    <img src="{{ asset('images/Edit.png') }}" alt="Edit" class="edit-button">
+                </a>
+            </div>
+        </td>
+        </tr>
+        @endforeach
+        </tbody>
+        </table>
+    </div>
     </div>
 
     <script>
-            $('.listing-status-online, .listing-status-offline').on('click', function() {
+        $(document).ready(function() {
+            // Event delegation for status update
+            $('#listings-tbody').on('click', '.listing-status-online, .listing-status-offline', function() {
                 var listingId = $(this).data('id');
                 var currentStatus = $(this).data('status');
                 var newStatus = currentStatus === 'online' ? 'offline' : 'online';
@@ -130,7 +132,8 @@
                 });
             });
 
-            $('.listing-status-approved, .listing-status-declined, .listing-status-pending').on('click',
+            $('#listings-tbody').on('click',
+                '.listing-status-approved, .listing-status-declined, .listing-status-pending',
                 function() {
                     var listingId = $(this).data('id');
                     var currentStatus = $(this).data('status');
@@ -150,7 +153,7 @@
                     });
                 });
 
-            $('.listing-status-0, .listing-status-1').on('click', function() {
+            $('#listings-tbody').on('click', '.listing-status-0, .listing-status-1', function() {
                 var listingId = $(this).data('id');
                 var currentStatus = $(this).data('status');
                 var newStatus = !currentStatus;
@@ -180,30 +183,33 @@
 
                     // Get column values for sorting
                     switch (column) {
-                        case 2: // For the "Rating" column // Doesn't work yet
-                            aValue = parseFloat($(a).find('td').eq(column).text().split(' ')[0]);
-                            bValue = parseFloat($(b).find('td').eq(column).text().split(' ')[0]);
+                        case 'name':
+                            aValue = $(a).find('td').eq(0).text().trim();
+                            bValue = $(b).find('td').eq(0).text().trim();
                             break;
-                        case 3: // For the "Status" column
-                            aValue = $(a).find('td').eq(column).text();
-                            bValue = $(b).find('td').eq(column).text();
+                        case 'location_name':
+                            aValue = $(a).find('td').eq(1).text().trim();
+                            bValue = $(b).find('td').eq(1).text().trim();
                             break;
-                        case 4: // For the "Approval" column
-                            var statusOrder = {
-                                'approved': 1,
-                                'pending': 2,
-                                'declined': 3
-                            };
-                            aValue = statusOrder[$(a).find('td').eq(column).text().toLowerCase()];
-                            bValue = statusOrder[$(b).find('td').eq(column).text().toLowerCase()];
+                        case 'rating':
+                            aValue = parseFloat($(a).find('td').eq(2).text());
+                            bValue = parseFloat($(b).find('td').eq(2).text());
+                            break;
+                        case 'status':
+                            aValue = $(a).find('td').eq(3).attr('data-status');
+                            bValue = $(b).find('td').eq(3).attr('data-status');
+                            break;
+                        case 'approval_status':
+                            aValue = $(a).find('td').eq(4).attr('data-approval-status');
+                            bValue = $(b).find('td').eq(4).attr('data-approval-status');
                             break;
                         case 5: // For the "Featured" column
-                            aValue = $(a).find('td').eq(column).text() === 'Yes' ? 1 : 0;
-                            bValue = $(b).find('td').eq(column).text() === 'Yes' ? 1 : 0;
+                            aValue = $(a).find('td').eq(5).attr('data-featured');
+                            bValue = $(b).find('td').eq(5).attr('data-featured');
                             break;
-                        case 6: // For the "Last Modified" column
-                            aValue = parseInt($(a).find('td').eq(column).attr('data-date'));
-                            bValue = parseInt($(b).find('td').eq(column).attr('data-date'));
+                        case 'updated_at':
+                            aValue = parseInt($(a).find('td').eq(4).attr('data-date'));
+                            bValue = parseInt($(b).find('td').eq(4).attr('data-date'));
                             break;
                         default: // For other columns
                             aValue = $(a).find('td').eq(column).text().toLowerCase();
@@ -245,5 +251,6 @@
                 // Sort table
                 sortTable(column, order);
             });
+        });
     </script>
 @endsection
