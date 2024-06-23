@@ -21,7 +21,7 @@ class RatingsTableSeeder extends Seeder
         \DB::table('ratings')->insert(array (
             0 => 
             array (
-                'id' => 1,
+                'id' => 16845053245,
                 'name' => 'ivander08',
                 'location_name' => 'A&W',
                 'rating' => 4,
