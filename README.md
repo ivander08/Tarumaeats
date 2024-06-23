@@ -2,6 +2,8 @@
 
 ![Tarumaeats Logo](https://repobeats.axiom.co/api/embed/ab2c52d0a0f2dff05a8852fbe84cff4edf25bf71.svg)
 
+## WARNING : Download the ListingsTableSeeder [Google Drive Link](https://drive.google.com/file/d/1628aJnRVDmIg4hOBlVpYcBAZ8H_Qweph/view?usp=sharing) first since it is too big for GitHub.
+
 ## Team 2-TI-A
 - **Ivander** (535220020)
 - **Justin Salim** (535220017)
@@ -48,24 +50,25 @@ To set up Tarumaeats locally, follow these steps:
    ```
    php artisan migrate
    ```
+6. **Download Listings Seeder**: The Listing Seeder is over 400MB, so cannot be uploaded in GitHub. Download it with this [Google Drive Link](https://drive.google.com/file/d/1628aJnRVDmIg4hOBlVpYcBAZ8H_Qweph/view?usp=sharing) and then put it the ListingsTableSeeder.php in app/database/seeders along with the other seeder files.
 
-6. **Seed the Database**: Seed the database with dummy data using the `php artisan db:seed` command. This will populate the database with initial data for testing purposes.
+7. **Seed the Database**: Seed the database with dummy data using the `php artisan db:seed` command. This will populate the database with initial data for testing purposes.
    ```
    php artisan db:seed
    ```
 
-7. **Compile Assets**: Compile frontend assets using npm.
+8. **Compile Assets**: Compile frontend assets using npm.
    ```
    npm install
    npm run dev
    ```
 
-8. **Start the Development Server**: Use the `php artisan serve` command to start the development server.
+9. **Start the Development Server**: Use the `php artisan serve` command to start the development server.
    ```
    php artisan serve
    ```
 
-9. **Access the Application**: Open your web browser and navigate to `http://localhost:8000` to access Tarumaeats.
+10. **Access the Application**: Open your web browser and navigate to `http://localhost:8000` to access Tarumaeats.
 
 ### Admin Account
 Use the following dummy admin account credentials to access the admin features:
