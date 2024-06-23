@@ -17,7 +17,7 @@ Tarumaeats is a web application designed to help students and visitors at UNTAR 
   
 - **Listing Search**: A search feature enables users to find food establishments based on various criteria such as price range, food type, special features, and opening hours.
   
-- **Detailed Listings**: Detailed listings provide users with comprehensive information about each food establishment, including images, name, location, price range, tags, contact details, and a map showing the location.
+- **Detailed Listings**: Detailed listings provide users with comprehensive information about each food establishment, including images, name, location, price range, tags, and contact details.
   
 - **Image Management**: Users can upload images for their listings, including a main image, banner image, and carousel images. Image management allows for a visually appealing representation of the food establishments.
   
@@ -49,12 +49,28 @@ To set up Tarumaeats locally, follow these steps:
    php artisan migrate
    ```
 
-6. **Start the Development Server**: Use the `php artisan serve` command to start the development server.
+6. **Seed the Database**: Seed the database with dummy data using the `php artisan db:seed` command. This will populate the database with initial data for testing purposes.
+   ```
+   php artisan db:seed
+   ```
+
+7. **Compile Assets**: Compile frontend assets using npm.
+   ```
+   npm install
+   npm run dev
+   ```
+
+8. **Start the Development Server**: Use the `php artisan serve` command to start the development server.
    ```
    php artisan serve
    ```
 
-7. **Access the Application**: Open your web browser and navigate to `http://localhost:8000` to access Tarumaeats.
+9. **Access the Application**: Open your web browser and navigate to `http://localhost:8000` to access Tarumaeats.
+
+### Admin Account
+Use the following dummy admin account credentials to access the admin features:
+- **Email**: ivanderseah08@gmail.com
+- **Password**: Hotdog08123
 
 ## Contributing
 
