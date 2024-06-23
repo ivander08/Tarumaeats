@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+ini_set('memory_limit', '2048M');
+
 Route::get('/', function () {
     return view('home');
 })->name('home');

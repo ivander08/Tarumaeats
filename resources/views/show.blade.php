@@ -53,7 +53,7 @@
 
 @section('content')
     <div class="show-background-image-container"
-        style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
+        style="background-image: url('data:image/jpeg;base64,{{ $listing->main_image }}');">
         @include('partials.header', ['class' => 'show-header'])
     </div>
     <div class="show-red-bar">
