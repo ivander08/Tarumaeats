@@ -49,7 +49,7 @@
                     <div class="eats-cards-container">
                         <a href="{{ route('eats.show', $listing->id) }}">
                             <div class="eats-card-image"
-                                style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
+                                style="background-image: url('data:image/jpeg;base64,{{ $listing->main_image }}');">
                             </div>
                         </a>
                         <div class="eats-card-content">
