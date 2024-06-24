@@ -7,6 +7,7 @@ use App\Models\Listings;
 use App\Models\ratings;
 use Illuminate\Support\Facades\Storage;
 
+// Kelas ListingsController mengendalikan logika bisnis untuk daftar listing
 class ListingsController extends Controller
 {
     public function home()
@@ -21,7 +22,6 @@ class ListingsController extends Controller
 
     public function indexApproved(Request $request)
     {
-        // Retrieve approved and online listings
         $listings = Listings::with('ratings')
             ->where('approval_status', 'approved')
             ->where('status', 'online')
@@ -29,15 +29,11 @@ class ListingsController extends Controller
 
         $resultsCount = $listings->count();
 
-        // $listings = Listings::all();
-
-        // Pass the filtered listings to the view
         return view('eats', compact('listings', 'resultsCount'));
     }
 
     public function filter(Request $request)
     {
-        // Retrieve filter selections from the request
         $campus = $request->input('campus');
         $type = $request->input('type');
         $cuisine = $request->input('cuisine');
@@ -46,19 +42,8 @@ class ListingsController extends Controller
         $specialFeatures = $request->input('special_features');
         $search = strtolower($request->input('search'));
 
-        // // Debugging
-        // echo '<pre>';
-        // print_r($cuisine);
-        // echo '</pre>';
-
-        // echo '<pre>';
-        // print_r($priceRange);
-        // echo '</pre>';
-
-        // Query builder for listings
         $query = Listings::query();
 
-        // Apply filters
         if ($campus) {
             $query->where('campus', $campus);
         }
@@ -72,7 +57,6 @@ class ListingsController extends Controller
         }
 
         if ($priceRange) {
-            // Idk how this logic works lol
             if (count($priceRange) === 4) {
             } else {
                 $query->whereIn('price_range', $priceRange);
@@ -94,16 +78,14 @@ class ListingsController extends Controller
             });
         }
 
-        // Apply the condition for approved and online listings
         $query->where('approval_status', 'approved')->where('status', 'online');
 
-        // Execute the query
         $listings = $query->get();
 
-        // Pass the filtered listings to the view
         return view('eats', compact('listings'));
     }
 
+    // Fungsi index mengambil semua listing dari database dan menampilkannya
     public function index()
     {
         $userName = auth()->user()->name;
@@ -111,14 +93,15 @@ class ListingsController extends Controller
         return view('listings.userListings', compact('listings'));
     }
 
+    // Fungsi create menampilkan form untuk membuat listing baru
     public function create()
     {
         return view('listings.createListings');
     }
 
+    // Fungsi store menyimpan listing baru ke dalam database
     public function store(Request $request)
     {
-        // Validate the form data
         $request->validate([
             'location_name' => 'required|string|max:255',
             'campus' => 'required|string|max:255',
@@ -143,7 +126,6 @@ class ListingsController extends Controller
             return redirect()->back()->withInput()->withErrors(['location_name' => 'Location name already exists.']);
         }
 
-        // Handle the image file uploads and encode them as base64
         $mainImage = base64_encode(file_get_contents($request->file('main_image')->getRealPath()));
         $bannerImage = base64_encode(file_get_contents($request->file('banner_image')->getRealPath()));
 
@@ -152,12 +134,10 @@ class ListingsController extends Controller
             $carouselImages[] = base64_encode(file_get_contents($carouselImage->getRealPath()));
         }
 
-        // Generate a unique ID for the listing
         do {
             $listingId = random_int(1, PHP_INT_MAX);
         } while (Listings::find($listingId) !== null);
 
-        // Create the listing
         Listings::create([
             'id' => $listingId,
             'name' => auth()->user()->name,
@@ -180,14 +160,14 @@ class ListingsController extends Controller
         return redirect()->route('listings');
     }
 
-
-
+    // Fungsi edit menampilkan form untuk mengedit sebuah listing
     public function edit($id)
     {
         $listing = Listings::find($id);
         return view('listings.editListings', compact('listing'));
     }
 
+    // Fungsi update mengupdate sebuah listing di dalam database
     public function update(Request $request, $id)
     {
         $listing = Listings::find($id);
@@ -196,7 +176,6 @@ class ListingsController extends Controller
             return redirect()->route('listings')->with('error', 'Listing not found.');
         }
 
-        // Validate the form data
         $request->validate([
             'location_name' => 'required|string|max:255',
             'campus' => 'required|string|max:255',
@@ -215,7 +194,6 @@ class ListingsController extends Controller
             'special_features' => 'nullable|array',
         ]);
 
-        // Update the listing attributes
         $listing->update([
             'name' => auth()->user()->name,
             'location_name' => $request->location_name,
@@ -231,7 +209,6 @@ class ListingsController extends Controller
             'special_features' => json_encode($request->special_features),
         ]);
 
-        // Handle image updates
         if ($request->hasFile('main_image')) {
             Storage::delete($listing->main_image);
             $listing->main_image = base64_encode(file_get_contents($request->file('main_image')->getRealPath()));
@@ -256,7 +233,7 @@ class ListingsController extends Controller
         return redirect()->route('listings');
     }
 
-
+    // Fungsi destroy menghapus sebuah listing dari database
     public function destroy($id)
     {
         $listing = Listings::find($id);
@@ -268,13 +245,13 @@ class ListingsController extends Controller
         return redirect()->route('listings');
     }
 
+    // Fungsi show menampilkan detail dari sebuah listing
     public function show($id)
     {
         $listing = Listings::with('ratings')->findOrFail($id);
 
-        // Check if the listing is approved or pending and online
         if (($listing->approval_status !== 'approved' && $listing->approval_status !== 'pending') || $listing->status !== 'online') {
-            return redirect()->route('eats'); // Redirect to the eats page
+            return redirect()->route('eats');
         }
 
         if (auth()->check()) {
@@ -290,7 +267,6 @@ class ListingsController extends Controller
     }
 
 
-    // This one's kinda bruteforce... but it works
     public function search(Request $request)
     {
         $userName = auth()->user()->name;
