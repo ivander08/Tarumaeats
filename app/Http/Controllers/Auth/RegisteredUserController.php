@@ -41,12 +41,13 @@ class RegisteredUserController extends Controller
             $userId = random_int(1, PHP_INT_MAX);
         } while (User::find($userId) !== null);
 
-        $user = User::create([
-            'id' => $userId,
-            'name' => strtolower($request->name),
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User;
+        $user->id = $userId;
+        $user->name = strtolower($request->name);
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
 
         event(new Registered($user));
 
