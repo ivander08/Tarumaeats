@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
+    // Menampilkan semua pengguna
     public function usersIndex()
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -21,6 +22,7 @@ class AdminController extends Controller
         return redirect('/');
     }
 
+    // Menampilkan semua listing
     public function listingsIndex()
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -30,6 +32,7 @@ class AdminController extends Controller
         return redirect('/');
     }
 
+    // Mengedit listing berdasarkan id
     public function editListing($id)
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -39,6 +42,7 @@ class AdminController extends Controller
         return redirect('/');
     }
 
+    // Memperbarui listing berdasarkan id
     public function updateListing(Request $request, $id)
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -48,7 +52,6 @@ class AdminController extends Controller
                 return redirect()->route('listings')->with('error', 'Listing not found.');
             }
 
-            // Validate the form data
             $request->validate([
                 'name' => 'required|string|max:255',
                 'location_name' => 'required|string|max:255',
@@ -74,7 +77,6 @@ class AdminController extends Controller
                 return redirect()->route('admin.listings.edit', ['id' => $id])->withErrors(['name' => 'User not found.']);
             }
 
-            // Update the listing attributes
             $listing->update([
                 'name' => $request->name,
                 'location_name' => $request->location_name,
@@ -90,7 +92,6 @@ class AdminController extends Controller
                 'special_features' => json_encode($request->special_features),
             ]);
 
-            // Handle image updates
             if ($request->hasFile('main_image')) {
                 Storage::delete($listing->main_image);
                 $listing->main_image = base64_encode(file_get_contents($request->file('main_image')->getRealPath()));
@@ -116,6 +117,7 @@ class AdminController extends Controller
         }
     }
 
+    // Memperbarui status listing
     public function updateStatus(Request $request)
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -127,6 +129,7 @@ class AdminController extends Controller
         return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
     }
 
+    // Memperbarui status persetujuan listing
     public function updateApproval(Request $request)
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -142,6 +145,7 @@ class AdminController extends Controller
         return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
     }
 
+    // Memperbarui peran pengguna
     public function updateFeatured(Request $request)
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -157,6 +161,7 @@ class AdminController extends Controller
         return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
     }
 
+    // Menampilkan detail listing
     public function updateRole(Request $request)
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -172,6 +177,7 @@ class AdminController extends Controller
         return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
     }
 
+    // Menghapus pengguna
     public function show($id)
     {
         if (Auth::check() && Auth::user()->is_admin) {
@@ -185,24 +191,22 @@ class AdminController extends Controller
         return redirect('/');
     }
 
+    // Mengedit pengguna
     public function destroyUser(User $user)
     {
-        // Delete the user and any associated data (if needed)
         $user->delete();
 
-        // Redirect back to the admin dashboard with a success message
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
 
     public function editUser(User $user)
     {
-        // Load the edit user view with the user data
         return view('user.adminDetails', compact('user'));
     }
 
+    // Memperbarui pengguna
     public function updateUser(Request $request, User $user)
     {
-        // Validate the incoming data
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
@@ -212,14 +216,12 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Update user details
         $originalUsername = $user->name;
         Listings::where('name', $originalUsername)->update(['name' => $user->name]);
         $user->name = $request->input('username');
         $user->email = $request->input('email');
         $user->save();
 
-        // Redirect back to the admin dashboard with a success message
         return redirect()->route('admin.users')->with('success', 'User details updated successfully.');
     }
 }
