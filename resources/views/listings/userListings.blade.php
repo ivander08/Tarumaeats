@@ -16,9 +16,12 @@
                 <a href="{{ route('admin.listings') }}">Manage Listings</a>
             @endif
         </div>
-        <a href="{{ route('listings.create') }}" style="text-decoration: none;">
-            <button type="button" id="create-listing-btn" class="user-listings-create">Create Listing</button>
-        </a>
+        <div class="download-create-buttons">
+            <button type="button" id="excel-user-listing" class="user-listings-excel">Download Excel</button>
+            <a href="{{ route('listings.create') }}" style="text-decoration: none;">
+                <button type="button" id="create-listing-btn" class="user-listings-create">Create Listing</button>
+            </a>
+        </div>
     </div>
     <div class="user-listings-table-wrapper">
         <div class="user-listings-table">
@@ -199,6 +202,14 @@
 
                 // Sort table
                 sortTable(column, order);
+            });
+
+            // Download Excel
+            document.getElementById('excel-user-listing').addEventListener('click', function() {
+                var wb = XLSX.utils.book_new();
+                var ws = XLSX.utils.table_to_sheet(document.querySelector('.user-listings-table table'));
+                XLSX.utils.book_append_sheet(wb, ws, 'Listings');
+                XLSX.writeFile(wb, 'listings.xlsx');
             });
         });
     </script>
