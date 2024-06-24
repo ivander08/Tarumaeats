@@ -47,6 +47,7 @@ Untuk mengatur Tarumaeats secara lokal, ikuti langkah-langkah berikut:
 
 4. **Migrasi Database**: Jalankan migrasi untuk membuat tabel-tabel yang diperlukan di database.
    ```
+   php artisan migrate:fresh
    php artisan migrate
    ```
 
