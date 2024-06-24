@@ -28,12 +28,13 @@ class RatingsController extends Controller
                 do {
                     $ratingId = random_int(1, PHP_INT_MAX);
                 } while (Ratings::find($ratingId) !== null);
-                Ratings::create([
-                    'id' => $ratingId,
-                    'name' => auth()->user()->name,
-                    'location_name' => $request->location_name,
-                    'rating' => $request->rating,
-                ]);
+                $rating = new Ratings;
+                $rating->id = $ratingId;
+                $rating->name = auth()->user()->name;
+                $rating->location_name = $request->location_name;
+                $rating->rating = $request->rating;
+                
+                $rating->save();
             }
         }
 

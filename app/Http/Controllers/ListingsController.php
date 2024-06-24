@@ -137,25 +137,26 @@ class ListingsController extends Controller
         do {
             $listingId = random_int(1, PHP_INT_MAX);
         } while (Listings::find($listingId) !== null);
+        // Create a new listing instance
+        $listing = new Listings;
+        $listing->id = $listingId;
+        $listing->name = auth()->user()->name;
+        $listing->location_name = $request->location_name;
+        $listing->campus = $request->campus;
+        $listing->location_address = $request->location_address;
+        $listing->website = $request->website;
+        $listing->phone_number = $request->phone_number;
+        $listing->email = $request->email;
+        $listing->main_image = $mainImage;
+        $listing->banner_image = $bannerImage;
+        $listing->carousel_images = json_encode($carouselImages);
+        $listing->type = $request->type;
+        $listing->cuisine = json_encode($request->cuisine);
+        $listing->price_range = $request->price_range;
+        $listing->payment_options = json_encode($request->payment_options);
+        $listing->special_features = json_encode($request->special_features);
 
-        Listings::create([
-            'id' => $listingId,
-            'name' => auth()->user()->name,
-            'location_name' => $request->location_name,
-            'campus' => $request->campus,
-            'location_address' => $request->location_address,
-            'website' => $request->website,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'main_image' => $mainImage,
-            'banner_image' => $bannerImage,
-            'carousel_images' => json_encode($carouselImages),
-            'type' => $request->type,
-            'cuisine' => json_encode($request->cuisine),
-            'price_range' => $request->price_range,
-            'payment_options' => json_encode($request->payment_options),
-            'special_features' => json_encode($request->special_features),
-        ]);
+        $listing->save();
 
         return redirect()->route('listings');
     }
