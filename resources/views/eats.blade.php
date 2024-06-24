@@ -3,6 +3,7 @@
 @section('title', 'Eats')
 
 @section('content')
+    <!-- Bagian untuk menampilkan filter dan hasil pencarian -->
     <form method="POST" action="{{ route('eats.filter') }}">
         @csrf
         <div class="eats-search-container">
@@ -174,6 +175,7 @@
                         }
                     }
                 @endphp
+                <!-- menampilkan hasil pencarian -->
                 @foreach ($listings as $listing)
                     <div class="eats-cards-container">
                         <a href="{{ route('eats.show', $listing->id) }}">
