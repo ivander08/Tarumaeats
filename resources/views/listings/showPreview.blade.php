@@ -3,6 +3,7 @@
 @section('title', $listing->location_name)
 
 @php
+// Fungsi untuk menampilkan rentang harga dalam format yang mudah dibaca
     if (!function_exists('PriceRangeDisplay')) {
         function PriceRangeDisplay($price_range)
         {
@@ -16,6 +17,7 @@
         }
     }
 
+    // Fungsi untuk menampilkan label tag dalam format yang mudah dibaca
     if (!function_exists('tagLabel')) {
         function tagLabel($value)
         {
@@ -47,18 +49,22 @@
         }
     }
 
+    // Menghitung jumlah dan rata-rata rating
     $ratingsCount = optional($listing->ratings)->count() ?: 0;
     $averageRating = $ratingsCount > 0 ? number_format(optional($listing->ratings)->avg('rating'), 1, '.', '') : 0;
 @endphp
 
 @section('content')
+<!-- Bagian untuk menampilkan gambar latar belakang -->
     <div class="show-background-image-container"
         style="background-image: url('data:image/jpeg;base64,{{ $listing->banner_image }}');">
         @include('partials.header', ['class' => 'show-header'])
     </div>
+    <!-- Bagian untuk menampilkan deskripsi -->
     <div class="show-red-bar">
         <h2>Description</h2>
     </div>
+    <!-- Bagian untuk menampilkan informasi listing -->
     <div class="show-info-container">
         <div class="show-name-tags">
             <div class="show-top">
@@ -154,6 +160,7 @@
             </div>
         </div>
     </div>
+    <!-- Bagian untuk menampilkan gambar carousel -->
     <div class="show-carousel-container">
         @if ($listing->carousel_images)
             <div class="glide">
@@ -172,6 +179,7 @@
         @endif
     </div>
 
+    <!-- Skrip untuk mengatur perilaku carousel dan rating -->
     <script>
         new Glide('.glide', {
             type: 'carousel',

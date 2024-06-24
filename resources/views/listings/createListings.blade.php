@@ -3,6 +3,7 @@
 @section('title', 'Create Listing')
 
 @section('content')
+    <!-- menampilkan judul halaman "Create Listings" -->
     <div class="user-listings-head">
         <div class="user-listings-head-text">
             <div class="user-listings-head-text-settings">
@@ -17,6 +18,7 @@
             @endif
         </div>
     </div>
+    <!-- form utama untuk membuat daftar baru -->
     <div class="user-listings-create-forms">
         <form id="create-listing-form" action="{{ route('listings.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -79,7 +81,6 @@
                         <label for="carousel_images">Carousel Images*</label>
                         <input type="file" class="create-form-control" id="carousel_images" name="carousel_images[]"
                             accept="image/*" multiple required>
-                        <!-- Carousel image previews will be dynamically generated here -->
                         <div id="carousel_images_preview" class="carousel-images-preview"></div>
                     </div>
                 </div>

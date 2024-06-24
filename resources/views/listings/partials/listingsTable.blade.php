@@ -1,4 +1,5 @@
 @foreach ($listings as $listing)
+    <!-- Listing Preview -->
     <tr>
         <td style="max-width: 15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
             <a href="{{ route('listings.preview', $listing->id) }}">{{ $listing->location_name }}</a>
@@ -46,6 +47,7 @@
     </tr>
 @endforeach
 
+<!-- Listing Script -->
 <script>
     $(document).ready(function() {
         $('.listing-status-online, .listing-status-offline').on('click', function() {

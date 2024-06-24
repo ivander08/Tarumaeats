@@ -3,6 +3,7 @@
 @section('title', 'Edit Listing')
 
 @section('content')
+    <!-- Bagian header halaman -->
     <div class="user-listings-head">
         <div class="user-listings-head-text">
             <div class="user-listings-head-text-settings">
@@ -13,12 +14,13 @@
             <a href="#">My Listings</a>
         </div>
     </div>
+    <!-- Form untuk mengedit listing -->
     <div class="user-listings-create-forms">
         <form id="edit-listing-form" action="{{ route('admin.listings.update', $listing->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
+            <!-- Bagian informasi lokasi -->
             <div class="create-text-forms-container">
                 <h1>Location Information</h1>
                 <div class="create-text-forms">
@@ -55,7 +57,7 @@
             </div>
 
             <div class="create-h-line"></div>
-
+            <!-- Bagian upload gambar -->
             <div class="create-image-forms-container">
                 <h1>Images</h1>
                 <div class="create-image-forms">
@@ -95,7 +97,7 @@
             </div>
 
             <div class="create-h-line"></div>
-
+            <!-- Bagian tag -->
             <div class="create-check-forms-container">
                 <h1>Tags</h1>
                 <div class="create-check-forms">
@@ -190,7 +192,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Tombol submit -->
             <div class="create-save-container">
                 <div class="alert alert-danger" style="color: red;">
                     @if ($errors->any())
@@ -205,7 +207,7 @@
             </div>
         </form>
     </div>
-
+    <!-- Script untuk preview gambar sebelum diupload -->
     <script>
         document.getElementById('main_image').onchange = function(e) {
             var reader = new FileReader();
@@ -214,7 +216,7 @@
                 document.getElementById('main_image_preview').src = event.target.result;
                 document.getElementById('main_image_preview').style.display = 'block';
                 document.getElementById('main_image_preview_database').style.display =
-                'none'; // Hide database preview
+                'none';
             };
 
             reader.readAsDataURL(e.target.files[0]);
@@ -227,7 +229,7 @@
                 document.getElementById('banner_image_preview').src = event.target.result;
                 document.getElementById('banner_image_preview').style.display = 'block';
                 document.getElementById('banner_image_preview_database').style.display =
-                'none'; // Hide database preview
+                'none'; 
             };
 
             reader.readAsDataURL(e.target.files[0]);
@@ -235,9 +237,9 @@
 
         document.getElementById('carousel_images').onchange = function(e) {
             var carouselImagesPreview = document.getElementById('carousel_images_preview');
-            carouselImagesPreview.innerHTML = ''; // Clear previous previews
+            carouselImagesPreview.innerHTML = ''; 
 
-            // Loop through selected files
+            
             for (var i = 0; i < e.target.files.length; i++) {
                 var reader = new FileReader();
                 reader.onload = function(event) {
@@ -251,7 +253,7 @@
                 reader.readAsDataURL(e.target.files[i]);
             }
 
-            // Hide database preview
+            
             document.getElementById('carousel_image_preview_database').style.display = 'none';
         };
     </script>

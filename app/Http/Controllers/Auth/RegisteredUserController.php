@@ -16,7 +16,7 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Menampilkan form registrasi
      */
     public function create(): View
     {
@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
+     * Handler untuk proses registrasi
      *
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Generate a unique ID for the user
+        // Generate ID yang unik
         do {
             $userId = random_int(1, PHP_INT_MAX);
         } while (User::find($userId) !== null);

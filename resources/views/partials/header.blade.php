@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 
+<!-- Header Component -->
 <body>
     <header class="{{ $class ?? '' }}">
         <nav>

@@ -3,6 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
+<!-- Bagian untuk menampilkan gambar latar belakang -->
     </form>
     <div class="button-container-background">
         <div class="button-container">
@@ -18,6 +19,7 @@
             </form>
         </div>
     </div>
+    <!-- Bagian untuk menampilkan rekomendasi makanan -->
     <div class="home-head">
         <div class="home-head-text">
             <div class="home-head-text-settings">
@@ -45,6 +47,7 @@
                         }
                     }
                 @endphp
+                <!-- Menampilkan rekomendasi makanan -->
                 @foreach ($listings as $listing)
                     <div class="eats-cards-container">
                         <a href="{{ route('eats.show', $listing->id) }}">
@@ -81,6 +84,7 @@
         </div>
     </div>
 
+    <!-- Bagian untuk memilih button UNTAR 1 atau UNTAR 2 -->
     <script>
         function submitForm(campusType) {
             document.getElementById('campusType').value = campusType;
