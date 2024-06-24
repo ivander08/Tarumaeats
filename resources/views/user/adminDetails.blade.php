@@ -3,6 +3,7 @@
 @section('title', 'User Details')
 
 @section('content')
+<!-- Bagian untuk menampilkan detail admin -->
     <div class="user-listings-head">
         <div class="user-listings-head-text">
             <div class="user-listings-head-text-settings">
