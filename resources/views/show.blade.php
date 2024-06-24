@@ -3,6 +3,7 @@
 @section('title', $listing->location_name)
 
 @php
+// Fungsi untuk menampilkan rentang harga dalam format yang mudah dibaca
     if (!function_exists('PriceRangeDisplay')) {
         function PriceRangeDisplay($price_range)
         {
@@ -16,6 +17,7 @@
         }
     }
 
+    // Fungsi untuk menampilkan label tag dalam format yang mudah dibaca
     if (!function_exists('tagLabel')) {
         function tagLabel($value)
         {
@@ -52,13 +54,16 @@
 @endphp
 
 @section('content')
+<!-- Bagian untuk menampilkan gambar latar belakang -->
     <div class="show-background-image-container"
         style="background-image: url('data:image/jpeg;base64,{{ $listing->main_image }}');">
         @include('partials.header', ['class' => 'show-header'])
     </div>
+    <!-- Bagian untuk menampilkan deskripsi -->
     <div class="show-red-bar">
         <h2>Description</h2>
     </div>
+    <!-- Bagian untuk menampilkan konten -->
     <div class="show-info-container">
         <div class="show-name-tags">
             <div class="show-top">
@@ -95,6 +100,7 @@
                 </div>
             </div>
             <hr>
+            <!-- Bagian untuk menampilkan tag listing -->
             <div class="show-tags">
                 @if ($listing->campus)
                     <span class="tag">{{ tagLabel($listing->campus) }}</span>
@@ -120,9 +126,9 @@
                         <span class="tag">{{ tagLabel($feature) }}</span>
                     @endforeach
                 @endif
-
             </div>
         </div>
+        <!-- Bagian untuk menampilkan kontak -->
         <div class="show-contact">
             <div class="show-website">
                 <div class="show-website-icon">
@@ -153,6 +159,7 @@
             </div>
         </div>
     </div>
+    <!-- Bagian untuk menampilkan gambar carousel -->
     <div class="show-carousel-container">
         @if ($listing->carousel_images)
             <div class="glide">
@@ -172,12 +179,14 @@
     </div>
 
     <script>
+        // Skrip untuk mengatur carousel
         new Glide('.glide', {
             type: 'carousel',
             perView: 1,
             focusAt: 'center'
         }).mount();
 
+        // Skrip untuk mengatur rating
         document.addEventListener('DOMContentLoaded', (event) => {
             const starInputs = document.querySelectorAll('.show-rating-interact input[type="radio"]');
             const starLabels = document.querySelectorAll('.show-rating-interact label');
