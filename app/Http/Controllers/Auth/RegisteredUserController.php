@@ -32,11 +32,17 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users', 'alpha_dash'], // Allow only lowercase letters, numbers, dashes, and underscores
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Generate a unique ID for the user
+        do {
+            $userId = random_int(1, PHP_INT_MAX);
+        } while (User::find($userId) !== null);
+
         $user = User::create([
+            'id' => $userId,
             'name' => strtolower($request->name),
             'email' => $request->email,
             'password' => Hash::make($request->password),

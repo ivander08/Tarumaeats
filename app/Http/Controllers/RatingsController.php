@@ -29,8 +29,14 @@ class RatingsController extends Controller
             if ($existingRating) {
                 $existingRating->update(['rating' => $request->rating]);
             } else {
+                // Generate a unique ID for the rating
+                do {
+                    $ratingId = random_int(1, PHP_INT_MAX);
+                } while (Ratings::find($ratingId) !== null);
+
                 // If the user has not rated yet, create a new rating
                 Ratings::create([
+                    'id' => $ratingId,
                     'name' => auth()->user()->name,
                     'location_name' => $request->location_name,
                     'rating' => $request->rating,

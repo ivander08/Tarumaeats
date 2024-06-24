@@ -130,7 +130,6 @@ class ListingsController extends Controller
             'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
             'carousel_images' => 'required|array',
             'carousel_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:30720',
-            'campus' => 'required|string|max:255',
             'type' => 'nullable|string|max:255',
             'cuisine' => 'required|array',
             'price_range' => 'required|string',
@@ -153,8 +152,14 @@ class ListingsController extends Controller
             $carouselImages[] = base64_encode(file_get_contents($carouselImage->getRealPath()));
         }
 
+        // Generate a unique ID for the listing
+        do {
+            $listingId = random_int(1, PHP_INT_MAX);
+        } while (Listings::find($listingId) !== null);
+
         // Create the listing
         Listings::create([
+            'id' => $listingId,
             'name' => auth()->user()->name,
             'location_name' => $request->location_name,
             'campus' => $request->campus,
@@ -165,7 +170,6 @@ class ListingsController extends Controller
             'main_image' => $mainImage,
             'banner_image' => $bannerImage,
             'carousel_images' => json_encode($carouselImages),
-            'campus' => $request->campus,
             'type' => $request->type,
             'cuisine' => json_encode($request->cuisine),
             'price_range' => $request->price_range,
@@ -175,6 +179,7 @@ class ListingsController extends Controller
 
         return redirect()->route('listings');
     }
+
 
 
     public function edit($id)
@@ -313,7 +318,8 @@ class ListingsController extends Controller
         return response()->json(['success' => false, 'message' => 'Listing not found'], 404);
     }
 
-    public function preview($id){
+    public function preview($id)
+    {
         $listing = Listings::with('ratings')->findOrFail($id);
         if (auth()->check()) {
             $userRating = ratings::where([
