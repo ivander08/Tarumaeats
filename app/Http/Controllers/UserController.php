@@ -11,14 +11,15 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
+    // Fungsi show untuk menampilkan detail user
     public function show()
     {
         return view("user.userDetails");
     }
 
+    // Fungsi update untuk memperbarui detail pengguna
     public function update(Request $request)
     {
-        // Validate the incoming data
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:255|unique:users,name,' . auth()->id(), // Update the unique rule
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
@@ -41,14 +42,13 @@ class UserController extends Controller
             $user->password = Hash::make($request->newPassword);
         }
 
-        // Update the user details using the custom save method
         $this->saveUserDetails(auth()->user(), $request->all());
         Listings::where('name', $originalUsername)->update(['name' => $user->name]);
 
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 
-    // Made a mistake by not including User $user in previous method, and I'm too lazy to rework it so I just make a new method lol
+    // Fungsi saveUserDetails untuk menyimpan detail pengguna
     private function saveUserDetails(User $user, array $data)
     {
         $user->name = $data['username'];
@@ -59,6 +59,7 @@ class UserController extends Controller
         $user->save();
     }
 
+    // Fungsi delete untuk menghapus akun pengguna
     public function delete()
     {
         $userId = auth()->id();
