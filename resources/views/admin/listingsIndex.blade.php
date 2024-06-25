@@ -35,7 +35,7 @@
                     <th style="cursor:pointer; width: 5rem;" class="sort" data-column="status" data-order="asc">Status
                     </th>
                     <th style="cursor:pointer; width: 8rem;" class="sort" data-column="approval_status" data-order="asc">Approval</th>
-                    <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="asc">
+                    <th style="cursor:pointer; width: 8rem;" class="sort" data-column="featured" data-order="asc">
                         Featured</th>
                     <th style="cursor:pointer; width: 8rem;" class="sort" data-column="updated_at" data-order="desc">
                         Last Modified
@@ -196,7 +196,7 @@
                         aValue = $(a).find('td').eq(4).attr('data-approval-status');
                         bValue = $(b).find('td').eq(4).attr('data-approval-status');
                         break;
-                    case 5:
+                    case 'featured':
                         aValue = $(a).find('td').eq(5).attr('data-featured');
                         bValue = $(b).find('td').eq(5).attr('data-featured');
                         break;
