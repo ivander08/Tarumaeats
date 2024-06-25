@@ -44,32 +44,30 @@ Untuk mengatur Tarumaeats secara lokal, ikuti langkah-langkah berikut:
 
 3. **Atur Variabel Lingkungan**: Buat salinan file `.env.example` dan beri nama `.env`. Perbarui konfigurasi database dan email di file `.env`.
 
+4. Buat database baru di pgAdmin dengan nama `tarumaeats`, atau nama apapun yang sama di file `.env`.
 
-4. **Migrasi Database**: Jalankan migrasi untuk membuat tabel-tabel yang diperlukan di database.
+5. **Migrasi Database**: Jalankan migrasi untuk membuat tabel-tabel yang diperlukan di database.
    ```
    php artisan migrate:fresh
    php artisan migrate
    ```
 
-5. **Unduh Listings Seeder**: Listings Seeder berukuran lebih dari 400MB, sehingga tidak dapat diunggah di GitHub. Unduh dengan [Google Drive Link ini](https://drive.google.com/file/d/1628aJnRVDmIg4hOBlVpYcBAZ8H_Qweph/view?usp=sharing) dan letakkan ListingsTableSeeder.php di database/seeders bersama dengan file seeder lainnya.
+6. **Unduh Listings Seeder**: Listings Seeder berukuran lebih dari 400MB, sehingga tidak dapat diunggah di GitHub. Unduh dengan [Google Drive Link ini](https://drive.google.com/file/d/1628aJnRVDmIg4hOBlVpYcBAZ8H_Qweph/view?usp=sharing) dan letakkan `ListingsTableSeeder.php` di `Tarumaeats/database/seeders` bersama dengan file seeder lainnya.
 
-6. **Seed Database**: Isi database dengan data dummy menggunakan perintah `php artisan db:seed`. Ini akan mengisi database dengan data awal untuk tujuan pengujian. Tahap ini dapat memakan waktu lebih dari satu menit.
-   ```
-   php artisan db:seed
-   ```
+7. **Seed Database**: Isi database dengan data dummy menggunakan perintah `php artisan db:seed`. Ini akan mengisi database dengan data awal untuk tujuan pengujian. Tahap ini dapat memakan waktu lebih dari satu menit.
 
-7. **Compile Asset**: Kompilasi asset frontend menggunakan npm.
+8. **Compile Asset**: Kompilasi asset frontend menggunakan npm.
    ```
    npm install
    npm run dev
    ```
 
-8. **Memulai Server Pengembangan**: Gunakan perintah `php artisan serve` untuk memulai server pengembangan.
+9. **Memulai Server Pengembangan**: Gunakan perintah `php artisan serve` untuk memulai server pengembangan.
    ```
    php artisan serve
    ```
 
-9. **Akses Aplikasi**: Buka browser web Anda dan buka `http://localhost:8000` untuk mengakses Tarumaeats.
+10. **Akses Aplikasi**: Buka browser web Anda dan buka `http://localhost:8000` untuk mengakses Tarumaeats.
 
 ### Akun Admin
 Gunakan kredensial akun admin berikut untuk mengakses fitur admin:
