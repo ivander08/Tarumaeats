@@ -146,7 +146,7 @@
         });
 
         $(document).ready(function() {
-            $('.user-status-0, .user-status-1').on('click', function() {
+            $('#listings-tbody').on('click', '.user-status-0, .user-status-1', function() {
                 var userId = $(this).data('id');
                 var currentRole = $(this).data('is_admin');
                 var newRole = !currentRole;
