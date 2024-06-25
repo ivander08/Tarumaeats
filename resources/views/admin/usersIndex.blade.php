@@ -45,7 +45,7 @@
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td data-date="{{ $user->created_at }}">
+                            <td data-date="{{ $user->created_at->timestamp }}">
                                 {{ $user->created_at->diffForHumans() }}
                             </td>
                             <td data-admin="{{ $user->is_admin }}">
@@ -86,6 +86,7 @@
     <script>
         // Fungsi untuk mengurutkan tabel berdasarkan kolom dan urutan yang dipilih
         function sortTable(column, order) {
+            // console.log('Sorting by column:', column, 'Order:', order);
             var tbody = $('#listings-tbody');
             var rows = tbody.find('tr').toArray();
             rows.sort(function(a, b) {
@@ -101,17 +102,18 @@
                         break;
                     case 'created_at':
                         aValue = parseInt($(a).find('td').eq(2).attr('data-date'));
-                        aValue = parseInt($(a).find('td').eq(2).attr('data-date'));
+                        bValue = parseInt($(b).find('td').eq(2).attr('data-date'));
                         break;
                     case 'is_admin':
                         aValue = $(a).find('td').eq(3).attr('data-admin');
-                        aValue = $(a).find('td').eq(3).attr('data-admin');
+                        bValue = $(b).find('td').eq(3).attr('data-admin');
                         break;
                     default:
                         aValue = $(a).find('td').eq(column).text().toLowerCase();
                         bValue = $(b).find('td').eq(column).text().toLowerCase();
                         break;
                 }
+                // console.log('Comparing values:', aValue, bValue);
                 if (order === 'asc') {
                     return aValue > bValue ? 1 : -1;
                 } else {
@@ -158,8 +160,7 @@
                         is_admin: newRole
                     },
                     success: function(response) {
-                        location
-                            .reload(); // Memuat ulang halaman jika berhasil untuk memperlihatkan perubahan
+                        location.reload(); // Memuat ulang halaman jika berhasil untuk memperlihatkan perubahan
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
