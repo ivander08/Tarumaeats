@@ -69,7 +69,7 @@
                         </div>
                     </td>
                     <td data-approval-status="{{ $listing->approval_status }}">
-                        <div class="listing-status-{{ $listing->approval_status }}">
+                        <div class="listing-status-{{ $listing->approval_status }}" data-status="{{ $listing->approval_status }}" data-id="{{ $listing->id }}">
                             &#x2022; {{ ucfirst($listing->approval_status) }}
                         </div>
                     </td>
