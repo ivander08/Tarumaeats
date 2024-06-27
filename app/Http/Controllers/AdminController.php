@@ -216,12 +216,14 @@ class AdminController extends Controller
             'email' => 'required|string|email|max:255',
         ]);
 
+        $username = $request->input('username');
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $originalUsername = $user->name;
-        Listings::where('name', $originalUsername)->update(['name' => $user->name]);
+        Listings::where('name', $originalUsername)->update(['name' => $username]);
         $user->name = $request->input('username');
         $user->email = $request->input('email');
         $user->save();
