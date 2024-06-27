@@ -194,6 +194,7 @@ class AdminController extends Controller
     // Mengedit pengguna
     public function destroyUser(User $user)
     {
+        Listings::where('name', $user->name)->delete();
         $user->delete();
 
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
