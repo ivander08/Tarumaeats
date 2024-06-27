@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="user-details-form-wrapper">
-        <form id="user-details-form" action="{{ route('admin.users.update', $user->id) }}" method="POST">
+        <form id="user-details-form" action="{{ route('admin.users.update', $editedUser->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="user-details-text-forms-container">
@@ -28,13 +28,13 @@
                     <div class="user-details-form-group">
                         <label for="username">Username</label>
                         <input type="text" class="user-details-form-control" id="username" name="username"
-                            value="{{ auth()->user()->name }}" required>
+                            value="{{ $editedUser->name }}" required>
                     </div>
 
                     <div class="user-details-form-group">
                         <label for="email">Email</label>
                         <input type="email" class="user-details-form-control" id="email" name="email"
-                            value="{{ auth()->user()->email }}" required>
+                            value="{{ $editedUser->email }}" required>
                     </div>
                 </div>
             </div>

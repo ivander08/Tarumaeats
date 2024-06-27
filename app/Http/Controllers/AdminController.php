@@ -199,9 +199,13 @@ class AdminController extends Controller
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
 
-    public function editUser(User $user)
+    public function editUser($id)
     {
-        return view('user.adminDetails', compact('user'));
+        if (Auth::check() && Auth::user()->is_admin) {
+            $editedUser = User::find($id);
+            return view('user.adminDetails', compact('editedUser'));
+        }
+        return redirect('/');
     }
 
     // Memperbarui pengguna
