@@ -74,7 +74,7 @@
                         </div>
                     </td>
                     <td data-featured="{{ $listing->is_featured }}">
-                        <div class="listing-status-{{ $listing->is_featured ? '1' : '0' }}" data-id="{{ $listing->id }}">
+                        <div class="listing-status-{{ $listing->is_featured ? '1' : '0' }}" data-id="{{ $listing->id }}" data-status="{{ $listing->is_featured }}">
                             &#x2022;
                             @if ($listing->is_featured)
                             Yes

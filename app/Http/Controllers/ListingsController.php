@@ -14,6 +14,7 @@ class ListingsController extends Controller
     {
         $listings = listings::with('ratings')
             ->where('approval_status', 'approved')
+            ->where('status', 'online')
             ->where('is_featured', true)
             ->get();
 
